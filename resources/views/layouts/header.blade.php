@@ -6,7 +6,7 @@
                 <div class="col-lg-6 col-md-7 align-self-center">
                     <div class="topbar-menu text-md-left text-center">
                         <ul class="align-self-center">
-                            <li><a href="#">Author</a></li>
+                            <li><a href="{{ route('author') }}">Author</a></li>
                             <li><a href="#">Advertisment</a></li>
                             <li><a href="#">Member</a></li>
                             <li><a href="#">Sitemap</a></li>
@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-5 align-self-center">
                     <div class="logo text-md-left text-center">
-                        <a class="main-logo" href="index.html"><img src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
+                        <a class="main-logo" href="{{ route('home') }}"><img src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7 text-md-right text-center">
@@ -55,7 +55,7 @@
         <div class="container nav-container">
             <div class="responsive-mobile-menu">
                 <div class="logo d-lg-none d-block">
-                    <a class="main-logo" href="index.html"><img src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
+                    <a class="main-logo" href="{{ route('home') }}"><img src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
                 </div>
                 <button class="menu toggle-btn d-block d-lg-none" data-target="#nextpage_main_menu"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -68,41 +68,29 @@
             </div>
             <div class="collapse navbar-collapse" id="nextpage_main_menu">
                 <ul class="navbar-nav menu-open">
-                    <li class="menu-item-has-children current-menu-item">
-                        <a href="#">Home</a>
-                        <ul class="sub-menu">
-                            <li><a href="index.html">Home 01</a></li>
-                            <li><a href="index-2.html">Home 02</a></li>
-                            <li><a href="index-3.html">Home 03</a></li>
-                            <li><a href="index-4.html">Home Food <span>New</span></a></li>
-                        </ul>
+                    <li class="current-menu-item">
+                        <a href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="menu-item-has-children current-menu-item">
                         <a href="#">Category</a>
                         <ul class="sub-menu">
-                            <li><a href="cat-tech.html">Tech</a></li>
-                            <li><a href="cat-sports.html">Sports</a></li>
-                            <li><a href="cat-lifestyle.html">Lifestyle</a></li>
-                            <li><a href="cat-fashion.html">Fashion</a></li>
-                            <li><a href="cat-food.html">Food <span>New</span></a></li>
+                            <li><a href="{{ route('category') }}">Tech</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children current-menu-item">
                         <a href="#">Pages</a>
                         <ul class="sub-menu">
-                            <li><a href="error.html">Error</a></li>
-                            <li><a href="author.html">Author</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="blog-details.html">Blog Details</a></li>
+                            <li><a href="{{ route('error') }}">Error</a></li>
+                            <li><a href="{{ route('author') }}">Author</a></li>
+                            <li><a href="{{ route('blog') }}">Blog</a></li>
+                            <li><a href="{{ route('blog-detail') }}">Blog Details</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children current-menu-item">
                         <a href="#">Blog</a>
                         <ul class="sub-menu">
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-details.html">Blog Details</a></li>
-                            <li><a href="blog-details-2.html">Blog Details 2</a></li>
+                            <li><a href="{{ route('blog') }}">Blog</a></li>
+                            <li><a href="{{ route('blog-detail') }}">Blog Details</a></li>
                         </ul>
                     </li>
                 </ul>

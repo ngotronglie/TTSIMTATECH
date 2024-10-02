@@ -8,7 +8,7 @@
     <div class="post-area pd-top-75 pd-bottom-50">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="section-title">
                         <h6 class="title">Trending News</h6>
                     </div>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="section-title">
                         <h6 class="title">Latest News</h6>
                     </div>
@@ -282,7 +282,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="section-title">
                         <h6 class="title">What’s new</h6>
                     </div>
@@ -327,7 +327,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                {{-- <div class="col-lg-3 col-md-6">
                     <div class="section-title">
                         <h6 class="title">Join With Us</h6>
                     </div>
@@ -353,7 +353,7 @@
                     <div class="add-area">
                         <a href="blog-details.html"><img class="w-100" src="{{ asset('template/assets/img/add/6.png' ) }}" alt="img"></a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

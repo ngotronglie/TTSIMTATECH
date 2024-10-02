@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
@@ -37,7 +38,9 @@
     <!-- navbar end -->
 
     <!-- banner area start -->
-    @include('layouts.banner')
+    @if (request()->is('home'))
+        @include('layouts.banner')
+    @endif
     <!-- banner area end -->
 
     @yield('content')
@@ -59,4 +62,5 @@
 
 
 <!-- Mirrored from solverwp.com/demo/html/nextpage/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Sep 2024 13:17:20 GMT -->
+
 </html>
