@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->id();  // Khóa chính tự động tăng
+            $table->string('name');  // Tên người dùng
+            $table->string('email')->unique();  // Email (không trùng lặp)
+            $table->string('password');  // Mật khẩu
+            $table->string('avatar')->nullable();  // Avatar (có thể là NULL)
+            $table->boolean('is_active')->default(1);  // Trạng thái tài khoản (mặc định là hoạt động)
+            $table->string('social_provider')->nullable();  // Tên nhà cung cấp dịch vụ mạng xã hội (nếu có)
+            $table->string('social_id')->nullable();  // ID từ nhà cung cấp mạng xã hội (nếu có)
             $table->timestamps();
         });
     }
