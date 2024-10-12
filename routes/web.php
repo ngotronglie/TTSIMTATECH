@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,54 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
-Route::prefix('template')->group(function () {
-    Route::get('category', function () {
-        return view('templates.category');
-    })->name('category');
-    Route::get('author', function () {
-        return view('templates.author');
-    })->name('author');
-    Route::get('error', function () {
-        return view('templates.error');
-    })->name('error');
-    Route::get('blog', function () {
-        return view('templates.blog');
-    })->name('blog');
-    Route::get('blog-detail', function () {
-        return view('templates.blog-detail');
-    })->name('blog-detail');
-});
-
-// Admin
-Route::prefix('admin')->as('admin.')->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-    Route::get('404', function () {
-        return view('admin.templates.404');
-    })->name('404');
-    Route::get('contact', function () {
-        return view('admin.templates.contact');
-    })->name('contact');
-    Route::get('faq', function () {
-        return view('admin.templates.faq');
-    })->name('faq');
-    Route::get('login', function () {
-        return view('admin.templates.login');
-    })->name('login');
-    Route::get('register', function () {
-        return view('admin.templates.register');
-    })->name('register');
-    Route::get('tables-data', function () {
-        return view('admin.templates.tables-data');
-    })->name('tables-data');
-    Route::get('tables-general', function () {
-        return view('admin.templates.tables-general');
-    })->name('tables-general');
-    Route::get('users-profile', function () {
-        return view('admin.templates.users-profile');
-    })->name('users-profile');
-});
+Route::get('/roloe', [RoleController::class, 'index'])->name('roles.index');        // Lấy danh sách tất cả roles
+Route::get('/create', [RoleController::class, 'create'])->name('roles.create'); // Hiển thị form tạo mới role
+Route::post('/', [RoleController::class, 'store'])->name('roles.store');        // Tạo mới một role
+Route::get('/{role}', [RoleController::class, 'show'])->name('roles.show');     // Lấy thông tin chi tiết của một role
+Route::get('/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit'); // Hiển thị form chỉnh sửa role
+Route::put('/{role}', [RoleController::class, 'update'])->name('roles.update');  // Cập nhật một role
+Route::delete('/{role}', [RoleController::class, 'destroy'])->name('roles.destroy'); // Xóa một role
