@@ -19,8 +19,6 @@
 </head>
 
 <body>
-
-
     <!-- search popup start-->
     <div class="td-search-popup" id="td-search-popup">
         <form action="https://solverwp.com/demo/html/nextpage/index.html" class="search-form">
@@ -34,7 +32,7 @@
     <div class="body-overlay" id="body-overlay"></div>
 
     <!-- header start -->
-    @include('layouts.header')
+    @include('clients.layouts.header')
     <!-- navbar end -->
 
     <!-- banner area start -->
@@ -42,10 +40,10 @@
         @include('layouts.banner')
     @endif
     <!-- banner area end -->
-
+    
     @yield('content')
 
-    @include('layouts.footer')
+    @include('clients.layouts.footer')
 
     <!-- back to top area start -->
     <div class="back-to-top">
@@ -59,8 +57,5 @@
     <!-- main js  -->
     <script src="{{ asset('template/assets/js/main.js') }}"></script>
 </body>
-
-
-<!-- Mirrored from solverwp.com/demo/html/nextpage/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Sep 2024 13:17:20 GMT -->
 
 </html>

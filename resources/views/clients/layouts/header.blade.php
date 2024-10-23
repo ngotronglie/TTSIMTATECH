@@ -15,8 +15,7 @@
                 </div>
                 <div class="col-lg-6 col-md-5 mt-2 mt-md-0 text-md-right text-center">
                     <div class="topbar-social">
-                        <div class="topbar-date d-none d-lg-inline-block"><i class="fa fa-calendar"></i> Saturday,
-                            October 7</div>
+                        <div class="topbar-date d-none d-lg-inline-block"><i class="fa fa-calendar"></i> {{ date('l, F j', strtotime(now())) }}</div>
                         <ul class="social-area social-area-2">
                             <li><a class="facebook-icon" href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a class="twitter-icon" href="#"><i class="fa fa-twitter"></i></a></li>
@@ -40,11 +39,23 @@
                         <a class="main-logo" href="{{ route('home') }}"><img src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-7 text-md-right text-center">
-                    <a href="#" class="adbar-right">
-                        <img src="{{ asset('template/assets/img/add/1.png') }}" alt="img">
-                    </a>
-                </div>
+                @isset($advertisement)
+                    <div class="col-xl-6 col-lg-7 text-md-right text-center">
+                        @foreach ($advertisement as $ads)
+                            @if ($ads->position == 'header' && $ads->pages == 'home')
+                                @php
+                                    $image = $ads->image;
+                                    if (!\Str::contains($image, 'http')) {
+                                        $image = Storage::url($image);
+                                    }
+                                @endphp
+                                <a href="{{ $ads->link }}" class="adbar-right">
+                                    <img src="{{ $image }}" alt="img" width="555" height="65" class="object-fit-cover">
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
+                @endisset
             </div>
         </div>
     </div>
@@ -69,29 +80,19 @@
             <div class="collapse navbar-collapse" id="nextpage_main_menu">
                 <ul class="navbar-nav menu-open">
                     <li class="current-menu-item">
-                        <a href="{{ route('home') }}">Home</a>
+                        <a href="{{ route('home') }}">Trang chủ</a>
                     </li>
-                    <li class="menu-item-has-children current-menu-item">
+                    @foreach ($categories as $category)
+                        <li class="current-menu-item">
+                            <a href="">{{ $category->name }}</a>
+                        </li>
+                    @endforeach
+                    {{-- <li class="menu-item-has-children current-menu-item">
                         <a href="#">Category</a>
                         <ul class="sub-menu">
                             <li><a href="{{ route('category') }}">Tech</a></li>
                         </ul>
-                    </li>
-                    <li class="menu-item-has-children current-menu-item">
-                        <a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ route('error') }}">Error</a></li>
-                            <li><a href="{{ route('author') }}">Author</a></li>
-                            <li><a href="{{ route('blog') }}">Blog</a></li>
-                            <li><a href="{{ route('blog-detail') }}">Blog Details</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children current-menu-item">
-                        <a href="#">Blog</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ route('blog') }}">Blog</a></li>
-                            <li><a href="{{ route('blog-detail') }}">Blog Details</a></li>
-                        </ul>
+                    </li> --}}
                     </li>
                 </ul>
             </div>

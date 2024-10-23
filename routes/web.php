@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,29 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
 Route::prefix('template')->group(function () {
-    Route::get('category', function () {
-        return view('templates.category');
-    })->name('category');
     Route::get('author', function () {
         return view('templates.author');
     })->name('author');
     Route::get('error', function () {
         return view('templates.error');
     })->name('error');
-    Route::get('blog', function () {
-        return view('templates.blog');
-    })->name('blog');
-    Route::get('blog-detail', function () {
-        return view('templates.blog-detail');
-    })->name('blog-detail');
 });
 
 // Admin
@@ -67,4 +58,42 @@ Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('users-profile', function () {
         return view('admin.templates.users-profile');
     })->name('users-profile');
+});
+
+// Client
+Route::group(['prefix' => '/'], function () {
+    Route::get('/', function () {
+        return view('clients.home');
+    })->name('home');
+    Route::get('category', function () {
+        return view('clients.category');
+    })->name('category');
+    Route::get('post-detail', function () {
+        return view('clients.post-detail');
+    })->name('post-detail');
+    // Route::get('category/{slug}/posts', [HomeController::class, 'findPostByCategory'])->name('category');
+});
+
+// Admin
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::prefix('categories')->as('categories.')->group(function () { 
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::get('/create', [CategoryController::class, 'create'])->name('create');
+        Route::post('/', [CategoryController::class, 'store'])->name('store');
+        Route::get('/{slug}/edit', [CategoryController::class, 'edit'])->name('edit');
+        Route::put('/{slug}', [CategoryController::class, 'update'])->name('update');
+        Route::delete('/{slug}', [CategoryController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('advertisements')->as('advertisements.')->group(function () {
+        Route::get('/', [AdvertisementController::class, 'index'])->name('index');
+        Route::get('/create', [AdvertisementController::class, 'create'])->name('create');
+        Route::post('/', [AdvertisementController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [AdvertisementController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [AdvertisementController::class, 'update'])->name('update');
+        Route::delete('/{id}', [AdvertisementController::class, 'destroy'])->name('destroy');
+        Route::get('/trashed', [AdvertisementController::class, 'trashed'])->name('trashed');
+        Route::patch('/{id}/restore', [AdvertisementController::class, 'restore'])->name('restore');
+        Route::delete('/{id}/force-delete', [AdvertisementController::class, 'forceDelete'])->name('force-delete');
+    });
 });

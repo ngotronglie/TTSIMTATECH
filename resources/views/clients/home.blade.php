@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('clients.layouts.app')
 
 @section('title')
     Home
@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="section-title">
-                        <h6 class="title">Trending News</h6>
+                        <h6 class="title">Tin Tức Thịnh Hành</h6>
                     </div>
                     <div class="post-slider owl-carousel">
                         <div class="item">
@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="section-title">
-                        <h6 class="title">Latest News</h6>
+                        <h6 class="title">Tin Tức Mới Nhất</h6>
                     </div>
                     <div class="post-slider owl-carousel">
                         <div class="item">
@@ -284,7 +284,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="section-title">
-                        <h6 class="title">What’s new</h6>
+                        <h6 class="title">Có Gì Mới</h6>
                     </div>
                     <div class="post-slider owl-carousel">
                         <div class="item">
@@ -327,33 +327,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-lg-3 col-md-6">
-                    <div class="section-title">
-                        <h6 class="title">Join With Us</h6>
-                    </div>
-                    <div class="social-area-list mb-4">
-                        <ul>
-                            <li><a class="facebook" href="#"><i
-                                        class="fa fa-facebook social-icon"></i><span>12,300</span><span>Like</span> <i
-                                        class="fa fa-plus"></i></a></li>
-                            <li><a class="twitter" href="#"><i
-                                        class="fa fa-twitter social-icon"></i><span>12,600</span><span>Followers</span>
-                                    <i class="fa fa-plus"></i></a></li>
-                            <li><a class="youtube" href="#"><i
-                                        class="fa fa-youtube-play social-icon"></i><span>1,300</span><span>Subscribers</span>
-                                    <i class="fa fa-plus"></i></a></li>
-                            <li><a class="instagram" href="#"><i
-                                        class="fa fa-instagram social-icon"></i><span>52,400</span><span>Followers</span>
-                                    <i class="fa fa-plus"></i></a></li>
-                            <li><a class="google-plus" href="#"><i
-                                        class="fa fa-google social-icon"></i><span>19,101</span><span>Subscribers</span>
-                                    <i class="fa fa-plus"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="add-area">
-                        <a href="blog-details.html"><img class="w-100" src="{{ asset('template/assets/img/add/6.png' ) }}" alt="img"></a>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>
@@ -427,7 +400,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="trending-post style-box">
                         <div class="section-title">
-                            <h6 class="title">Trending News</h6>
+                            <h6 class="title">Tin Tức Thịnh Hành</h6>
                         </div>
                         <div class="post-slider owl-carousel">
                             <div class="item">
@@ -941,211 +914,32 @@
         </div>
     </div>
 
-    <div class="add-area bg-after-sky mg-top--100">
-        <div class="container">
-            <a href="#"><img src="{{ asset('template/assets/img/add/2.png' ) }}" alt="img"></a>
-        </div>
-    </div>
-
-    <div class="post-area bg-sky pd-top-80 pd-bottom-60">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 order-lg-4">
-                    <div class="single-post-wrap style-overlay">
-                        <div class="thumb">
-                            <img src="{{ asset('template/assets/img/video/7.png' ) }}" alt="img">
-                            <a href="https://www.youtube.com/watch?v=WwvNiN2_Jlk"
-                                class="video-play-btn play-btn-large play-btn-yellow mfp-iframe" tabindex="0"><i
-                                    class="fa fa-play"></i></a>
-                        </div>
-                        <div class="details">
-                            <div class="post-meta-single">
-                                <a class="tag-base tag-blue" href="cat-tech.html">Tech</a>
-                                <p><i class="fa fa-clock-o"></i>08.22.2023</p>
-                            </div>
-                            <h6 class="title"><a href="blog-details.html">Scientists Discover the Switch That Makes
-                                    Human</a></h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 order-lg-1">
-                    <div class="section-title">
-                        <h6 class="title">Automobile News</h6>
-                    </div>
-                    <div class="post-slider owl-carousel">
-                        <div class="item">
-                            <div class="single-post-list-wrap">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <img src="{{ asset('template/assets/img/post/list/1.png' ) }}" alt="img">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="title"><a href="blog-details.html">Himachal Pradesh rules in
-                                                    order to allow tourists </a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-post-list-wrap">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <img src="{{ asset('template/assets/img/post/list/2.png' ) }}" alt="img">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="title"><a href="blog-details.html">Online registration, booking
-                                                    for Vaishno Devi </a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-post-list-wrap">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <img src="{{ asset('template/assets/img/post/list/3.png' ) }}" alt="img">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="title"><a href="blog-details.html">Detecting technologies in
-                                                    airports this year</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-post-list-wrap">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <img src="{{ asset('template/assets/img/post/list/4.png' ) }}" alt="img">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="title"><a href="blog-details.html">The FAA will drone detect-ing
-                                                    in airports this</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-post-list-wrap">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <img src="{{ asset('template/assets/img/post/list/1.png' ) }}" alt="img">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="title"><a href="blog-details.html">Himachal Pradesh rules in
-                                                    order to allow tourists </a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-post-list-wrap">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <img src="{{ asset('template/assets/img/post/list/2.png' ) }}" alt="img">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="title"><a href="blog-details.html">Online registration, booking
-                                                    for Vaishno Devi </a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-post-list-wrap">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <img src="{{ asset('template/assets/img/post/list/3.png' ) }}" alt="img">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="title"><a href="blog-details.html">Detecting technologies in
-                                                    airports this</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-post-list-wrap">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <img src="{{ asset('template/assets/img/post/list/4.png' ) }}" alt="img">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="title"><a href="blog-details.html">The FAA will drone detect-ing
-                                                    in airports this</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 order-lg-12">
-                    <form class="single-newsletter-inner bg-yellow text-center">
-                        <h5>Newsletter</h5>
-                        <p>Stay Updated on all that's new add noteworthy</p>
-                        <div class="single-input-inner">
-                            <input type="text" placeholder="Enter Your Name">
-                        </div>
-                        <div class="single-input-inner">
-                            <input type="text" placeholder="Enter Your Email">
-                        </div>
-                        <a class="btn btn-base w-100" href="#">Subscribe Now</a>
-                    </form>
-                </div>
+    @isset($advertisement)
+        <div class="add-area bg-after-sky mg-top--100">
+            <div class="container overflow-hidden">
+                @foreach ($advertisement as $ads)
+                    @if ($ads->position == 'middle' && $ads->pages == 'home')
+                        @php
+                            $image = $ads->image;
+                            if (!\Str::contains($image, 'http')) {
+                                $image = Storage::url($image);
+                            }
+                        @endphp
+                        <a href="{{ $ads->link }}">
+                            <img src="{{ $image }}" alt="img" height="200" class="object-fit-cover">
+                        </a>
+                    @endif
+                @endforeach
             </div>
         </div>
-    </div>
+    @endisset
 
     <div class="tranding-area pd-top-75 pd-bottom-50">
         <div class="container">
             <div class="section-title">
                 <div class="row">
                     <div class="col-md-3 mb-2 mb-md-0">
-                        <h6 class="title">Trending News</h6>
+                        <h6 class="title">Tin Tức Thịnh Hành</h6>
                     </div>
                     <div class="col-md-9">
                         <div class="nxp-tab-inner nxp-tab-post text-md-right">
@@ -1609,4 +1403,24 @@
             </div>
         </div>
     </div>
+
+    @isset($advertisement)
+        <div class="add-area bg-after-sky mg-top--100">
+            <div class="container overflow-hidden">
+                @foreach ($advertisement as $ads)
+                    @if ($ads->position == 'bottom' && $ads->pages == 'home')
+                        @php
+                            $image = $ads->image;
+                            if (!\Str::contains($image, 'http')) {
+                                $image = Storage::url($image);
+                            }
+                        @endphp
+                        <a href="{{ $ads->link }}">
+                            <img src="{{ $image }}" alt="img" height="200" class="object-fit-cover">
+                        </a>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    @endisset
 @endsection
