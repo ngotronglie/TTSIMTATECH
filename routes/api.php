@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\Api\AdvertisementController;
 use App\Http\Controllers\Api\CategoryController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\FaqController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::prefix('categories')->group(function () {
     Route::put('{slug}/update',        [CategoryController::class, 'update']);
     Route::delete('{slug}/delete',     [CategoryController::class, 'delete']);
 });
+
 Route::prefix('advertisements')->group(function () {
     Route::get('/',                    [AdvertisementController::class, 'index']);
     Route::post('create',              [AdvertisementController::class, 'create']);
@@ -36,4 +38,19 @@ Route::prefix('advertisements')->group(function () {
     Route::get('trashed',              [AdvertisementController::class, 'trashed']);
     Route::patch('{id}/restore',       [AdvertisementController::class, 'restore']);
     Route::delete('{id}/force-delete', [AdvertisementController::class, 'forceDelete']);
+});
+
+Route::prefix('contacts')->group(function () {
+    Route::get('/',                    [ContactController::class, 'index']);
+    Route::post('create',              [ContactController::class, 'create']);
+    Route::get('{id}/show',            [ContactController::class, 'show']);
+    Route::delete('{id}/delete',       [ContactController::class, 'delete']);
+});
+
+Route::prefix('faqs')->group(function () {
+    Route::get('/',                    [FaqController::class, 'index']);
+    Route::post('create',              [FaqController::class, 'create']);
+    Route::get('{id}/show',            [FaqController::class, 'show']);
+    Route::put('{id}/update',          [FaqController::class, 'update']);
+    Route::delete('{id}/delete',       [FaqController::class, 'delete']);
 });

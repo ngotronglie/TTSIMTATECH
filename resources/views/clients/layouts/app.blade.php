@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/responsive.css') }}">
 
+    @yield('styles')
 </head>
 
 <body>
@@ -41,7 +42,9 @@
     @endif
     <!-- banner area end -->
     
-    @yield('content')
+    <div style="min-height: 75vh;">
+        @yield('content')
+    </div>
 
     @include('clients.layouts.footer')
 
@@ -56,6 +59,8 @@
     <script src="{{ asset('template/assets/js/vendor.js') }}"></script>
     <!-- main js  -->
     <script src="{{ asset('template/assets/js/main.js') }}"></script>
+
+    @yield('scripts')
 </body>
 
 </html>

@@ -10,9 +10,9 @@
             <h5>Danh sách danh mục</h5>
         </small>
 
-        @if (session('success') || session('error'))
+        @if (session('success') || session('error') || isset($error))
             <small class="{{ session('success') ? 'text-success' : 'text-danger' }} fst-italic fw-bold">
-                {{ session('success') ?? session('error') }}
+                {{ session('success') ?? session('error') ?? $error }}
             </small>
         @endif
 
@@ -34,41 +34,49 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categories as $category)
+                @if($categories && $categories->count() > 0)
+                    @foreach ($categories as $category)
+                        <tr>
+                            <th scope="row">{{ $category->id }}</th>
+                            <td>{{ $category->name }}</td>
+                            <td>
+                                @php
+                                    $image = $category->image;
+                                    if (!\Str::contains($image, 'http')) {
+                                        $image = Storage::url($image);
+                                    }
+                                @endphp
+                                <div style="height: 200px; overflow: hidden;">
+                                    <img src="{{ $image }}" alt="" class="img-thumbnail" style="object-fit: cover; width: 200px; height: 200px;">
+                                </div>
+                            </td>
+                            <td>{{ $category->slug }}</td>
+                            <td>
+                                {!! $category->is_active ? '<span class="badge bg-success">Hiển thị</span>' : '<span class="badge bg-danger">Không</span>' !!}
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center align-items-center align-middle">
+                                    <a href="{{ route('admin.categories.edit', $category->slug) }}" class="btn btn-sm btn-warning me-2 d-flex"><i class="bi bi-pencil-square me-2"></i>Sửa</a>
+                                    <form action="{{ route('admin.categories.destroy', $category->slug) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button class="btn btn-sm btn-danger d-flex" onclick="return confirm('Bạn có muốn xóa danh mục này không?')"><i class="bi bi-trash me-2"></i>Xóa</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach 
+                @else
                     <tr>
-                        <th scope="row">{{ $category->id }}</th>
-                        <td>{{ $category->name }}</td>
-                        <td>
-                            @php
-                                $image = $category->image;
-                                if (!\Str::contains($image, 'http')) {
-                                    $image = Storage::url($image);
-                                }
-                            @endphp
-                            <div style="height: 200px; overflow: hidden;">
-                                <img src="{{ $image }}" alt="" class="img-thumbnail" style="object-fit: cover; width: 200px; height: 200px;">
-                            </div>
-                        </td>
-                        <td>{{ $category->slug }}</td>
-                        <td>
-                            {!! $category->is_active ? '<span class="badge bg-success">Hiển thị</span>' : '<span class="badge bg-danger">Không</span>' !!}
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center align-middle">
-                                <a href="{{ route('admin.categories.edit', $category->slug) }}" class="btn btn-sm btn-warning me-2 d-flex"><i class="bi bi-pencil-square me-2"></i>Sửa</a>
-                                <form action="{{ route('admin.categories.destroy', $category->slug) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-    
-                                    <button class="btn btn-sm btn-danger d-flex" onclick="return confirm('Bạn có muốn xóa danh mục này không?')"><i class="bi bi-trash me-2"></i>Xóa</button>
-                                </form>
-                            </div>
-                        </td>
+                        <td colspan="6" class="text-danger fst-italic fw-bold">Chưa có danh mục nào được tạo!</td>
                     </tr>
-                @endforeach 
+                @endif
             </tbody>
         </table>
         
-        {{ $categories->links() }}
+        @isset($categories)
+            {{ $categories->links() }}
+        @endisset
     </div>
 @endsection

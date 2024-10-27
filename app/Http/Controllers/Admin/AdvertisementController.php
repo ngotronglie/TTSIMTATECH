@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
 use App\Http\Requests\StoreAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
@@ -19,10 +20,6 @@ class AdvertisementController extends Controller
     public function index()
     {
         $advertisements = Advertisement::latest('id')->paginate(10);
-
-        if ($advertisements->isEmpty()) {
-            return back()->with('error', 'Chưa có quảng cáo nào được tạo.');
-        }
 
         return view(self::PATH_VIEW . __FUNCTION__, compact('advertisements'));
     }
@@ -168,10 +165,6 @@ class AdvertisementController extends Controller
     {
         try {
             $trashedAdvertisements = Advertisement::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(10);
-
-            if ($trashedAdvertisements->isEmpty()) {
-                return view(self::PATH_VIEW . __FUNCTION__)->with('error', 'Chưa có quảng cáo nào bị xóa.');
-            }
         
             return view(self::PATH_VIEW . __FUNCTION__, compact('trashedAdvertisements'));
         } catch (\Exception $e) {

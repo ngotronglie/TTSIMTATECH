@@ -44,43 +44,51 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($advertisements as $advertisement)
+                    @if ($advertisements && $advertisements->count() > 0)
+                        @foreach ($advertisements as $advertisement)
+                            <tr>
+                                <th scope="row">{{ $advertisement->id }}</th>
+                                <td>{{ $advertisement->user->name }}</td>
+                                <td class="overflow-hidden">
+                                    @php
+                                        $url = $advertisement->image;
+                                        if (!\Str::contains($url, 'http')) {
+                                            $url = Storage::url($url);
+                                        }
+                                    @endphp
+                                    <img src="{{ $url }}" alt="" width="150px" height="150px" class="object-fit-cover">
+                                </td>
+                                <td>{{ $advertisement->content }}</td>
+                                <td>{{ $advertisement->pages }}</td>
+                                <td>{{ $advertisement->position }}</td>
+                                <td class="text-nowrap">{{ date('d-m-Y', strtotime($advertisement->start_date)) }}</td>
+                                <td class="text-nowrap">{{ date('d-m-Y', strtotime($advertisement->end_date)) }}</td>
+                                <td class="text-capitalize">{{ $advertisement->status }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ route('admin.advertisements.edit', $advertisement->id) }}" class="btn btn-sm btn-warning me-2 d-flex"> <i class="bi bi-pencil-square me-1"></i> Sửa </a>
+
+                                        <form action="{{ route('admin.advertisements.destroy', $advertisement->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button class="btn btn-sm btn-danger d-flex" onclick="return confirm('Bạn có muốn xóa chến dịch quảng cáo này không?')"> <i class="bi bi-trash me-1"></i> Xóa </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
                         <tr>
-                            <th scope="row">{{ $advertisement->id }}</th>
-                            <td>{{ $advertisement->user->name }}</td>
-                            <td class="overflow-hidden">
-                                @php
-                                    $url = $advertisement->image;
-                                    if (!\Str::contains($url, 'http')) {
-                                        $url = Storage::url($url);
-                                    }
-                                @endphp
-                                <img src="{{ $url }}" alt="" width="150px" height="150px" class="object-fit-cover">
-                            </td>
-                            <td>{{ $advertisement->content }}</td>
-                            <td>{{ $advertisement->pages }}</td>
-                            <td>{{ $advertisement->position }}</td>
-                            <td class="text-nowrap">{{ date('d-m-Y', strtotime($advertisement->start_date)) }}</td>
-                            <td class="text-nowrap">{{ date('d-m-Y', strtotime($advertisement->end_date)) }}</td>
-                            <td class="text-capitalize">{{ $advertisement->status }}</td>
-                            <td>
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <a href="{{ route('admin.advertisements.edit', $advertisement->id) }}" class="btn btn-sm btn-warning me-2 d-flex"> <i class="bi bi-pencil-square me-1"></i> Sửa </a>
-
-                                    <form action="{{ route('admin.advertisements.destroy', $advertisement->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button class="btn btn-sm btn-danger d-flex" onclick="return confirm('Bạn có muốn xóa chến dịch quảng cáo này không?')"> <i class="bi bi-trash me-1"></i> Xóa </button>
-                                    </form>
-                                </div>
-                            </td>
+                            <td colspan="10" class="text-danger fst-italic fw-bold">Chưa có chến dịch quảng cáo nào được tạo!</td>
                         </tr>
-                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
 
-        {{ $advertisements->links() }}
+        @isset($advertisement)
+            {{ $advertisements->links() }}
+        @endisset
     </div>
 @endsection

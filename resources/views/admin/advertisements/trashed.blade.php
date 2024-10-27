@@ -11,9 +11,9 @@
                 <h5>Danh sách quảng cáo đã xóa</h5>
             </small>
    
-            @if (session('success') || session('error') || isset($error))
+            @if (session('success') || session('error'))
                 <small class="{{ session('success') ? 'text-success' : 'text-danger' }} fst-italic fw-bold">
-                    {{ session('success') ?? session('error') ?? $error }}
+                    {{ session('success') ?? session('error') }}
                 </small>
             @endif
 
@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @isset($trashedAdvertisements)
+                    @if($trashedAdvertisements && $trashedAdvertisements->count() > 0)
                         @foreach ($trashedAdvertisements as $advertisement)
                             <tr>
                                 <th scope="row">{{ $advertisement->id }}</th>
@@ -76,7 +76,11 @@
                                 </td>
                             </tr>
                         @endforeach
-                    @endisset
+                    @else
+                        <tr>
+                            <td colspan="10" class="text-danger fst-italic fw-bold">Chưa có quảng cáo nào trong thùng rác!</td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

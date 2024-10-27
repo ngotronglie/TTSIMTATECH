@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
@@ -20,10 +21,6 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::latest('id')->paginate(10);
-
-        if ($categories->isEmpty()) {
-            return back()->with('error', 'Chưa có danh mục nào được tạo!');
-        }
 
         return view(self::PATH_VIEW . __FUNCTION__, compact('categories'));
     }

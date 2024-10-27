@@ -103,7 +103,7 @@
         <div class="mb-3">
             <button class="btn btn-primary me-2"> <i class="bi bi-bookmark me-1"></i> Thêm mới </button>
             <button type="reset" class="btn btn-secondary me-2"> <i class="bi bi-clock-wise me-1"></i> Nhập lại </button>
-            <a href="{{ route('admin.advertisements.index') }}" class="btn btn-info me-2"> <i class="bi bi-arrow-left me-1"></i> Quay lại </a>
+            <a href="{{ route('admin.advertisements.index') }}" class="btn btn-info me-2"> <i class="bi bi-arrow-left me-1"></i> Danh sách </a>
         </div>
     </form>
 @endsection

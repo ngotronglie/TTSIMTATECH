@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdvertisementController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Client\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +31,7 @@ Route::prefix('template')->group(function () {
     })->name('error');
 });
 
-// Admin
+// Template Admin
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('dashboard', function () {
         return view('admin.dashboard');
@@ -37,12 +39,6 @@ Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('404', function () {
         return view('admin.templates.404');
     })->name('404');
-    Route::get('contact', function () {
-        return view('admin.templates.contact');
-    })->name('contact');
-    Route::get('faq', function () {
-        return view('admin.templates.faq');
-    })->name('faq');
     Route::get('login', function () {
         return view('admin.templates.login');
     })->name('login');
@@ -72,6 +68,11 @@ Route::group(['prefix' => '/'], function () {
         return view('clients.post-detail');
     })->name('post-detail');
     // Route::get('category/{slug}/posts', [HomeController::class, 'findPostByCategory'])->name('category');
+    Route::get('faq', [HomeController::class, 'faqs'])->name('faq');
+    Route::get('contact', function () {
+        return view('clients.contact');
+    })->name('contact');
+    Route::post('contact', [HomeController::class, 'submitContact'])->name('contact.store');
 });
 
 // Admin
@@ -95,5 +96,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/trashed', [AdvertisementController::class, 'trashed'])->name('trashed');
         Route::patch('/{id}/restore', [AdvertisementController::class, 'restore'])->name('restore');
         Route::delete('/{id}/force-delete', [AdvertisementController::class, 'forceDelete'])->name('force-delete');
+    });
+
+    Route::prefix('contacts')->as('contacts.')->group(function () {
+        Route::get('/', [ContactController::class, 'index'])->name('index');
+        Route::get('/{id}', [ContactController::class, 'show'])->name('show');
+        Route::delete('/{id}', [ContactController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('faqs')->as('faqs.')->group(function () {
+        Route::get('/', [FaqController::class, 'index'])->name('index');
+        Route::get('/create', [FaqController::class, 'create'])->name('create');
+        Route::post('/', [FaqController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [FaqController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [FaqController::class, 'update'])->name('update');
+        Route::delete('/{id}', [FaqController::class, 'destroy'])->name('destroy');
     });
 });

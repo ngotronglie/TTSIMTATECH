@@ -95,7 +95,8 @@
                 <li><a href="#">Về chúng tôi</a></li>
                 <li><a href="#">Điều khoản và điều kiện</a></li>
                 <li><a href="#">Chính sách bảo mật</a></li>
-                <li><a href="#">Liên hệ</a></li>
+                <li><a href="{{ route('faq') }}">Câu hỏi thường gặp</a></li>
+                <li><a href="{{ route('contact') }}">Liên hệ</a></li>
             </ul>
             <p>Copyright ©2024 Team Island</p>
         </div>

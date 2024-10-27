@@ -25,7 +25,7 @@
                     </a>
                 </li>
             </ul>
-        </li><!-- End Tables Nav -->
+        </li><!-- End Categories Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#ads-nav" data-bs-toggle="collapse" href="#">
@@ -44,7 +44,40 @@
                     </a>
                 </li>
             </ul>
-        </li><!-- End Tables Nav -->
+        </li><!-- End Advertisements Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#contact-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-telephone"></i><span>Quản lý liên hệ</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="contact-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('admin.contacts.index') }}">
+                        <i class="bi bi-circle"></i><span>Danh sách</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Contacts Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#faq-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-question-circle"></i><span>Quản lý F.A.Qs</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="faq-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('admin.faqs.index') }}">
+                        <i class="bi bi-circle"></i><span>Danh sách</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.faqs.create') }}">
+                        <i class="bi bi-circle"></i><span>Thêm mới</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End FAQs Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -73,20 +106,6 @@
                 <span>Profile</span>
             </a>
         </li><!-- End Profile Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('admin.faq') }}">
-                <i class="bi bi-question-circle"></i>
-                <span>F.A.Q</span>
-            </a>
-        </li><!-- End F.A.Q Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('admin.contact') }}">
-                <i class="bi bi-envelope"></i>
-                <span>Contact</span>
-            </a>
-        </li><!-- End Contact Page Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('admin.register') }}">

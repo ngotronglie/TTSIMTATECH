@@ -2,7 +2,7 @@
 
 namespace App\View\Composers;
 
-use App\Http\Controllers\Homecontroller;
+use App\Http\Controllers\Client\HomeController;
 use Illuminate\View\View;
 
 class AdvertisementComposer
