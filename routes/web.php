@@ -8,6 +8,7 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,5 +132,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::delete('/{id}', [PostController::class, 'destroy'])->name('destroy');
     });
 
+    Route::prefix('comments')->as('comments.')->group(function () {
+        Route::get('/', [CommentController::class, 'index'])->name('index');
+        Route::get('/create', [CommentController::class, 'create'])->name('create');
+        Route::post('/', [CommentController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [CommentController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [CommentController::class, 'update'])->name('update');
+        Route::delete('/{id}', [CommentController::class, 'destroy'])->name('destroy');
+    });
 
 });
