@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\AdvertisementController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ContactController;
-use App\Http\Controllers\Admin\FaqController;
-use App\Http\Controllers\Client\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AdvertisementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +78,7 @@ Route::group(['prefix' => '/'], function () {
 
 // Admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::prefix('categories')->as('categories.')->group(function () { 
+    Route::prefix('categories')->as('categories.')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');
         Route::get('/create', [CategoryController::class, 'create'])->name('create');
         Route::post('/', [CategoryController::class, 'store'])->name('store');
@@ -112,4 +113,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::put('/{id}', [FaqController::class, 'update'])->name('update');
         Route::delete('/{id}', [FaqController::class, 'destroy'])->name('destroy');
     });
+    Route::prefix('users')->as('users.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [UserController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [UserController::class, 'update'])->name('update');
+        Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+    });
+
 });
