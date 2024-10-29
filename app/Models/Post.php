@@ -16,6 +16,7 @@ class Post extends Model
         'slug',
         'content',
         'is_active',
+        'view'
     ];
 
     public function user()

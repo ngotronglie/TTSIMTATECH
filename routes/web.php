@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\ContactController;
@@ -121,5 +122,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::put('/{id}', [UserController::class, 'update'])->name('update');
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
     });
+    Route::prefix('posts')->as('posts.')->group(function () {
+        Route::get('/', [PostController::class, 'index'])->name('index');
+        Route::get('/create', [PostController::class, 'create'])->name('create');
+        Route::post('/', [PostController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [PostController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [PostController::class, 'update'])->name('update');
+        Route::delete('/{id}', [PostController::class, 'destroy'])->name('destroy');
+    });
+
 
 });

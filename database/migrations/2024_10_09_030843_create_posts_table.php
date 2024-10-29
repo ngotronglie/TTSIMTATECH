@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('content');
+            $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->string('view')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
