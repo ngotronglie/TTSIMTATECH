@@ -6,7 +6,6 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Danh sách Roles</h1>
         <nav>
             <ol class="breadcrumb">
                 {{-- <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li> --}}
@@ -21,32 +20,70 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Danh sách Roles</h5>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="card-title">Danh sách Roles</h5>
+                            <a href="{{ route('roles.create') }}" class="btn btn-primary">Thêm mới danh mục</a>
+                        </div>
 
-                        <!-- Role Table -->
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">STT</th>
-                                    <th scope="col">Tên Role</th>
-                                    <th scope="col">Hành động</th>
+                                    <th>STT</th>
+                                    <th>Tên Role</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($roles as $role)
+                                @foreach ($roles as $key => $role)
                                     <tr>
-                                        <th scope="row">{{ $loop->iteration }}</th> <!-- Số thứ tự -->
-                                        <td>{{ $role->name }}</td> <!-- Tên role -->
+                                        <th>{{ $key + 1 }}</th>
+                                        <td>{{ $role->name }}</td>
                                         <td>
-                                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary">Sửa</a>
-                                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
-                                                style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>
-                                            </form>
+                                            @if ($role->delete_at)
+                                                Không hoạt động
+                                            @else
+                                                Hoạt động
+                                            @endif
                                         </td>
+
+                                        <td class="text-center align-middle">
+                                            @if ($role->trashed())
+                                                <div class="btn-group" role="group" aria-label="Hành động">
+                                                    {{-- Nút khôi phục --}}
+                                                    <form action="{{ route('roles.restore', $role->id) }}" method="POST"
+                                                        class="d-inline">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-success me-1"
+                                                            onclick="return confirm('Bạn có muốn khôi phục vai trò này?')">Khôi
+                                                            Phục</button>
+                                                    </form>
+                                                    {{-- Nút xóa vĩnh viễn --}}
+                                                    <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"
+                                                            onclick="return confirm('Bạn có muốn xóa vĩnh viễn vai trò này?')">Xóa</button>
+                                                    </form>
+                                                </div>
+                                            @else
+                                                <div class="btn-group" role="group" aria-label="Hành động">
+                                                    <!-- Nút chỉnh sửa -->
+                                                    <a href="{{ route('roles.edit', $role->id) }}"
+                                                        class="btn btn-primary me-1 d-inline">Sửa</a>
+                                                    {{-- Nút Ẩn (Xóa mềm) --}}
+                                                    <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"
+                                                            onclick="return confirm('Bạn có chắc chắn muốn ẩn?')">Ẩn</button>
+                                                    </form>
+                                                </div>
+                                            @endif
+                                        </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>

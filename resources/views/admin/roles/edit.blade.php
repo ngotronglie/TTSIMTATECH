@@ -26,16 +26,6 @@
                         </div>
                     @endif
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                     <form action="{{ route('roles.update', $role->id) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -44,9 +34,10 @@
                                 <label for="name" class="form-label">Tên Role</label>
                                 <input type="text" name="name" class="form-control"
                                     value="{{ old('name', $role->name) }}" placeholder="Nhập tên Role" required>
-                                @if ($errors->has('name'))
-                                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                                @endif
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+
                             </div>
 
                             <div class="col-md-12 text-center">

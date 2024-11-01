@@ -10,22 +10,10 @@
               </a> --}}
           </li><!-- End Dashboard Nav -->
           <li class="nav-item">
-              <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-layout-text-window-reverse"></i><span>Role</span><i
-                      class="bi bi-chevron-down ms-auto"></i>
+              <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse"
+                  href="{{ route('roles.index') }}">
+                  <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý vai trò</span>
               </a>
-              <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('roles.create') }}">
-                          <i class="bi bi-circle"></i><span>Thêm role</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('roles.index') }}">
-                          <i class="bi bi-circle"></i><span>Danh sách role</span>
-                      </a>
-                  </li>
-              </ul>
           </li><!-- End Tables Nav -->
 
           {{-- <li class="nav-heading">Pages</li> --}}

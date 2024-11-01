@@ -22,7 +22,18 @@ class UpdateRoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255|unique:roles,name,' . $this->route('role')->id,
+        ];
+    }
+
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Trường tên không được để trống.',
+            'name.string' => 'Trường tên phải là một chuỗi.',
+            'name.max' => 'Trường tên không được vượt quá 255 ký tự.',
+            'name.unique' => 'Trường tên đã tồn tại. Vui lòng chọn tên khác.',
         ];
     }
 }

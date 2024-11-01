@@ -27,17 +27,6 @@
                         </div>
                     @endif
 
-                    <!-- Thông báo lỗi -->
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                     <!-- Form tạo mới role -->
                     <form action="{{ route('roles.store') }}" method="POST">
                         @csrf
@@ -46,7 +35,13 @@
                             <div class="col-md-12">
                                 <label for="name" class="form-label">Tên Role</label>
                                 <input type="text" name="name" class="form-control" placeholder="Nhập tên Role"
-                                    required>
+                                    value="{{ old('name') }}" required>
+
+                                @error('name')
+                                    <span class="text-danger">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="col-md-12 text-center">

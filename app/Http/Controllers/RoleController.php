@@ -13,7 +13,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::withTrashed()->get();
         return view('admin.roles.index', compact('roles'));
     }
 
@@ -37,7 +37,7 @@ class RoleController extends Controller
         Role::create($request->all());
 
         return redirect()->route('roles.index')
-            ->with('success', 'Role created successfully.');
+            ->with('success', 'Thêm vai trò thành công');
     }
 
     /**
@@ -61,14 +61,10 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        $request->validate([
-            'name' => 'required|max:255|unique:roles,name,' . $role->id,
-        ]);
-
         $role->update($request->all());
 
         return redirect()->route('roles.index')
-            ->with('success', 'Role updated successfully.');
+            ->with('success', 'Sửa vai trò thành công');
     }
 
     /**
@@ -79,6 +75,24 @@ class RoleController extends Controller
         $role->delete();
 
         return redirect()->route('roles.index')
-            ->with('success', 'Role deleted successfully.');
+            ->with('success', 'Ẩn vai trò thành công');
+    }
+
+    public function restore($id)
+    {
+        $vaitro = Role::onlyTrashed()->findOrFail($id);
+        $vaitro->restore();
+
+        return redirect()->route('roles.index')
+            ->with('success', 'Khôi phục vai trò thành công');
+    }
+
+    public function forceDelete($id)
+    {
+        $vaitro = Role::onlyTrashed()->findOrFail($id);
+        $vaitro->forceDelete();
+
+        return redirect()->route('roles.index')
+            ->with('success', 'Xóa vai trò thành công');
     }
 }
