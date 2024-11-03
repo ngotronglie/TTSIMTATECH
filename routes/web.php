@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PostController;
@@ -29,31 +30,16 @@ Route::prefix('template')->group(function () {
     Route::get('author', function () {
         return view('templates.author');
     })->name('author');
-    Route::get('error', function () {
-        return view('templates.error');
-    })->name('error');
 });
 
 // Template Admin
 Route::prefix('admin')->as('admin.')->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-    Route::get('404', function () {
-        return view('admin.templates.404');
-    })->name('404');
     Route::get('login', function () {
         return view('admin.templates.login');
     })->name('login');
     Route::get('register', function () {
         return view('admin.templates.register');
     })->name('register');
-    Route::get('tables-data', function () {
-        return view('admin.templates.tables-data');
-    })->name('tables-data');
-    Route::get('tables-general', function () {
-        return view('admin.templates.tables-general');
-    })->name('tables-general');
     Route::get('users-profile', function () {
         return view('admin.templates.users-profile');
     })->name('users-profile');
@@ -80,6 +66,11 @@ Route::group(['prefix' => '/'], function () {
 
 // Admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+
+    Route::get('dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
     Route::prefix('categories')->as('categories.')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');
         Route::get('/create', [CategoryController::class, 'create'])->name('create');
@@ -142,3 +133,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     });
 
 });
+
+Route::resource('roles', RoleController::class);
+Route::post('roles/{id}/restore', [RoleController::class, 'restore'])
+    ->name('roles.restore');
+Route::delete('roles/{id}/force-delete', [RoleController::class, 'forceDelete'])
+    ->name('roles.forceDelete');

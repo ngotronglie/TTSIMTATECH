@@ -1,7 +1,7 @@
 @extends('clients.layouts.app')
 
 @section('title')
-    Home
+    Trang chủ
 @endsection
 
 @section('content')

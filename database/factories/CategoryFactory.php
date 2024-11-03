@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+use Illuminate\Support\Str;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -14,11 +15,16 @@ class CategoryFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
+        static $index = 0;
+        $names = ['Trang chủ', 'Giáo dục', 'Công nghệ', 'Video', 'Podcasts'];
+        
+        $name = $names[$index++ % count($names)];
+        
         return [
-            'name' => fake()->name(),
-            'slug' => fake()->slug(),
+            'name' => $name,
+            'slug' => Str::slug($name),
             'image' => fake()->imageUrl(),
             'is_active' => fake()->boolean(),
         ];

@@ -1,4 +1,4 @@
-<aside id="sidebar" class="sidebar">
+<aside id="sidebar" class="sidebar d-flex flex-column justify-content-between">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
@@ -79,55 +79,15 @@
             </ul>
         </li><!-- End FAQs Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{ route('admin.tables-general') }}">
-                        <i class="bi bi-circle"></i><span>General Tables</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.tables-data') }}">
-                        <i class="bi bi-circle"></i><span>Data Tables</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Tables Nav -->
+    </ul>
 
-        <li class="nav-heading">Pages</li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('admin.users-profile') }}">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('admin.register') }}">
-                <i class="bi bi-card-list"></i>
-                <span>Register</span>
-            </a>
-        </li><!-- End Register Page Nav -->
-
+    <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('admin.login') }}">
-                <i class="bi bi-box-arrow-in-right"></i>
-                <span>Login</span>
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Đăng xuất</span>
             </a>
         </li><!-- End Login Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('admin.404') }}">
-                <i class="bi bi-dash-circle"></i>
-                <span>Error 404</span>
-            </a>
-        </li><!-- End Error 404 Page Nav -->
-
     </ul>
 
 </aside><!-- End Sidebar-->
