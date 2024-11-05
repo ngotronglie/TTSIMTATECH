@@ -9,6 +9,7 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\CommentController;
 
 /*
@@ -34,16 +35,18 @@ Route::prefix('template')->group(function () {
 
 // Template Admin
 Route::prefix('admin')->as('admin.')->group(function () {
-    Route::get('login', function () {
-        return view('admin.templates.login');
-    })->name('login');
-    Route::get('register', function () {
-        return view('admin.templates.register');
-    })->name('register');
-    Route::get('users-profile', function () {
-        return view('admin.templates.users-profile');
-    })->name('users-profile');
+    // Đăng ký
+    Route::get('register', [AuthenController::class, 'formDangKy'])->name('register');
+    Route::post('register', [AuthenController::class, 'dangKy']);
+
+    // Đăng nhập
+    Route::get('login', [AuthenController::class, 'formDangNhap'])->name('login');
+    Route::post('login', [AuthenController::class, 'dangNhap']);
+
+    // Đăng xuất
+    Route::post('logout', [AuthenController::class, 'dangXuat'])->name('logout');
 });
+
 
 // Client
 Route::group(['prefix' => '/'], function () {
@@ -131,7 +134,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::put('/{id}', [CommentController::class, 'update'])->name('update');
         Route::delete('/{id}', [CommentController::class, 'destroy'])->name('destroy');
     });
-
 });
 
 Route::resource('roles', RoleController::class);

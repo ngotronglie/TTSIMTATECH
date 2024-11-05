@@ -15,7 +15,8 @@
                 </div>
                 <div class="col-lg-6 col-md-5 mt-2 mt-md-0 text-md-right text-center">
                     <div class="topbar-social">
-                        <div class="topbar-date d-none d-lg-inline-block"><i class="fa fa-calendar"></i> {{ date('l, F j', strtotime(now())) }}</div>
+                        <div class="topbar-date d-none d-lg-inline-block"><i class="fa fa-calendar"></i>
+                            {{ date('l, F j', strtotime(now())) }}</div>
                         <ul class="social-area social-area-2">
                             <li><a class="facebook-icon" href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a class="twitter-icon" href="#"><i class="fa fa-twitter"></i></a></li>
@@ -36,7 +37,8 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-5 align-self-center">
                     <div class="logo text-md-left text-center">
-                        <a class="main-logo" href="{{ route('home') }}"><img src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
+                        <a class="main-logo" href="{{ route('home') }}"><img
+                                src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
                     </div>
                 </div>
                 @isset($advertisement)
@@ -50,7 +52,8 @@
                                     }
                                 @endphp
                                 <a href="{{ $ads->link }}" class="adbar-right">
-                                    <img src="{{ $image }}" alt="img" width="555" height="65" class="object-fit-cover">
+                                    <img src="{{ $image }}" alt="img" width="555" height="65"
+                                        class="object-fit-cover">
                                 </a>
                             @endif
                         @endforeach
@@ -66,7 +69,8 @@
         <div class="container nav-container">
             <div class="responsive-mobile-menu">
                 <div class="logo d-lg-none d-block">
-                    <a class="main-logo" href="{{ route('home') }}"><img src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
+                    <a class="main-logo" href="{{ route('home') }}"><img
+                            src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
                 </div>
                 <button class="menu toggle-btn d-block d-lg-none" data-target="#nextpage_main_menu"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -84,24 +88,34 @@
                     </li>
                     @foreach ($categories as $category)
                         <li class="current-menu-item">
-                            <a href="">{{ $category->name }}</a>
+                            <a href="#">{{ $category->name }}</a>
                         </li>
                     @endforeach
-                    {{-- <li class="menu-item-has-children current-menu-item">
-                        <a href="#">Category</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ route('category') }}">Tech</a></li>
-                        </ul>
-                    </li> --}}
-                    </li>
                 </ul>
             </div>
-            <div class="nav-right-part nav-right-part-desktop">
-                <div class="menu-search-inner">
+            <div class="nav-right-part nav-right-part-desktop d-flex align-items-center">
+                <div class="menu-search-inner me-2">
                     <input type="text" placeholder="Search For">
                     <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
                 </div>
+                <div class="auth-buttons d-flex align-items-center"> <!-- Thêm d-flex để căn chỉnh hàng -->
+                    @if (Auth::check())
+                        <form action="{{ route('admin.logout') }}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">Đăng xuất</button>
+                        </form>
+                    @else
+                        <!-- Nếu người dùng chưa đăng nhập -->
+                        <div class="auth-buttons d-flex align-items-center ms-3">
+                            <a href="{{ route('admin.login') }}" class="btn btn-primary btn-sm me-2">Đăng nhập</a>
+                            <a href="{{ route('admin.register') }}" class="btn btn-success btn-sm">Đăng ký</a>
+                        </div>
+                    @endif
+                </div>
+
             </div>
         </div>
     </nav>
+
+
 </div>
