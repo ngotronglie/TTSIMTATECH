@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const TYPE_ADMIN = 'admin';
+
+    const TYPE_MEMBER = 'member';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +26,7 @@ class User extends Authenticatable
         'email',
         'password',
         'avatar',
-        'is_active', 
+        'is_active',
         'social_provider',
         'social_id',
     ];
@@ -51,4 +55,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_active' => 'boolean',
     ];
+
+    public function admin()
+    {
+        return $this->roles()->where('name', self::TYPE_ADMIN)->exists();
+    }
+
+    public function member()
+    {
+        return $this->roles()->where('name', self::TYPE_MEMBER)->exists();
+    }
 }
