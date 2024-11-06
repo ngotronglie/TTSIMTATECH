@@ -32,6 +32,10 @@ Route::prefix('template')->group(function () {
         return view('templates.author');
     })->name('author');
 });
+route::get('home/profile', [HomeController::class, 'profile'])->name('home/profile');
+route::get('admin', function () {
+    return view('admin.dashboard');
+});
 
 // Template Admin
 Route::prefix('admin')->as('admin.')->group(function () {
@@ -46,7 +50,27 @@ Route::prefix('admin')->as('admin.')->group(function () {
     // Đăng xuất
     Route::post('logout', [AuthenController::class, 'dangXuat'])->name('logout');
 });
+Route::controller(AuthenController::class)->group(function(){
 
+    Route::get('auth/twitter', 'redirectToTwitter')->name('auth.twitter');
+
+    Route::get('auth/twitter/callback', 'handleTwitterCallback');
+
+});
+Route::controller(AuthenController::class)->group(function(){
+
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
+
+});
+Route::controller(AuthenController::class)->group(function(){
+
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+
+    Route::get('auth/google/callback', 'handleGoogleCallback');
+
+});
 
 // Client
 Route::group(['prefix' => '/'], function () {
