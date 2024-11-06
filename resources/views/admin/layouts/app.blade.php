@@ -8,8 +8,7 @@
     <title>@yield('title')</title>
 
     <!-- Favicons -->
-    <link href="{{ asset('template/admin/assets/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('template/admin/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('template/admin/assets/img/logo.svg') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">

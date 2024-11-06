@@ -27,15 +27,7 @@ use App\Http\Controllers\CommentController;
 //     return view('welcome');
 // });
 
-Route::prefix('template')->group(function () {
-    Route::get('author', function () {
-        return view('templates.author');
-    })->name('author');
-});
-route::get('home/profile', [HomeController::class, 'profile'])->name('home/profile');
-route::get('admin', function () {
-    return view('admin.dashboard');
-});
+Route::get('home/profile', [HomeController::class, 'profile'])->name('home/profile');
 
 // Template Admin
 Route::prefix('admin')->as('admin.')->group(function () {
@@ -73,7 +65,7 @@ Route::controller(AuthenController::class)->group(function(){
 });
 
 // Client
-Route::group(['prefix' => '/'], function () {
+Route::group([], function () {
     Route::get('/', function () {
         return view('clients.home');
     })->name('home');
@@ -83,7 +75,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('post-detail', function () {
         return view('clients.post-detail');
     })->name('post-detail');
-    // Route::get('category/{slug}/posts', [HomeController::class, 'findPostByCategory'])->name('category');
+    // Route::get('category/{slug}/posts', [HomeController::class, 'findPostByCategory'])->name('category.posts');
     Route::get('faq', [HomeController::class, 'faqs'])->name('faq');
     Route::get('contact', function () {
         return view('clients.contact');

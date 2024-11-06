@@ -1,35 +1,4 @@
 <div class="navbar-area">
-    <!-- topbar end-->
-    <div class="topbar-area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-7 align-self-center">
-                    <div class="topbar-menu text-md-left text-center">
-                        <ul class="align-self-center">
-                            <li><a href="{{ route('author') }}">Author</a></li>
-                            <li><a href="#">Advertisment</a></li>
-                            <li><a href="#">Member</a></li>
-                            <li><a href="#">Sitemap</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-5 mt-2 mt-md-0 text-md-right text-center">
-                    <div class="topbar-social">
-                        <div class="topbar-date d-none d-lg-inline-block"><i class="fa fa-calendar"></i>
-                            {{ date('l, F j', strtotime(now())) }}</div>
-                        <ul class="social-area social-area-2">
-                            <li><a class="facebook-icon" href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="twitter-icon" href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="youtube-icon" href="#"><i class="fa fa-youtube-play"></i></a></li>
-                            <li><a class="instagram-icon" href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a class="google-icon" href="#"><i class="fa fa-google-plus"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- topbar end-->
 
     <!-- adbar end-->
     <div class="adbar-area bg-black d-none d-lg-block">
@@ -37,8 +6,10 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-5 align-self-center">
                     <div class="logo text-md-left text-center">
-                        <a class="main-logo" href="{{ route('home') }}"><img
-                                src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
+                        <a class="main-logo" href="{{ route('home') }}">
+                            <img src="{{ asset('template/admin/assets/img/logo.svg') }}" alt="img">
+                            <span class="text-white align-middle px-2">WorldSchools.Space</span>
+                        </a>
                     </div>
                 </div>
                 @isset($advertisement)
@@ -70,7 +41,7 @@
             <div class="responsive-mobile-menu">
                 <div class="logo d-lg-none d-block">
                     <a class="main-logo" href="{{ route('home') }}"><img
-                            src="{{ asset('template/assets/img/logo.png') }}" alt="img"></a>
+                            src="{{ asset('template/admin/assets/img/logo.svg') }}" alt="img"></a>
                 </div>
                 <button class="menu toggle-btn d-block d-lg-none" data-target="#nextpage_main_menu"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -94,8 +65,8 @@
                 </ul>
             </div>
             <div class="nav-right-part nav-right-part-desktop d-flex align-items-center">
-                <div class="menu-search-inner me-2">
-                    <input type="text" placeholder="Search For">
+                <div class="menu-search-inner me-2 d-flex">
+                    <input type="text" placeholder="Tìm kiếm">
                     <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
                 </div>
                 <div class="auth-buttons d-flex align-items-center">

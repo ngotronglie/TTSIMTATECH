@@ -22,8 +22,8 @@ class AdvertisementFactory extends Factory
             'position' => fake()->randomElement(['header', 'middle', 'bottom', 'sidebar']),
             'image' => fake()->imageUrl(),
             'link' => fake()->url(),
-            'start_date' => fake()->dateTime(),
-            'end_date' => fake()->dateTime(),
+            'start_date' => now()->addDays(rand(1, 5)),
+            'end_date' => now()->addDays(rand(5, 10)),
             'status' => fake()->randomElement(['draft', 'active', 'paused', 'completed']),
             'content' => fake()->sentence(),
         ];

@@ -713,7 +713,7 @@
         </div>
     </div>
 
-    <div class="video-area bg-black pd-top-80 pd-bottom-150">
+    <div class="video-area bg-black pd-top-80 mb-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -915,7 +915,7 @@
     </div>
 
     @isset($advertisement)
-        <div class="add-area bg-after-sky mg-top--100">
+        <div class="add-area bg-after-sky mt-2">
             <div class="container overflow-hidden">
                 @foreach ($advertisement as $ads)
                     @if ($ads->position == 'middle' && $ads->pages == 'home')
@@ -934,7 +934,7 @@
         </div>
     @endisset
 
-    <div class="tranding-area pd-top-75 pd-bottom-50">
+    <div class="tranding-area pd-top-75 mb-2">
         <div class="container">
             <div class="section-title">
                 <div class="row">
@@ -1405,7 +1405,7 @@
     </div>
 
     @isset($advertisement)
-        <div class="add-area bg-after-sky mg-top--100">
+        <div class="add-area bg-after-sky mt-2">
             <div class="container overflow-hidden">
                 @foreach ($advertisement as $ads)
                     @if ($ads->position == 'bottom' && $ads->pages == 'home')

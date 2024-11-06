@@ -8,8 +8,7 @@
     <title>Đăng nhập</title>
 
     <!-- Favicons -->
-    <link href="{{ asset('template/admin/assets/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('template/admin/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('template/admin/assets/img/logo.svg') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -39,8 +38,8 @@
 
                             <div class="d-flex justify-content-center py-4">
                                 <a href="index.html" class="logo d-flex align-items-center w-auto">
-                                    <img src="{{ asset('template/admin/assets/img/logo.png') }}" alt="">
-                                    <span class="d-none d-lg-block">NiceAdmin</span>
+                                    <img src="{{ asset('template/admin/assets/img/logo.svg') }}" alt="">
+                                    <span class="d-none d-lg-block">WorldSchools.Space</span>
                                 </a>
                             </div><!-- End Logo -->
 

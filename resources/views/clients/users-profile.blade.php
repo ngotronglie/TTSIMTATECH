@@ -1,13 +1,13 @@
 @extends('clients.layouts.app')
 
 @section('title')
-    CÔNG NGHỆ
+    Hồ Sơ
 @endsection
 
 @section('content')
     <div class="pagetitle container">
         <h1>Hồ Sơ</h1>
-    </div><!-- End Page Title -->
+    </div>
 
     <section class="section profile container">
         <div class="row">
