@@ -80,4 +80,7 @@ class HomeController extends Controller
 
         return view('clients.contact')->with('success', 'Gửi liên hệ thành công.');
     }
+    public function profile(){
+        return view('clients.users-profile');
+    }
 }
