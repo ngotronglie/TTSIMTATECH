@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthenController extends Controller
 {
@@ -81,5 +83,94 @@ class AuthenController extends Controller
         request()->session()->regenerateToken();
 
         return redirect()->route('home');
+    }
+    //đăng nhập bằng google
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->with(['hd' => 'http://127.0.0.1:8000/'])
+        ->redirect();
+    }
+    public function handleGoogleCallback()
+
+    {
+
+        try {
+
+            $user = Socialite::driver('google')->user();
+
+            $finduser = User::where('google_id', $user->id)->first();
+            if ($finduser) {
+                Auth::login($finduser);
+                return redirect()->intended('/');
+            } else {
+                $newUser = User::updateOrCreate(['email' => $user->email], [
+                    'name' => $user->name,
+                    'google_id' => $user->id,
+                    'password' => encrypt('123456dummy')
+                ]);
+                Auth::login($newUser);
+                return redirect()->intended('/');
+            }
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+    // đăng nhập bằng facebook
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function handleFacebookCallback()
+    {
+        try {
+            $user = Socialite::driver('facebook')->user();
+            $finduser = User::where('facebook_id', $user->id)->first();
+            if($finduser){
+                Auth::login($finduser);
+                return redirect()->intended('dashboard');
+            }else{
+                $newUser = User::updateOrCreate(['email' => $user->email],[
+                        'name' => $user->name,
+                        'facebook_id'=> $user->id,
+                        'password' => encrypt('123456dummy')
+
+                    ]);
+                Auth::login($newUser);
+                return redirect()->intended('dashboard');
+            }
+        } catch (Exception $e) {
+
+            dd($e->getMessage());
+        }
+    }
+    // đăng nhập bằng twitter
+    public function redirectToTwitter()
+
+    {
+
+        return Socialite::driver('twitter')->redirect();
+
+    }
+    public function handleTwitterCallback()
+    {
+        try {
+            $user = Socialite::driver('twitter')->user();
+            $finduser = User::where('twitter_id', $user->id)->first();
+            if($finduser){
+                Auth::login($finduser);
+                return redirect()->intended('dashboard');
+
+            }else{
+                $newUser = User::updateOrCreate(['email' => $user->email],[
+                        'name' => $user->name,
+                        'Twitter_id'=> $user->id,
+                        'password' => encrypt('123456dummy')
+                    ]);
+                Auth::login($newUser);
+                return redirect()->intended('dashboard');
+            }
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
 }
