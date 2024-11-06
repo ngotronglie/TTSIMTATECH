@@ -9,6 +9,58 @@
             </a>
         </li><!-- End Dashboard Nav -->
         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-people"></i><span>Quản lý người dùng</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="user-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('admin.users.index') }}">
+                        <i class="bi bi-circle"></i><span>Danh sách</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.users.create') }}">
+                        <i class="bi bi-circle"></i><span>Thêm mới</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End User Nav -->
+        
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#post-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-postcard"></i><span>Quản lý bài viết</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="post-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('admin.posts.index') }}">
+                        <i class="bi bi-circle"></i><span>Danh sách</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.posts.create') }}">
+                        <i class="bi bi-circle"></i><span>Thêm mới</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Posts Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#comment-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-chat"></i><span>Quản lý bình luận</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="comment-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('admin.comments.index') }}">
+                        <i class="bi bi-circle"></i><span>Danh sách</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End comments Nav -->
+
+        <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#cate-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-list-ul"></i><span>Quản lý danh mục</span><i
                     class="bi bi-chevron-down ms-auto"></i>
@@ -48,7 +100,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#contact-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-telephone"></i><span>Quản lý liên hệ</span><i
+                <i class="bi bi-telephone"></i><span>Quản lý phản hồi</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="contact-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
