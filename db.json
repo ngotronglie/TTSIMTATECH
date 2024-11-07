@@ -1,0 +1,25 @@
+{
+  "advertisements": [
+    {
+      "title": "Quảng cáo điện thoại",
+      "description": "iphone 14",
+      "id": "2c80"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Samsung 1",
+      "id": "0832"
+    }
+  ],
+  "comments": [
+    {
+      "id": "3b03",
+      "text": "vbb"
+    }
+  ],
+  "posts": [],
+  "roles": [],
+  "role_user": [],
+  "users": []
+}

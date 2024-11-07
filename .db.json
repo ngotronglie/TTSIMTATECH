@@ -1,0 +1,20 @@
+{
+  "advertisements": [
+    {
+      "title": "Quảng cáo điện thoại",
+      "description": "iphone 15",
+      "id": "2c80"
+    }
+  ],
+  "categories": [],
+  "comments": [
+    {
+      "id": "3b03",
+      "text": "vbb"
+    }
+  ],
+  "posts": [],
+  "roles": [],
+  "role_user": [],
+  "users": []
+}
