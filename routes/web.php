@@ -66,20 +66,11 @@ Route::controller(AuthenController::class)->group(function(){
 
 // Client
 Route::group([], function () {
-    Route::get('/', function () {
-        return view('clients.home');
-    })->name('home');
-    Route::get('category', function () {
-        return view('clients.category');
-    })->name('category');
-    Route::get('post-detail', function () {
-        return view('clients.post-detail');
-    })->name('post-detail');
-    // Route::get('category/{slug}/posts', [HomeController::class, 'findPostByCategory'])->name('category.posts');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('post/{slug}', [HomeController::class, 'postDetail'])->name('post-detail');
+    Route::get('category/{slug}/posts', [HomeController::class, 'findPostByCategory'])->name('category.posts');
     Route::get('faq', [HomeController::class, 'faqs'])->name('faq');
-    Route::get('contact', function () {
-        return view('clients.contact');
-    })->name('contact');
+    Route::get('contact', [HomeController::class, 'contactPage'])->name('contact');
     Route::post('contact', [HomeController::class, 'submitContact'])->name('contact.store');
 });
 

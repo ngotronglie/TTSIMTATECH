@@ -36,6 +36,7 @@
                         <th class="align-middle">Ảnh/Video</th>
                         <th class="align-middle">Nội dung</th>
                         <th class="align-middle">Trang</th>
+                        <th class="align-middle">Danh mục</th>
                         <th class="align-middle">Vị trí</th>
                         <th class="align-middle">Ngày bắt dầu</th>
                         <th class="align-middle">Ngày kết thúc</th>
@@ -59,7 +60,8 @@
                                     <img src="{{ $url }}" alt="" width="150px" height="150px" class="object-fit-cover">
                                 </td>
                                 <td>{{ $advertisement->content }}</td>
-                                <td>{{ $advertisement->pages }}</td>
+                                <td>{{ $advertisement->pages ?? 'N/A' }}</td>
+                                <td>{{ $advertisement->category->name ?? 'N/A' }}</td>
                                 <td>{{ $advertisement->position }}</td>
                                 <td class="text-nowrap">{{ date('d-m-Y', strtotime($advertisement->start_date)) }}</td>
                                 <td class="text-nowrap">{{ date('d-m-Y', strtotime($advertisement->end_date)) }}</td>

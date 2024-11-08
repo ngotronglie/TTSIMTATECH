@@ -35,6 +35,15 @@
             @enderror
         </div>
 
+        <!-- Input for Description -->
+        <div class="mb-3">
+            <label class="form-label">Description: <span class="text-danger">*</span></label>
+            <input type="text" name="description" value="{{ old('description') }}" class="form-control @error('description') is-invalid @enderror">
+            @error('description')
+                <small class="text-danger fst-italic">* {{ $message }}</small>
+            @enderror
+        </div>
+
         <!-- Textarea for Content -->
         <div class="mb-3">
             <label class="form-label">Nội dung: <span class="text-danger">*</span></label>
