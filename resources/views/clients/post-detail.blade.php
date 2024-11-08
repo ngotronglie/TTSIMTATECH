@@ -1,7 +1,7 @@
 @extends('clients.layouts.app')
 
 @section('title')
-    Chi tiết bài viết
+    {{ $post->title }}
 @endsection
 
 @section('content')
@@ -11,10 +11,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-inner">
-                        <h5 class="page-title">Chi tiết bài viết</h5>
+                        <h5 class="page-title">{{ $post->title }}</h5>
                         <ul class="page-list">
                             <li><a href="{{ route('home') }}">Trang chủ</a></li>
-                            <li>Chi tiết bài viết</li>
+                            <li>{{ $post->title }}</li>
                         </ul>
                     </div>
                 </div>
@@ -31,31 +31,31 @@
                         <div class="single-blog-inner m-0">
                             <div class="single-post-wrap style-overlay">
                                 <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/blog/4.png') }}" alt="img">
+                                    @php
+                                        $image = $post->image;
+                                        if (!\Str::contains($image, 'http')) {
+                                            $image = Storage::url($image);
+                                        }
+                                    @endphp
+                                    <img src="{{ $image }}" alt="img">
                                 </div>
                                 <div class="details pb-4">
                                     <div class="post-meta-single mb-2">
                                         <ul>
-                                            <li><a class="tag-base tag-blue" href="#">Tech</a></li>
+                                            <li><a class="tag-base tag-blue" href="#">{{ $post->category->name }}</a></li>
                                             <li>
-                                                <p><i class="fa fa-clock-o"></i>08.22.2023</p>
+                                                <p><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}</p>
                                             </li>
-                                            <li><i class="fa fa-user"></i>R. Lambert</li>
+                                            <li><i class="fa fa-user"></i>{{ $post->user->name }}</li>
                                         </ul>
                                     </div>
-                                    <h5 class="title mt-0">Uttarakhand’s Hemkund Sahib yatra to start from</h5>
+                                    <h5 class="title mt-0">{{ $post->title }}</h5>
                                 </div>
                             </div>
                             <div class="single-blog-details">
-                                <p>Lorem ipsum dolor sit amet elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in in voluptate velit
-                                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut unde
-                                    omnis iste natus error sit voluptatem, totam rem aperiam, eaque ipsa quae ab illo
-                                    inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-                                    ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                                    consequuntur magni dolores eos qui ratione sequi nesciunt Neque por quisquam est</p>
+                                <p>
+                                    {{ $post->content }}
+                                </p>
                                 <blockquote class="blockquote">
                                     <i class="fa fa-quote-right"></i>
                                     <p>Lorem ipsum dolor sit amet elit, sed do eiusmod tempor incididunt ut labore et
@@ -154,7 +154,7 @@
                                 <div class="media">
                                     <img src="{{ asset('template/assets/img/author/1.png') }}" alt="img">
                                     <div class="media-body align-self-center">
-                                        <h4>Nathan George</h4>
+                                        <h4>{{ $post->user->name }}</h4>
                                         <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure,
                                             but because those who do not know how to pursue pleasure rationally
                                             encounter consequences that aextremely painful. Nor again is there anyone
@@ -163,68 +163,42 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="related-post">
-                            <div class="section-title mb-0">
-                                <h5 class="mb-0">Related Post</h5>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="single-post-wrap">
-                                        <div class="thumb">
-                                            <img src="{{ asset('template/assets/img/post/19.png') }}" alt="img">
-                                            <a class="tag-base tag-red" href="#">Tech</a>
-                                        </div>
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                    <li><i class="fa fa-user"></i>08.22.2023</li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="title mt-2"><a href="#">Lifting Weights Makes Your Nervous</a>
-                                            </h6>
-                                        </div>
-                                    </div>
+                        @if (isset($relatedPosts) && $relatedPosts->count() > 0)
+                            <div class="related-post">
+                                <div class="section-title mb-0">
+                                    <h5 class="mb-0">Related Post</h5>
                                 </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="single-post-wrap">
-                                        <div class="thumb">
-                                            <img src="{{ asset('template/assets/img/post/20.png') }}" alt="img">
-                                            <a class="tag-base tag-blue" href="#">Tech</a>
-                                        </div>
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                    <li><i class="fa fa-user"></i>08.22.2023</li>
-                                                </ul>
+                                <div class="row justify-content-center">
+                                    @foreach ($relatedPosts as $post)
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="single-post-wrap">
+                                                <div class="thumb">
+                                                    @php
+                                                        $image = $post->image;
+                                                        if (!\Str::contains($image, 'http')) {
+                                                            $image = Storage::url($image);
+                                                        }
+                                                    @endphp
+                                                    <img src="{{ $image }}" width="278px" height="165px" alt="img">
+                                                    <a class="tag-base tag-light-green" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
+                                                </div>
+                                                <div class="details">
+                                                    <div class="post-meta-single">
+                                                        <ul>
+                                                            <li><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}</li>
+                                                            <li><i class="fa fa-user"></i>{{ $post->user->name }}</li>
+                                                        </ul>
+                                                    </div>
+                                                    <h6 class="title mt-2">
+                                                        <a href="{{ route('post-detail', $post->slug) }}"> {{ $post->title }}</a>
+                                                    </h6>
+                                                </div>
                                             </div>
-                                            <h6 class="title mt-2"><a href="#">New, Remote Weight-Loss Method </a>
-                                            </h6>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="single-post-wrap">
-                                        <div class="thumb">
-                                            <img src="{{ asset('template/assets/img/post/21.png') }}" alt="img">
-                                            <a class="tag-base tag-light-green" href="#">Tech</a>
-                                        </div>
-                                        <div class="details">
-                                            <div class="post-meta-single">
-                                                <ul>
-                                                    <li><i class="fa fa-clock-o"></i>08.22.2023</li>
-                                                    <li><i class="fa fa-user"></i>08.22.2023</li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="title mt-2"><a href="#">Social Connection Boosts Fitness App
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
+                        @endif
                         <div class="blog-comment">
                             <div class="section-title">
                                 <h4>3 Comments</h4>

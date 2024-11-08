@@ -7,7 +7,7 @@
                     <div class="col-md-12 col-sm-6">
                         <div class="single-category-inner text-center">
                             <img src="{{ Storage::url($category->image) }}" alt="img" height="50" class="mx-auto object-fit-cover">
-                            <a class="tag-base tag-blue text-nowrap" href="#" style="min-width: 200px;">{{ $category->name }}</a>
+                            <a class="tag-base tag-blue text-nowrap" href="{{ route('category.posts', $category->slug) }}" style="min-width: 200px;">{{ $category->name }}</a>
                         </div>
                     </div>
                 @endforeach

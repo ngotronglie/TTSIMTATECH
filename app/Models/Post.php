@@ -14,6 +14,7 @@ class Post extends Model
         'category_id',
         'title',
         'slug',
+        'description',
         'content',
         'is_active',
         'view'

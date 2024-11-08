@@ -7,6 +7,7 @@ use App\Models\Advertisement;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Faq;
+use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,26 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('is_active', true)->get();
+        $now = Carbon::now()->toDateTimeString();
+        $weekAgo = Carbon::now()->subWeek()->toDateTimeString();
 
-        return view('home', compact('categories'));
+        $latestPosts = Post::latest('id')->paginate(10);
+
+        $trendingPosts = Post::whereBetween('created_at', [$weekAgo, $now])
+            ->orderByDesc('view')
+            ->paginate(10);
+
+        $postsInDay = Post::whereDate('created_at', now()->toDateString()) 
+            ->inRandomOrder()
+            ->take(9)
+            ->get();  
+            
+        return view('clients.home', compact('latestPosts', 'trendingPosts', 'postsInDay'));
+    }
+
+    public function contactPage()
+    {
+        return view('clients.contact');
     }
 
     public function categories()
@@ -28,9 +46,31 @@ class HomeController extends Controller
 
     public function findPostByCategory($slug)
     {
-        $category = Category::where('slug', $slug)->posts()->latest('id')->paginate(20);
+        $category = Category::where('slug', $slug)->firstOrFail(); 
+        
+        $categoryPosts = $category->posts()->latest('id')->paginate(20); 
+    
+        return view('clients.category', compact('category', 'categoryPosts'));
+    }
+    
+    public function postDetail($slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
 
-        return view('category', compact('category'));
+        $relatedPosts = Post::where('category_id', $post->category_id)
+            ->where('id', '!=', $post->id)
+            ->latest('id')
+            ->limit(3)
+            ->get();
+
+        return view('clients.post-detail', compact('post', 'relatedPosts'));
+    }
+
+    public function featuredPosts()
+    {
+        $featuredPosts = Post::orderByDesc('view')->get();
+
+        return $featuredPosts;
     }
 
     public function advertisement()
