@@ -1,7 +1,7 @@
 @extends('clients.layouts.app')
 
 @section('title')
-    TECH
+    {{ $category->name }}
 @endsection
 
 @section('content')
@@ -11,10 +11,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-inner">
-                        <h5 class="page-title">Tech</h5>
+                        <h5 class="page-title">{{ $category->name }}</h5>
                         <ul class="page-list">
                             <li><a href="{{ route('home') }}">Trang chủ</a></li>
-                            <li>Tech</li>
+                            <li>{{ $category->name }}</li>
                         </ul>
                     </div>
                 </div>
@@ -27,125 +27,39 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 pd-top-50">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/1.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
+                    <div class="row mb-2">
+                        @foreach ($categoryPosts as $post)
+                            @if ($loop->index <= 5)
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="single-post-wrap style-box">
+                                        <div class="thumb">
+                                            @php
+                                                $image = $post->image;
+                                                if (!\Str::contains($image, 'http')) {
+                                                    $image = Storage::url($image);
+                                                }
+                                            @endphp
+                                            <img src="{{ $image }}" width="278px" height="165px" alt="img">
+                                        </div>
+                                        <div class="details">
+                                            <div class="post-meta-single mb-4 pt-1">
+                                                <ul>
+                                                    <li><a class="tag-base tag-light-blue" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a></li>
+                                                    <li><i class="fa fa-user"></i>{{ $post->user->name }}</li>
+                                                </ul>
+                                            </div>
+                                            <h6 class="title"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                            <p>{{ $post->description }}</p>
+                                            <a class="btn btn-base mt-4" href="{{ route('post-detail', $post->slug) }}">Read more</a>
+                                        </div>
                                     </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/2.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/3.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/4.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/5.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/6.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
 
                     @isset($advertisement)
-                        <div class="add-area bg-after-sky mg-top--100">
+                        <div class="add-area bg-after-sky my-2">
                             <div class="container overflow-hidden">
                                 @foreach ($advertisement as $ads)
                                     @if ($ads->position == 'middle' && $ads->pages == 'category')
@@ -164,123 +78,38 @@
                         </div>
                     @endisset
 
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/7.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
+                    <div class="row mt-5 mb-2">
+                        @foreach ($categoryPosts as $post)
+                            @if ($loop->index > 5)
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="single-post-wrap style-box">
+                                        <div class="thumb">
+                                            @php
+                                                $image = $post->image;
+                                                if (!\Str::contains($image, 'http')) {
+                                                    $image = Storage::url($image);
+                                                }
+                                            @endphp
+                                            <img src="{{ $image }}" width="278px" height="165px" alt="img">
+                                        </div>
+                                        <div class="details">
+                                            <div class="post-meta-single mb-4 pt-1">
+                                                <ul>
+                                                    <li><a class="tag-base tag-light-blue" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a></li>
+                                                    <li><i class="fa fa-user"></i>{{ $post->user->name }}</li>
+                                                </ul>
+                                            </div>
+                                            <h6 class="title"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                            <p>{{ $post->description }}</p>
+                                            <a class="btn btn-base mt-4" href="{{ route('post-detail', $post->slug) }}">Read more</a>
+                                        </div>
                                     </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/8.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/9.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/1.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/5.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-post-wrap style-box">
-                                <div class="thumb">
-                                    <img src="{{ asset('template/assets/img/tech/6.png') }}" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single mb-4 pt-1">
-                                        <ul>
-                                            <li><a class="tag-base tag-light-blue" href="#">Tech</a></li>
-                                            <li><i class="fa fa-user"></i>John R.bert</li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="title"><a href="blog-details.html">Night-time co recording app predicts
-                                            asthma.</a></h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipi elit</p>
-                                    <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
+                                
+                            @endif
+                        @endforeach
                     </div>
-                    <nav class="mt-4 text-center">
+                    <nav class="mt-4 text-center my-2">
                         <ul class="pagination">
                             <li class="page-item prev"><a class="page-link" href="#"><i
                                         class="fa fa-angle-left"></i></a></li>
@@ -294,7 +123,7 @@
                     </nav>
 
                     @isset($advertisement)
-                        <div class="add-area bg-after-sky mg-top--100">
+                        <div class="add-area bg-after-sky mt-5">
                             <div class="container overflow-hidden">
                                 @foreach ($advertisement as $ads)
                                     @if ($ads->position == 'bottom' && $ads->pages == 'category')

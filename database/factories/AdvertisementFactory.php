@@ -18,7 +18,8 @@ class AdvertisementFactory extends Factory
     {
         return [
             'user_id' => rand(1, 2),
-            'pages' => fake()->randomElement(['home', 'education', 'technology', 'latest_news', 'video', 'podcast', 'category', 'post_detail']),
+            'category_id' => rand(1, 4),
+            'pages' => fake()->randomElement(['home', 'post_detail']),
             'position' => fake()->randomElement(['header', 'middle', 'bottom', 'sidebar']),
             'image' => fake()->imageUrl(),
             'link' => fake()->url(),

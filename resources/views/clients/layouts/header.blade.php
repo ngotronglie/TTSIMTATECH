@@ -58,9 +58,11 @@
                         <a href="{{ route('home') }}">Trang chủ</a>
                     </li>
                     @foreach ($categories as $category)
-                        <li class="current-menu-item">
-                            <a href="#">{{ $category->name }}</a>
-                        </li>
+                        @if ($category->posts->count() > 0)
+                            <li class="current-menu-item">
+                                <a href="{{ route('category.posts', $category->slug) }}">{{ $category->name }}</a>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>

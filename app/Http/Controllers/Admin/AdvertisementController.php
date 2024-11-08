@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
 use App\Http\Requests\StoreAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
+use App\Models\Category;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,6 +20,7 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
+        // $categories     = Category::all();
         $advertisements = Advertisement::latest('id')->paginate(10);
 
         return view(self::PATH_VIEW . __FUNCTION__, compact('advertisements'));
@@ -29,7 +31,9 @@ class AdvertisementController extends Controller
      */
     public function create()
     {
-        return view(self::PATH_VIEW . __FUNCTION__);
+        $categories     = Category::all();
+
+        return view(self::PATH_VIEW . __FUNCTION__, compact('categories'));
     }
 
     /**
@@ -39,32 +43,38 @@ class AdvertisementController extends Controller
     {
         try {
             $data = $request->validated();
-            
-            if ($data['pages'] != 'home' && $data['position'] == 'header') {
+    
+            // Kiểm tra nếu pages là null hoặc không phải là 'home' và position là 'header'
+            if (($data['pages'] !== null && $data['pages'] !== 'home') && $data['position'] == 'header') {
                 return back()->withInput()->with('error', 'Không hiển thị quảng cáo nào cho vị trí này ngoài trang chủ.');
             }
-
-            if ($this->checkDuplicateAdvertisement($data['pages'], $data['position'], $data['start_date'], $data['end_date'])) {
-                return back()->withInput()->with('error', 'Đẫ có quảng cáo tồn tại trong khoảng thời gian và trang này.');
+    
+            // Kiểm tra trùng quảng cáo
+            if ($this->checkDuplicateAdvertisement($data['pages'] ?? null, $data['position'], $data['start_date'], $data['end_date'], $data['category_id'] ?? null)) {
+                return back()->withInput()->with('error', 'Đã có quảng cáo tồn tại trong khoảng thời gian và trang, danh mục hoặc vị trí này.');
             }
-
+    
+            // Kiểm tra và xử lý file hình ảnh
             if ($request->hasFile('image')) {
                 $data['image'] = Storage::put(self::PATH_UPLOAD, $request->file('image'));
             }
-
+    
+            // Tạo quảng cáo mới
             Advertisement::create($data);
-
+    
             return redirect()->route('admin.advertisements.index')->with('success', 'Thêm quảng cáo thành công.');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            
+    
+            // Xóa file hình ảnh nếu có lỗi
             if (isset($data['image']) && Storage::exists($data['image'])) {
                 Storage::delete($data['image']);
             }
-
+    
             return back()->with('error', 'Thêm quảng cáo thất bại, vui lòng thử lại.');
         }
     }
+    
 
     public function show($id)
     {
@@ -82,13 +92,14 @@ class AdvertisementController extends Controller
      */
     public function edit($id)
     {
+        $categories    = Category::all();
         $advertisement = Advertisement::find($id);
 
         if (empty($advertisement)) {
             return back()->with('error', 'Không tìm thấy quảng cáo.');
         }
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('advertisement'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'advertisement'));
     }
 
     /**
@@ -109,7 +120,7 @@ class AdvertisementController extends Controller
                 return back()->withInput()->with('error', 'Không hiển thị quảng cáo nào cho vị trí này ngoài trang chủ.');
             }
             
-            if ($this->checkDuplicateAdvertisement($data['pages'], $data['position'], $data['start_date'], $data['end_date'], $advertisement->id)) {
+            if ($this->checkDuplicateAdvertisement($data['pages'] ?? null, $data['position'], $data['start_date'], $data['end_date'], $data['category_id'] ?? null, $advertisement->id)) {
                 return back()->withInput()->with('error', 'Đẫ có quảng cáo tồn tại trong khoảng thời gian và vị trí này.');
             }
 
@@ -216,9 +227,9 @@ class AdvertisementController extends Controller
         }
     }
     
-    private function checkDuplicateAdvertisement($pages, $position, $startDate, $endDate, $currentId = null)
+    private function checkDuplicateAdvertisement($pages = null, $position, $startDate, $endDate, $categoryId = null, $currentId = null)
     {
-        return Advertisement::where('pages', $pages)->where('position', $position)
+        return Advertisement::where('position', $position)
             ->where(function($query) use ($startDate, $endDate) {
                 $query->whereBetween('start_date', [$startDate, $endDate])
                     ->orWhereBetween('end_date', [$startDate, $endDate])
@@ -227,9 +238,16 @@ class AdvertisementController extends Controller
                             ->where('end_date', '>=', $endDate);
                     });
             })
+            ->when($categoryId, function($query) use ($categoryId) {
+                return $query->where('category_id', $categoryId);
+            })
+            ->when($pages, function($query) use ($pages) {
+                return $query->where('pages', $pages);
+            })
             ->when($currentId, function($query) use ($currentId) {
                 return $query->where('id', '!=', $currentId);
             })
             ->exists();
     }
+
 }

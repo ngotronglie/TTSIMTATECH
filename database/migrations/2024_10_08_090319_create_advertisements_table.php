@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,7 +16,8 @@ return new class extends Migration
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->enum('pages', ['home', 'education', 'technology', 'latest_news', 'video', 'podcast', 'category', 'post_detail'])->default('home');
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade');
+            $table->enum('pages', ['home', 'post_detail'])->default('home');
             $table->enum('position', ['header', 'middle', 'bottom', 'sidebar'])->default('header'); 
             $table->string('image'); 
             $table->string('link');
