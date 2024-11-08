@@ -44,20 +44,24 @@
                                         <div class="details">
                                             <div class="post-meta-single mb-4 pt-1">
                                                 <ul>
-                                                    <li><a class="tag-base tag-light-blue" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a></li>
+                                                    <li><a class="tag-base tag-light-blue"
+                                                            href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
+                                                    </li>
                                                     <li><i class="fa fa-user"></i>{{ $post->user->name }}</li>
                                                 </ul>
                                             </div>
-                                            <h6 class="title"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                            <h6 class="title"><a
+                                                    href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a>
+                                            </h6>
                                             <p>{{ $post->description }}</p>
-                                            <a class="btn btn-base mt-4" href="{{ route('post-detail', $post->slug) }}">Read more</a>
+                                            <a class="btn btn-base mt-4"
+                                                href="{{ route('post-detail', $post->slug) }}">Read more</a>
                                         </div>
                                     </div>
                                 </div>
                             @endif
                         @endforeach
                     </div>
-
                     @isset($advertisement)
                         <div class="add-area bg-after-sky my-2">
                             <div class="container overflow-hidden">
@@ -70,7 +74,8 @@
                                             }
                                         @endphp
                                         <a href="{{ $ads->link }}">
-                                            <img src="{{ $image }}" alt="img" height="200" class="object-fit-cover">
+                                            <img src="{{ $image }}" alt="img" height="200"
+                                                class="object-fit-cover">
                                         </a>
                                     @endif
                                 @endforeach
@@ -95,17 +100,21 @@
                                         <div class="details">
                                             <div class="post-meta-single mb-4 pt-1">
                                                 <ul>
-                                                    <li><a class="tag-base tag-light-blue" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a></li>
+                                                    <li><a class="tag-base tag-light-blue"
+                                                            href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
+                                                    </li>
                                                     <li><i class="fa fa-user"></i>{{ $post->user->name }}</li>
                                                 </ul>
                                             </div>
-                                            <h6 class="title"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                            <h6 class="title"><a
+                                                    href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a>
+                                            </h6>
                                             <p>{{ $post->description }}</p>
-                                            <a class="btn btn-base mt-4" href="{{ route('post-detail', $post->slug) }}">Read more</a>
+                                            <a class="btn btn-base mt-4"
+                                                href="{{ route('post-detail', $post->slug) }}">Read more</a>
                                         </div>
                                     </div>
                                 </div>
-                                
                             @endif
                         @endforeach
                     </div>
@@ -134,7 +143,8 @@
                                             }
                                         @endphp
                                         <a href="{{ $ads->link }}">
-                                            <img src="{{ $image }}" alt="img" height="200" class="object-fit-cover">
+                                            <img src="{{ $image }}" alt="img" height="200"
+                                                class="object-fit-cover">
                                         </a>
                                     @endif
                                 @endforeach
@@ -142,7 +152,7 @@
                         </div>
                     @endisset
                 </div>
-                 
+
                 @include('clients.layouts.sidebar')
 
             </div>

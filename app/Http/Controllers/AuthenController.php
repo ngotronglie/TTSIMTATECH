@@ -73,7 +73,7 @@ class AuthenController extends Controller
             'email' => 'Email không chính xác hoặc mật khẩu không đúng.',
         ])->withInput();
     }
-
+    
     public function dangXuat()
     {
         Auth::logout();
@@ -87,8 +87,7 @@ class AuthenController extends Controller
     //đăng nhập bằng google
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->with(['hd' => 'http://127.0.0.1:8000/'])
-        ->redirect();
+        return Socialite::driver('google')->redirect();
     }
     public function handleGoogleCallback()
 
