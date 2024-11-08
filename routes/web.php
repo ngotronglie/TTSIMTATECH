@@ -50,26 +50,23 @@ Route::prefix('admin')->as('admin.')->group(function () {
     // Đăng xuất
     Route::post('logout', [AuthenController::class, 'dangXuat'])->name('logout');
 });
-Route::controller(AuthenController::class)->group(function(){
+Route::controller(AuthenController::class)->group(function () {
 
     Route::get('auth/twitter', 'redirectToTwitter')->name('auth.twitter');
 
     Route::get('auth/twitter/callback', 'handleTwitterCallback');
-
 });
-Route::controller(AuthenController::class)->group(function(){
+Route::controller(AuthenController::class)->group(function () {
 
     Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
 
     Route::get('auth/facebook/callback', 'handleFacebookCallback');
-
 });
-Route::controller(AuthenController::class)->group(function(){
+Route::controller(AuthenController::class)->group(function () {
 
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
 
     Route::get('auth/google/callback', 'handleGoogleCallback');
-
 });
 
 // Client
@@ -165,3 +162,4 @@ Route::post('roles/{id}/restore', [RoleController::class, 'restore'])
     ->name('roles.restore');
 Route::delete('roles/{id}/force-delete', [RoleController::class, 'forceDelete'])
     ->name('roles.forceDelete');
+Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.chitiet');

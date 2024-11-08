@@ -1,7 +1,7 @@
 @extends('clients.layouts.app')
 
 @section('title')
-    TECH
+{{ $category->name }}
 @endsection
 
 @section('content')
@@ -11,10 +11,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-inner">
-                        <h5 class="page-title">Tech</h5>
+                        <h5 class="page-title"> {{ $category->name }}</h5>
                         <ul class="page-list">
                             <li><a href="{{ route('home') }}">Trang chủ</a></li>
-                            <li>Tech</li>
+                            <li>{{ $category->name }}</li>
                         </ul>
                     </div>
                 </div>
@@ -28,7 +28,31 @@
             <div class="row">
                 <div class="col-lg-9 pd-top-50">
                     <div class="row">
-                        <div class="col-lg-4 col-md-6">
+                        @forelse ($posts as $post)
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single-post-wrap style-box">
+                                    <div class="thumb">
+                                        <img src="{{ asset($post->image) }}" alt="Image" width="100%" height="300px">
+                                    </div>
+                                    <div class="details">
+                                        <div class="post-meta-single mb-4 pt-1">
+                                            <ul>
+                                                <li><a class="tag-base tag-light-blue" href="#">{{ $category->name }}</a></li>
+                                                <li><i class="fa fa-user"></i> {{ $post->user->name }}</li>
+                                            </ul>
+                                        </div>
+                                        <h6 class="title"><a href="#">{{ $post->title }}</a></h6>
+                                        <p>{{ Str::limit($post->excerpt, 100) }}</p> <!-- Tóm tắt bài viết -->
+                                        <a class="btn btn-base mt-4" href="#">Đọc thêm</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="col-12">
+                                <p>Chưa có bài viết nào cho danh mục này.</p>
+                            </div>
+                        @endforelse
+                        {{-- <div class="col-lg-4 col-md-6">
                             <div class="single-post-wrap style-box">
                                 <div class="thumb">
                                     <img src="{{ asset('template/assets/img/tech/1.png') }}" alt="img">
@@ -141,7 +165,8 @@
                                     <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
+
                     </div>
 
                     @isset($advertisement)
@@ -165,7 +190,7 @@
                     @endisset
 
                     <div class="row">
-                        <div class="col-lg-4 col-md-6">
+                        {{-- <div class="col-lg-4 col-md-6">
                             <div class="single-post-wrap style-box">
                                 <div class="thumb">
                                     <img src="{{ asset('template/assets/img/tech/7.png') }}" alt="img">
@@ -278,7 +303,7 @@
                                     <a class="btn btn-base mt-4" href="blog-details.html">Read more</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <nav class="mt-4 text-center">
                         <ul class="pagination">

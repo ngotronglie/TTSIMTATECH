@@ -1,6 +1,6 @@
 <div class="navbar-area">
     <!-- topbar end-->
-    <div class="topbar-area">
+    {{-- <div class="topbar-area">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-7 align-self-center">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- topbar end-->
 
     <!-- adbar end-->
@@ -83,16 +83,18 @@
             </div>
             <div class="collapse navbar-collapse" id="nextpage_main_menu">
                 <ul class="navbar-nav menu-open">
+                    <!-- Link đến Trang Chủ -->
                     <li class="current-menu-item">
                         <a href="{{ route('home') }}">Trang chủ</a>
                     </li>
                     @foreach ($categories as $category)
                         <li class="current-menu-item">
-                            <a href="#">{{ $category->name }}</a>
+                            <a href="{{ route('category.chitiet', ['slug' => $category->slug]) }}">{{ $category->name }}</a>
                         </li>
                     @endforeach
                 </ul>
             </div>
+            
             <div class="nav-right-part nav-right-part-desktop d-flex align-items-center">
                 <div class="menu-search-inner me-2">
                     <input type="text" placeholder="Search For">
@@ -118,10 +120,10 @@
                             </ul>
                         </div>
                     @else
-                        <div class="auth-buttons d-flex align-items-center ms-3">
-                            <a href="{{ route('admin.login') }}" class="btn btn-primary btn-sm me-2">Đăng nhập</a>
-                            <a href="{{ route('admin.register') }}" class="btn btn-success btn-sm">Đăng ký</a>
-                        </div>
+                    <div class="auth-buttons d-flex align-items-center ms-1">
+                        <a href="{{ route('admin.login') }}" class="btn btn-primary me-1">Đăng nhập</a>
+                        <a href="{{ route('admin.register') }}" class="btn btn-primary">Đăng ký</a>
+                    </div>
                     @endif
                 </div>
             </div>
