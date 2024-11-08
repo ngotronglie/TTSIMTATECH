@@ -59,6 +59,10 @@ class AuthenController extends Controller
 
             $user = Auth::user();
 
+            /**
+             * @var User $user
+             */
+
             if ($user->admin()) {
                 return redirect()->route('admin.dashboard');
             } else {
