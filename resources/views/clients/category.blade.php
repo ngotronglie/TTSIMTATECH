@@ -57,7 +57,6 @@
                             @endif
                         @endforeach
                     </div>
-
                     @isset($advertisement)
                         <div class="add-area bg-after-sky my-2">
                             <div class="container overflow-hidden">
@@ -70,7 +69,8 @@
                                             }
                                         @endphp
                                         <a href="{{ $ads->link }}">
-                                            <img src="{{ $image }}" alt="img" height="200" class="object-fit-cover">
+                                            <img src="{{ $image }}" alt="img" height="200"
+                                                class="object-fit-cover">
                                         </a>
                                     @endif
                                 @endforeach
@@ -94,7 +94,8 @@
                                             }
                                         @endphp
                                         <a href="{{ $ads->link }}">
-                                            <img src="{{ $image }}" alt="img" height="200" class="object-fit-cover">
+                                            <img src="{{ $image }}" alt="img" height="200"
+                                                class="object-fit-cover">
                                         </a>
                                     @endif
                                 @endforeach
@@ -102,7 +103,7 @@
                         </div>
                     @endisset
                 </div>
-                 
+
                 @include('clients.layouts.sidebar')
 
             </div>

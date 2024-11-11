@@ -29,4 +29,8 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function readHistories()
+    {
+        return $this->hasMany(ReadHistory::class);  // Một bài viết có thể có nhiều lượt đọc
+    }
 }

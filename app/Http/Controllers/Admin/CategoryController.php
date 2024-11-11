@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+
 
 class CategoryController extends Controller
 {
@@ -23,6 +25,18 @@ class CategoryController extends Controller
         $categories = Category::latest('id')->paginate(10);
 
         return view(self::PATH_VIEW . __FUNCTION__, compact('categories'));
+    }
+    public function show($slug)
+    {
+        // Lấy danh mục theo slug
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+        // Lấy các bài viết thuộc danh mục này
+        $posts = Post::where('category_id', $category->id)
+                     ->where('is_active', 1)
+                     ->get();
+
+        return view('clients.category', compact('category', 'posts'));
     }
 
     /**
