@@ -28,11 +28,7 @@ use App\Http\Controllers\MemberController;
 //     return view('welcome');
 // });
 
-Route::prefix('template')->group(function () {
-    Route::get('author', function () {
-        return view('templates.author');
-    })->name('author');
-});
+Route::get('home/profile', [HomeController::class, 'profile'])->name('home/profile');
 
 // Template Admin
 Route::prefix('admin')->as('admin.')->group(function () {
@@ -47,24 +43,32 @@ Route::prefix('admin')->as('admin.')->group(function () {
     // Đăng xuất
     Route::post('logout', [AuthenController::class, 'dangXuat'])->name('logout');
 });
+Route::controller(AuthenController::class)->group(function () {
 
+    Route::get('auth/twitter', 'redirectToTwitter')->name('auth.twitter');
+
+    Route::get('auth/twitter/callback', 'handleTwitterCallback');
+});
+Route::controller(AuthenController::class)->group(function () {
+
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
+});
+Route::controller(AuthenController::class)->group(function () {
+
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+
+    Route::get('auth/google/callback', 'handleGoogleCallback');
+});
 
 // Client
-Route::group(['prefix' => '/'], function () {
-    Route::get('/', function () {
-        return view('clients.home');
-    })->name('home');
-    Route::get('category', function () {
-        return view('clients.category');
-    })->name('category');
-    Route::get('post-detail', function () {
-        return view('clients.post-detail');
-    })->name('post-detail');
-    // Route::get('category/{slug}/posts', [HomeController::class, 'findPostByCategory'])->name('category');
+Route::group([], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('post/{slug}', [HomeController::class, 'postDetail'])->name('post-detail');
+    Route::get('category/{slug}/posts', [HomeController::class, 'findPostByCategory'])->name('category.posts');
     Route::get('faq', [HomeController::class, 'faqs'])->name('faq');
-    Route::get('contact', function () {
-        return view('clients.contact');
-    })->name('contact');
+    Route::get('contact', [HomeController::class, 'contactPage'])->name('contact');
     Route::post('contact', [HomeController::class, 'submitContact'])->name('contact.store');
     Route::get('profile', [MemberController::class, 'showProfile'])->name('profile');
     Route::post('change-password', [MemberController::class, 'changePassword'])->name('change-password');
@@ -125,6 +129,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/', [PostController::class, 'index'])->name('index');
         Route::get('/create', [PostController::class, 'create'])->name('create');
         Route::post('/', [PostController::class, 'store'])->name('store');
+        Route::post('upload', [PostController::class, 'upload'])->name('upload');
         Route::get('/{id}/edit', [PostController::class, 'edit'])->name('edit');
         Route::put('/{id}', [PostController::class, 'update'])->name('update');
         Route::delete('/{id}', [PostController::class, 'destroy'])->name('destroy');
@@ -145,3 +150,4 @@ Route::post('roles/{id}/restore', [RoleController::class, 'restore'])
     ->name('roles.restore');
 Route::delete('roles/{id}/force-delete', [RoleController::class, 'forceDelete'])
     ->name('roles.forceDelete');
+Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.chitiet');

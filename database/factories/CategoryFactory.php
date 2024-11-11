@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         static $index = 0;
-        $names = ['Trang chủ', 'Giáo dục', 'Công nghệ', 'Video', 'Podcasts'];
+        $names = ['Giáo dục', 'Công nghệ', 'Video', 'Podcasts'];
         
         $name = $names[$index++ % count($names)];
         
@@ -26,7 +26,7 @@ class CategoryFactory extends Factory
             'name' => $name,
             'slug' => Str::slug($name),
             'image' => fake()->imageUrl(),
-            'is_active' => fake()->boolean(),
+            'is_active' => 1,
         ];
     }
 }

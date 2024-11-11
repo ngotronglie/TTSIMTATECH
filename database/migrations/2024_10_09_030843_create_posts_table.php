@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('description');
             $table->text('content');
             $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);

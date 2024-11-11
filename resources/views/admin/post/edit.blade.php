@@ -38,11 +38,20 @@
                 <img src="{{ asset($post->image) }}" alt="Current Image" class="mt-2" style="max-width: 100px;">
             @endif
         </div>
+        
+        <!-- Input for Description -->
+        <div class="mb-3">
+            <label class="form-label">Description: <span class="text-danger">*</span></label>
+            <input type="text" name="description" value="{{ old('description', $post->description) }}" class="form-control @error('description') is-invalid @enderror">
+            @error('description')
+                <small class="text-danger fst-italic">* {{ $message }}</small>
+            @enderror
+        </div>
 
         <!-- Textarea for Content -->
         <div class="mb-3">
             <label class="form-label">Nội dung: <span class="text-danger">*</span></label>
-            <textarea name="content" rows="5" class="form-control @error('content') is-invalid @enderror">{{ old('content', $post->content) }}</textarea>
+            <textarea name="content" rows="5" id="content" class="form-control @error('content') is-invalid @enderror">{{ old('content', $post->content) }}</textarea>
             @error('content')
                 <small class="text-danger fst-italic">* {{ $message }}</small>
             @enderror
@@ -95,4 +104,30 @@
             <a href="{{ route('admin.posts.index') }}" class="btn btn-info"> <i class="bi bi-arrow-left me-1"></i> Danh sách </a>
         </div>
     </form>
+@endsection
+
+@section('script-libs')
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+@endsection
+
+@section('scripts')
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#content'), {
+                ckfinder: {
+                    uploadUrl: "{{ route('admin.posts.upload', ['_token' => csrf_token()]) }}"
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+@endsection
+
+@section('styles')
+    <style>
+        .ck-editor__editable_inline {
+            height: 450px;
+        }
+    </style>
 @endsection

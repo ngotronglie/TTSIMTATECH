@@ -30,6 +30,7 @@
                     <th class="align-middle">Tác giả</th>
                     <th class="align-middle">Slug</th>
                     <th class="align-middle">View</th>
+                    <th class="align-middle">Mô tả</th>
                     <th class="align-middle">Nội dung</th>
                     <th class="align-middle">Hình ảnh</th>
                     <th class="align-middle">Danh mục</th>
@@ -47,9 +48,16 @@
                             <td>{{ $post->user->name ?? 'Không xác định' }}</td> <!-- Hiển thị tên tác giả -->
                             <td>{{ $post->slug }}</td>
                             <td>{{ $post->view }}</td>
+                            <td>{{ $post->description }}</td>
                             <td>{{ $post->content }}</td>
                             <td>
-                                <img src="{{ asset($post->image) }}" alt="Image" width="50" height="50">
+                                @php
+                                    $image = $post->image;
+                                    if (!\Str::contains($image, 'http')) {
+                                        $image = Storage::url($image);
+                                    }
+                                @endphp
+                                <img src="{{ $image }}" alt="Image" width="50" height="50">
                             </td>
                             <td>{{ $post->category->name ?? 'Không có' }}</td>
                             <td>{{ $post->is_active ? 'Hoạt động' : 'Không hoạt động' }}</td>

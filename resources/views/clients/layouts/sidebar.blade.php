@@ -7,7 +7,7 @@
                     <div class="col-md-12 col-sm-6">
                         <div class="single-category-inner text-center">
                             <img src="{{ Storage::url($category->image) }}" alt="img" height="50" class="mx-auto object-fit-cover">
-                            <a class="tag-base tag-blue text-nowrap" href="#" style="min-width: 200px;">{{ $category->name }}</a>
+                            <a class="tag-base tag-blue text-nowrap" href="{{ route('category.posts', $category->slug) }}" style="min-width: 200px;">{{ $category->name }}</a>
                         </div>
                     </div>
                 @endforeach
@@ -17,17 +17,19 @@
         @isset($advertisement)
             <div class="widget widget-add">
                 @foreach ($advertisement as $ads)
-                    @if ($ads->position == 'sidebar' && $ads->pages == 'post_detail')
-                        @php
-                            $image = $ads->image;
-                            if (!\Str::contains($image, 'http')) {
-                                $image = Storage::url($image);
-                            }
-                        @endphp
-                        <a href="{{ $ads->link }}" class="add">
-                            <img src="{{ $image }}" alt="img" width="262" class="object-fit-cover">
-                        </a>
-                    @endif
+                    @foreach ($categories as $category)
+                        @if ($ads->position == 'sidebar' && $ads->pages == 'post_detail' || $ads->category_id == $category->id)
+                            @php
+                                $image = $ads->image;
+                                if (!\Str::contains($image, 'http')) {
+                                    $image = Storage::url($image);
+                                }
+                            @endphp
+                            <a href="{{ $ads->link }}" class="add">
+                                <img src="{{ $image }}" alt="img" width="262" class="object-fit-cover">
+                            </a>
+                        @endif
+                    @endforeach
                 @endforeach
             </div>
         @endisset

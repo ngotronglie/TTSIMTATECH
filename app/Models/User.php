@@ -23,6 +23,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'google_id',
+        'facebook_id',
+        'Twitter_id',
         'email',
         'password',
         'avatar',
@@ -64,5 +67,9 @@ class User extends Authenticatable
     public function member()
     {
         return $this->roles()->where('name', self::TYPE_MEMBER)->exists();
+    }
+    public function readHistories()
+    {
+        return $this->hasMany(ReadHistory::class);  // Một người dùng có thể có nhiều lịch sử đọc
     }
 }

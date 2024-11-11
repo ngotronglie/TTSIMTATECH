@@ -8,8 +8,7 @@
     <title>@yield('title')</title>
 
     <!-- Favicons -->
-    <link href="{{ asset('template/admin/assets/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('template/admin/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('template/admin/assets/img/logo.svg') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -28,6 +27,8 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('template/admin/assets/css/style.css') }}" rel="stylesheet">
+
+    @yield('styles')
 </head>
 
 <body>
@@ -60,6 +61,7 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('template/admin/assets/js/main.js') }}"></script>
 
+    @yield('script-libs')
     @yield('scripts')
 
 </body>

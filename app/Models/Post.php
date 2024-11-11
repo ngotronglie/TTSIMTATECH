@@ -14,6 +14,7 @@ class Post extends Model
         'category_id',
         'title',
         'slug',
+        'description',
         'content',
         'is_active',
         'view'
@@ -27,5 +28,9 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function readHistories()
+    {
+        return $this->hasMany(ReadHistory::class);  // Một bài viết có thể có nhiều lượt đọc
     }
 }

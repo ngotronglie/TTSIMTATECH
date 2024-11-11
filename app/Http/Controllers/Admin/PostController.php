@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -35,52 +36,47 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      */
 
-     public function store(StorePostRequest $request)
-{
-    // Validate form input
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'slug' => 'required|string|max:255|unique:posts,slug',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'content' => 'required',
-        'category_id' => 'required|exists:categories,id',
-        'user_id' => 'required|exists:users,id',
-        'is_active' => 'required|boolean',
-    ]);
+    public function store(StorePostRequest $request)
+    {
+        $request->validated();
 
-    // Initialize a new Post instance
-    $post = new Post();
-    $post->title = $request->title;
-    $post->slug = $request->slug;
-    $post->content = $request->content;
-    $post->category_id = $request->category_id;
-    $post->user_id = $request->user_id;
-    $post->is_active = $request->is_active;
-    $post->view = 0;
+        // Initialize a new Post instance
+        $post = new Post();
+        $post->title = $request->title;
+        $post->slug = $request->slug;
+        $post->description = $request->description;
+        $post->content = $request->content;
+        $post->category_id = $request->category_id;
+        $post->user_id = $request->user_id;
+        $post->is_active = $request->is_active;
+        $post->view = 0;
 
-    // Handle image upload and store the path
-    if ($request->hasFile('image')) {
-        $file = $request->file('image');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $filePath = $file->storeAs('uploads/images', $filename, 'public');
-        $post->image = '/storage/' . $filePath; // Save the image path in the database
+        // Handle image upload and store the path
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('uploads/images', $filename, 'public');
+            $post->image = $filePath; // Save the image path in the database
+        }
+
+        $post->save();
+
+        return redirect()->route('admin.posts.index')->with('success', 'Bài viết đã được thêm thành công.');
     }
 
-
-    // Save the post
-    $post->save();
-
-    // Redirect to posts index with a success message
-    return redirect()->route('admin.posts.index')->with('success', 'Bài viết đã được thêm thành công.');
-}
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
+    public function upload(Request $request)
     {
-        //
+        if ($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+    
+            $path = $request->file('upload')->storeAs('images/posts', $fileName, 'public');
+    
+            $url = Storage::url($path);
+            return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
+        }
     }
 
     /**
@@ -97,19 +93,11 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
 
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:posts,slug,' . $post->id,
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'content' => 'required',
-            'category_id' => 'required|exists:categories,id',
-            'user_id' => 'required|exists:users,id',
-            'is_active' => 'required|boolean',
-        ]);
+        $request->validated();
 
         // Xử lý ảnh mới nếu có
         if ($request->hasFile('image')) {

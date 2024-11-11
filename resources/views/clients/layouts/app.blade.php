@@ -9,7 +9,7 @@
     <title>@yield('title')</title>
 
     <!-- favicon -->
-    <link rel=icon href="{{ asset('template/assets/img/favicon.png') }}" sizes="20x20" type="image/png">
+    <link rel=icon href="{{ asset('template/admin/assets/img/logo.svg') }}" sizes="20x20" type="image/svg">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('template/assets/css/vendor.css') }}">
@@ -37,8 +37,8 @@
     <!-- navbar end -->
 
     <!-- banner area start -->
-    @if (request()->is('home'))
-        @include('layouts.banner')
+    @if (request()->is('/'))
+        @include('clients.layouts.banner')
     @endif
     <!-- banner area end -->
     
@@ -55,11 +55,12 @@
     <!-- back to top area end -->
 
     <!-- all plugins here -->
-    {{-- <script data-cfasync="false" src="{{ asset('template/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script> --}}
     <script src="{{ asset('template/assets/js/vendor.js') }}"></script>
     <!-- main js  -->
     <script src="{{ asset('template/assets/js/main.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    
     @yield('scripts')
 </body>
 
