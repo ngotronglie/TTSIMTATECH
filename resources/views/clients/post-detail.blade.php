@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-inner">
-                        <h5 class="page-title">{{ $post->title }}</h5>
+                        <h5 class="page-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $post->title }}</h5>
                         <ul class="page-list">
                             <li><a href="{{ route('home') }}">Trang chủ</a></li>
                             <li>{{ $post->title }}</li>
@@ -30,7 +30,7 @@
                     <div class="blog-details-page-inner">
                         <div class="single-blog-inner m-0">
                             <div class="single-post-wrap style-overlay">
-                                <div class="thumb">
+                                <div class="thumb text-center">
                                     @php
                                         $image = $post->image;
                                         if (!\Str::contains($image, 'http')) {
@@ -53,23 +53,10 @@
                                 </div>
                             </div>
                             <div class="single-blog-details">
-                                <p>
-                                    {{ $post->content }}
-                                </p>
-                                <blockquote class="blockquote">
-                                    <i class="fa fa-quote-right"></i>
-                                    <p>Lorem ipsum dolor sit amet elit, sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ullamco laboris nisi
-                                        ut aliquip ex ea commodo. Duis aute irure dolor in in voluptate velit esse
-                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                    </p>
-                                </blockquote>
+                                <div>
+                                    {!! $post->content !!}
+                                </div>
                             </div>
-                            <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because
-                                those who do not know how to pursue pleasure rationally encounter consequences that are
-                                extremely painful. Nor again is there anyone who loves or pursues or desires to obtain
-                                pain of itself, because it is pain, but because occasionally circumstances occur in
-                                which toil and pain can procure him some great pleasure.</p>
 
                             @isset($advertisement)
                                 @foreach ($advertisement as $ads)
@@ -89,67 +76,6 @@
                                 @endforeach
                             @endisset
 
-                            <h5>Expression in New Human Rights Policy</h5>
-                            <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because
-                                those who do not know how to pursue pleasure rationally encounter consequences that are
-                                extremely painful. Nor again is there anyone who loves or pursues or desires to obtain
-                                pain of itself, because it is pain, but because occasionally circumstances occur in
-                                which toil and pain can procure him some great pleasure.</p>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="thumb mb-3 mb-sm-0">
-                                        <img src="{{ asset('template/assets/img/blog/5.png') }}" alt="img">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="{{ asset('template/assets/img/blog/6.png') }}" alt="img">
-                                </div>
-                            </div>
-                            <div class="video-area">
-                                <h5>Expression in New Human Rights Policy</h5>
-                                <div class="single-blog-inner mb-4">
-                                    <div class="thumb">
-                                        <img src="{{ asset('template/assets/img/blog/7.png') }}" alt="image">
-                                        <a class="video-play-btn" href="https://www.youtube.com/embed/Wimkqo8gDZ0"
-                                            data-effect="mfp-zoom-in"><i class="fa fa-play"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because
-                                those who do not know how to pursue pleasure rationally encounter consequences that are
-                                extremely painful. Nor again is there anyone who loves or pursues or desires to obtain
-                                pain of itself, because it is pain, but because occasionally circumstances occur in
-                                which toil and pain can procure him some great pleasure.</p>
-                            <div class="meta">
-                                <div class="row">
-                                    <div class="col-lg-5">
-                                        <div class="tags">
-                                            <span>Tags:</span>
-                                            <a href="#">Tin tức,</a>
-                                            <a href="#">Bài viết,</a>
-                                            <a href="#">Tạp chí</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 text-md-right">
-                                        <div class="blog-share">
-                                            <span>Share:</span>
-                                            <ul class="social-area social-area-2 d-inline">
-                                                <li><a class="facebook-icon" href="#"><i
-                                                            class="fa fa-facebook"></i></a>
-                                                </li>
-                                                <li><a class="twitter-icon" href="#"><i class="fa fa-twitter"></i></a>
-                                                </li>
-                                                <li><a class="youtube-icon" href="#"><i
-                                                            class="fa fa-youtube-play"></i></a></li>
-                                                <li><a class="instagram-icon" href="#"><i
-                                                            class="fa fa-instagram"></i></a></li>
-                                                <li><a class="google-icon" href="#"><i
-                                                            class="fa fa-google-plus"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="author-area">
                                 <div class="media">
                                     <img src="{{ asset('template/assets/img/author/1.png') }}" alt="img">
@@ -180,7 +106,12 @@
                                                         }
                                                     @endphp
                                                     <img src="{{ $image }}" width="278px" height="165px" alt="img">
-                                                    <a class="tag-base tag-light-green" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
+                                                    @php
+                                                        $colors = ['tag-red', 'tag-blue', 'tag-green', 'tag-orange', 'tag-purple', 'tag-light-green']; 
+                                                        $randomColor = $colors[array_rand($colors)];
+                                                    @endphp
+
+                                                    <a class="tag-base {{ $randomColor }}" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
                                                 </div>
                                                 <div class="details">
                                                     <div class="post-meta-single">
@@ -189,7 +120,7 @@
                                                             <li><i class="fa fa-user"></i>{{ $post->user->name }}</li>
                                                         </ul>
                                                     </div>
-                                                    <h6 class="title mt-2">
+                                                    <h6 class="title mt-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                                                         <a href="{{ route('post-detail', $post->slug) }}"> {{ $post->title }}</a>
                                                     </h6>
                                                 </div>

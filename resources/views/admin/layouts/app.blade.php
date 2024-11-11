@@ -27,6 +27,8 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('template/admin/assets/css/style.css') }}" rel="stylesheet">
+
+    @yield('styles')
 </head>
 
 <body>
@@ -59,6 +61,7 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('template/admin/assets/js/main.js') }}"></script>
 
+    @yield('script-libs')
     @yield('scripts')
 
 </body>

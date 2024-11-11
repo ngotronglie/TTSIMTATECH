@@ -17,17 +17,19 @@
         @isset($advertisement)
             <div class="widget widget-add">
                 @foreach ($advertisement as $ads)
-                    @if ($ads->position == 'sidebar' && $ads->pages == 'post_detail')
-                        @php
-                            $image = $ads->image;
-                            if (!\Str::contains($image, 'http')) {
-                                $image = Storage::url($image);
-                            }
-                        @endphp
-                        <a href="{{ $ads->link }}" class="add">
-                            <img src="{{ $image }}" alt="img" width="262" class="object-fit-cover">
-                        </a>
-                    @endif
+                    @foreach ($categories as $category)
+                        @if ($ads->position == 'sidebar' && $ads->pages == 'post_detail' || $ads->category_id == $category->id)
+                            @php
+                                $image = $ads->image;
+                                if (!\Str::contains($image, 'http')) {
+                                    $image = Storage::url($image);
+                                }
+                            @endphp
+                            <a href="{{ $ads->link }}" class="add">
+                                <img src="{{ $image }}" alt="img" width="262" class="object-fit-cover">
+                            </a>
+                        @endif
+                    @endforeach
                 @endforeach
             </div>
         @endisset

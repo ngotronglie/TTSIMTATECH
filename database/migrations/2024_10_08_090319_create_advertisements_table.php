@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade');
-            $table->enum('pages', ['home', 'post_detail'])->default('home');
+            $table->enum('pages', ['home', 'post_detail'])->nullable()->default('home');
             $table->enum('position', ['header', 'middle', 'bottom', 'sidebar'])->default('header'); 
             $table->string('image'); 
             $table->string('link');

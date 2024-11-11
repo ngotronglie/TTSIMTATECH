@@ -128,6 +128,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/', [PostController::class, 'index'])->name('index');
         Route::get('/create', [PostController::class, 'create'])->name('create');
         Route::post('/', [PostController::class, 'store'])->name('store');
+        Route::post('upload', [PostController::class, 'upload'])->name('upload');
         Route::get('/{id}/edit', [PostController::class, 'edit'])->name('edit');
         Route::put('/{id}', [PostController::class, 'update'])->name('update');
         Route::delete('/{id}', [PostController::class, 'destroy'])->name('destroy');

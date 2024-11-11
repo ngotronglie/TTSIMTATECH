@@ -8,7 +8,7 @@
     <div class="post-area pd-top-75 pd-bottom-50">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
+                <div class="{{ isset($postsInWeek) && $postsInWeek->count() > 0 ? 'col-lg-4' : 'col-lg-6' }} col-md-6">
                     <div class="section-title">
                         <h6 class="title">Tin Tức Thịnh Hành</h6>
                     </div>
@@ -32,7 +32,7 @@
                                                 <div class="post-meta-single">
                                                     <p><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}</p>
                                                 </div>
-                                                <h6 class="title"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                                <h6 class="title post-line1"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
                                             </div>
                                         </div>
                             @if ($loop->index % 3 == 2 || $loop->index == count($trendingPosts) - 1)
@@ -42,7 +42,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="{{ isset($postsInWeek) && $postsInWeek->count() > 0 ? 'col-lg-4' : 'col-lg-6' }} col-md-6">
                     <div class="section-title">
                         <h6 class="title">Tin Tức Mới Nhất</h6>
                     </div>
@@ -70,7 +70,7 @@
                                                     <li><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}</li>
                                                 </ul>
                                             </div>
-                                            <h6 class="title"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                            <h6 class="title post-line2"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -82,13 +82,13 @@
                         @endforeach
                     </div>
                 </div>
-                @if (isset($postsInDay) && $postsInDay->count() > 0)
+                @if (isset($postsInWeek) && $postsInWeek->count() > 0)
                     <div class="col-lg-4 col-md-6">
                         <div class="section-title">
                             <h6 class="title">Có Gì Mới</h6>
                         </div>
                         <div class="post-slider owl-carousel">
-                            @foreach ($postsInDay as $post)
+                            @foreach ($postsInWeek as $post)
                                 <div class="item">
                                     <div class="single-post-wrap">
                                         <div class="thumb">
@@ -98,17 +98,19 @@
                                                     $image = Storage::url($image);
                                                 }
                                             @endphp
-                                            <img src="{{ $image }}" alt="img">
+                                            <img src="{{ $image }}" width="265px" height="250px" alt="img">
                                         </div>
                                         <div class="details">
                                             <div class="post-meta-single mb-4 pt-1">
                                                 <ul>
-                                                    <li><a class="tag-base tag-blue" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a></li>
+                                                    <li>
+                                                        <a class="tag-base tag-blue" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
+                                                    </li>
                                                     <li><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}</li>
                                                 </ul>
                                             </div>
-                                            <h6 class="title"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor
+                                            <h6 class="title post-line2"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                            <p class="post-line3">Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor
                                                 incididunt ut labore et dolore magna aliqua. </p>
                                         </div>
                                     </div>
@@ -139,7 +141,7 @@
                                     <p class="btn-date"><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}</p>
                                 </div>
                                 <div class="details">
-                                    <h6 class="title"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                    <h6 class="title post-line2"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
                                 </div>
                             </div>
                         </div>
@@ -163,13 +165,18 @@
                                     }
                                 @endphp
                                 <img src="{{ $image }}" width="275px" height="200px" alt="img">
-                                <a class="tag-base tag-purple" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
+                                @php
+                                    $colors = ['tag-red', 'tag-blue', 'tag-green', 'tag-orange', 'tag-purple', 'tag-light-green']; 
+                                    $randomColor = $colors[array_rand($colors)];
+                                @endphp
+
+                                <a class="tag-base {{ $randomColor }}" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
                             </div>
                             <div class="details">
                                 <div class="post-meta-single">
                                     <p><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}</p>
                                 </div>
-                                <h6 class="title"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                <h6 class="title post-line2"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
                             </div>
                         </div>
                     </div>
@@ -420,7 +427,12 @@
                                     }
                                 @endphp
                                 <img src="{{ $image }}" width="275px" height="200px" alt="img">
-                                <a class="tag-base tag-light-green" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
+                                @php
+                                    $colors = ['tag-red', 'tag-blue', 'tag-green', 'tag-orange', 'tag-purple', 'tag-light-green']; 
+                                    $randomColor = $colors[array_rand($colors)];
+                                @endphp
+                                
+                                <a class="tag-base {{ $randomColor }}" href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
                             </div>
                             <div class="details">
                                 <div class="post-meta-single mb-3">
@@ -429,8 +441,8 @@
                                         <li><i class="fa fa-user"></i>{{ $post->user->name }}</li>
                                     </ul>
                                 </div>
-                                <h6><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
-                                {{-- <p>{{ $post->description }}</p> --}}
+                                <h6 class="post-line2" style="min-height: 50px;"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                <p class="post-line3">{{ $post->description }}</p>
                             </div>
                         </div>
                     </div>
@@ -458,4 +470,27 @@
             </div>
         </div>
     @endisset
+@endsection
+
+@section('styles')
+    <style>
+        .post-line1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .post-line2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .post-line3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
 @endsection

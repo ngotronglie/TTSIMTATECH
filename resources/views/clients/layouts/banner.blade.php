@@ -27,8 +27,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <h2>{{ $post->title }}</h2>
-                                {{-- <p>{{ $post->description }}</p> --}}
+                                <h2 style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $post->title }}</h2>
+                                <p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $post->description }}</p>
                                 <a class="btn btn-blue" href="{{ route('post-detail', $post->slug) }}">Read More</a>
                             </div>
                         </div>
@@ -50,15 +50,20 @@
                                     }
                                 @endphp
                                 <img src="{{ $image }}" width="278px" height="185px" alt="img">
-                                <a class="tag-base tag-orange" href="cat-tech.html">{{ $post->category->name }}</a>
+                                @php
+                                    $colors = ['tag-red', 'tag-blue', 'tag-green', 'tag-orange', 'tag-purple'];
+                                    $randomColor = $colors[array_rand($colors)];
+                                @endphp
+
+                                <a class="tag-base {{ $randomColor }}" href="cat-tech.html">{{ $post->category->name }}</a>
+
                             </div>
                             <div class="details">
-                                <h6 class="title"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a>
-                                </h6>
+                                <h6 class="title" style="min-height: 55px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
                                 <div class="post-meta-single mt-3">
                                     <ul>
-                                        <li><i
-                                                class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}
+                                        <li>
+                                            <i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}
                                         </li>
                                     </ul>
                                 </div>
