@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,9 @@ Route::group([], function () {
     Route::get('faq', [HomeController::class, 'faqs'])->name('faq');
     Route::get('contact', [HomeController::class, 'contactPage'])->name('contact');
     Route::post('contact', [HomeController::class, 'submitContact'])->name('contact.store');
+    Route::get('profile', [MemberController::class, 'showProfile'])->name('profile');
+    Route::post('change-password', [MemberController::class, 'changePassword'])->name('change-password');
+    Route::put('update-profile', [MemberController::class, 'updateProfile'])->name('update-profile');
 });
 
 // Admin
