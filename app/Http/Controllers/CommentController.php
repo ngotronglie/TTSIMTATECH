@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Comment;
 
 class CommentController extends Controller
 {
@@ -38,9 +39,29 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $slug)
     {
-        //
+        // dd($request->all());
+        // Xác thực yêu cầu (nếu cần)
+        $request->validate([
+            'content' => 'required|string|max:1000',
+        ]);
+
+        // Tìm bài viết dựa trên slug
+        $post = Post::where('slug', $slug)->first();
+
+        if (!$post) {
+            return redirect()->back()->with('error', 'Bài viết không tồn tại!');
+        }
+
+        // Lưu bình luận
+        Comment::create([
+            'content' => $request->input('content'),
+            'post_id' => $post->id,
+            'user_id' => auth()->id(), // Nếu đã đăng nhập
+        ]);
+
+        return redirect()->back()->with('success', 'Bình luận đã được thêm thành công!');
     }
 
     /**

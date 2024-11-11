@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ReadHistory extends Model
 {
     use HasFactory;
+    protected $table = 'read_history';
     protected $fillable = [
         'user_id',
         'post_id',

@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
-use App\Models\Advertisement;
-use App\Models\Category;
-use App\Models\Contact;
+use Carbon\Carbon;
 use App\Models\Faq;
 use App\Models\Post;
-use Carbon\Carbon;
+use App\Models\Comment;
+use App\Models\Contact;
+use App\Models\Category;
+use App\Models\ReadHistory;
 use Illuminate\Http\Request;
+use App\Models\Advertisement;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -28,7 +31,7 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->limit(9)
             ->get();
-            
+
         return view('clients.home', compact('latestPosts', 'trendingPosts', 'postsInWeek'));
     }
 
@@ -46,24 +49,56 @@ class HomeController extends Controller
 
     public function findPostByCategory($slug)
     {
-        $category = Category::where('slug', $slug)->firstOrFail(); 
-        
-        $categoryPosts = $category->posts()->latest('id')->paginate(20); 
-    
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+        $categoryPosts = $category->posts()->latest('id')->paginate(20);
+
         return view('clients.category', compact('category', 'categoryPosts'));
     }
-    
+
+    // public function postDetail($slug)
+    // {
+    //     $post = Post::where('slug', $slug)->firstOrFail();
+
+    //     $relatedPosts = Post::where('category_id', $post->category_id)
+    //         ->where('id', '!=', $post->id)
+    //         ->latest('id')
+    //         ->limit(3)
+    //         ->get();
+    //         $post->increment('view');
+
+    //         $comments = Comment::where('post_id', $post->id)->latest()->get();
+    //         // dd($comments);
+    //     return view('clients.post-detail', compact('post', 'relatedPosts','comments'));
+    // }
     public function postDetail($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
-
         $relatedPosts = Post::where('category_id', $post->category_id)
             ->where('id', '!=', $post->id)
             ->latest('id')
             ->limit(3)
             ->get();
+        $post->increment('view');
+        // $comments = Comment::where('post_id', $post->id)->latest()->get();
+        $comments = Comment::where('post_id', $post->id)->latest()->take(3)->get();
 
-        return view('clients.post-detail', compact('post', 'relatedPosts'));
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $history = ReadHistory::where('user_id', $userId)
+                ->where('post_id', $post->id)
+                ->first();
+
+            if (!$history) {
+                ReadHistory::create([
+                    'user_id' => $userId,
+                    'post_id' => $post->id,
+                    'read_at' => Carbon::now(),
+                ]);
+            }
+        }
+
+        return view('clients.post-detail', compact('post', 'relatedPosts', 'comments'));
     }
 
     public function featuredPosts()
@@ -75,13 +110,13 @@ class HomeController extends Controller
 
     public function advertisement()
     {
-        $now = Carbon::now()->toDateTimeString(); 
+        $now = Carbon::now()->toDateTimeString();
 
         $advertisement = Advertisement::where('status', 'active')
-            ->whereDate('start_date', '<=', $now) 
-            ->whereDate('end_date', '>=', $now)    
+            ->whereDate('start_date', '<=', $now)
+            ->whereDate('end_date', '>=', $now)
             ->get();
-    
+
         return $advertisement;
     }
 
@@ -120,7 +155,22 @@ class HomeController extends Controller
 
         return view('clients.contact')->with('success', 'Gửi liên hệ thành công.');
     }
-    public function profile(){
+    public function profile()
+    {
         return view('clients.users-profile');
     }
+    // public function showRecentlyViewedPosts()
+    // {
+    //     // Lấy ID người dùng đã đăng nhập
+    //     $userId = auth()->id();
+
+    //     // Lấy các bài viết đã xem gần đây của người dùng
+    //     $recentPosts = ReadHistory::with('post') // Eager loading để lấy bài viết
+    //         ->where('user_id', $userId) // Lọc theo user_id
+    //         ->latest('read_at') // Sắp xếp theo thời gian xem (mới nhất trước)
+    //         ->limit(5) // Giới hạn số lượng bài viết muốn hiển thị
+    //         ->get();
+
+    //     return view('clients.recently-viewed', compact('recentPosts'));
+    // }
 }
