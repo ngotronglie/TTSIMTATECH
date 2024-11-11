@@ -24,12 +24,12 @@ class HomeController extends Controller
             ->orderByDesc('view')
             ->paginate(10);
 
-        $postsInDay = Post::whereDate('created_at', now()->toDateString()) 
-            ->inRandomOrder()
-            ->take(9)
-            ->get();  
+        $postsInWeek = Post::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()])
+            ->orderBy('created_at', 'desc')
+            ->limit(9)
+            ->get();
             
-        return view('clients.home', compact('latestPosts', 'trendingPosts', 'postsInDay'));
+        return view('clients.home', compact('latestPosts', 'trendingPosts', 'postsInWeek'));
     }
 
     public function contactPage()

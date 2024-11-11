@@ -51,7 +51,13 @@
                             <td>{{ $post->description }}</td>
                             <td>{{ $post->content }}</td>
                             <td>
-                                <img src="{{ asset($post->image) }}" alt="Image" width="50" height="50">
+                                @php
+                                    $image = $post->image;
+                                    if (!\Str::contains($image, 'http')) {
+                                        $image = Storage::url($image);
+                                    }
+                                @endphp
+                                <img src="{{ $image }}" alt="Image" width="50" height="50">
                             </td>
                             <td>{{ $post->category->name ?? 'Không có' }}</td>
                             <td>{{ $post->is_active ? 'Hoạt động' : 'Không hoạt động' }}</td>

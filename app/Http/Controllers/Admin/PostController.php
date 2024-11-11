@@ -56,7 +56,7 @@ class PostController extends Controller
             $file = $request->file('image');
             $filename = time() . '_' . $file->getClientOriginalName();
             $filePath = $file->storeAs('uploads/images', $filename, 'public');
-            $post->image = '/storage/' . $filePath; // Save the image path in the database
+            $post->image = $filePath; // Save the image path in the database
         }
 
         $post->save();
@@ -64,13 +64,19 @@ class PostController extends Controller
         return redirect()->route('admin.posts.index')->with('success', 'Bài viết đã được thêm thành công.');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
+    public function upload(Request $request)
     {
-        //
+        if ($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+    
+            $path = $request->file('upload')->storeAs('images/posts', $fileName, 'public');
+    
+            $url = Storage::url($path);
+            return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
+        }
     }
 
     /**
