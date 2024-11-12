@@ -10,16 +10,17 @@ class FaqController extends Controller
 {
     const PATH_VIEW = 'admin.faqs.';
 
-    public function index()
-    {
-        $faqs = Faq::latest('id')->paginate(10);
+    // public function index()
+    // {
+    //     $faqs = Faq::latest('id')->paginate(10);
 
-        // if ($faqs->isEmpty()) {
-        //     return view(self::PATH_VIEW . __FUNCTION__)->with('error', 'Chưa có câu hỏi nào được tạo!');
-        // }
+    //     // if ($faqs->isEmpty()) {
+    //     //     return view(self::PATH_VIEW . __FUNCTION__)->with('error', 'Chưa có câu hỏi nào được tạo!');
+    //     // }
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('faqs'));
-    }
+    //     return view(self::PATH_VIEW . __FUNCTION__, compact('faqs'));
+    // }
+    
 
     public function create()
     {

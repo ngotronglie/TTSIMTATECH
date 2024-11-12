@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AuthenController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdvertisementController;
-use App\Http\Controllers\AuthenController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,8 @@ Route::group([], function () {
 });
 
 // Admin
+Route::get('/admin/search', [SearchController::class, 'search'])->name('admin.search');
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::get('dashboard', function () {
