@@ -151,3 +151,6 @@ Route::post('roles/{id}/restore', [RoleController::class, 'restore'])
 Route::delete('roles/{id}/force-delete', [RoleController::class, 'forceDelete'])
     ->name('roles.forceDelete');
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.chitiet');
+Route::post('post/{slug}/comment', [CommentController::class, 'store'])->name('post.comment');
+// Route::post('post/{post}/comment', [HomeController::class, 'addComment'])->name('post.comment');
+

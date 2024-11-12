@@ -25,7 +25,7 @@ class UpdatePostRequest extends FormRequest
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:posts,slug,' . $this->route('id'),
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'required|max:100',
+            'description' => 'required',
             'content' => 'required',
             'category_id' => 'required|exists:categories,id',
             'user_id' => 'required|exists:users,id',

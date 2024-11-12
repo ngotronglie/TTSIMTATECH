@@ -33,4 +33,8 @@ class Post extends Model
     {
         return $this->hasMany(ReadHistory::class);  // Một bài viết có thể có nhiều lượt đọc
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
