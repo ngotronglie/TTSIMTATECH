@@ -45,39 +45,68 @@ class AuthenController extends Controller
         return view('admin.auth.login');
     }
 
+    // public function dangNhap()
+    // {
+    //     // In ra dữ liệu để kiểm tra
+    //     $nguoidung = request()->validate([
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+
+    //     // dd($nguoidung);
+
+    //     // Thực hiện đăng nhập
+    //     if (Auth::attempt($nguoidung)) {
+    //         request()->session()->regenerate();
+
+    //         $user = Auth::user();
+
+    //         /**
+    //          * @var User $user
+    //          */
+
+    //         if ($user->admin()) {
+    //             return redirect()->route('admin.dashboard');
+    //         } else {
+    //             return redirect()->route('home');
+    //         }
+    //     }
+
+    //     // Nếu đăng nhập thất bại, hiển thị lỗi
+    //     return back()->withErrors([
+    //         'email' => 'Email không chính xác hoặc mật khẩu không đúng.',
+    //     ])->withInput();
+    // }
     public function dangNhap()
-    {
-        // In ra dữ liệu để kiểm tra
-        $nguoidung = request()->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+{
+    // Xác thực dữ liệu đầu vào
+    $nguoidung = request()->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
-        // dd($nguoidung);
+    // Thực hiện đăng nhập
+    if (Auth::attempt($nguoidung)) {
+        // Đăng nhập thành công, tạo lại session
+        request()->session()->regenerate();
 
-        // Thực hiện đăng nhập
-        if (Auth::attempt($nguoidung)) {
-            request()->session()->regenerate();
+        // Lấy thông tin người dùng
+        $user = Auth::user();
 
-            $user = Auth::user();
-
-            /**
-             * @var User $user
-             */
-
-            if ($user->admin()) {
-                return redirect()->route('admin.dashboard');
-            } else {
-                return redirect()->route('home');
-            }
+        // Kiểm tra quyền admin và chuyển hướng
+        if ($user->admin()) {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('home');
         }
-
-        // Nếu đăng nhập thất bại, hiển thị lỗi
-        return back()->withErrors([
-            'email' => 'Email không chính xác hoặc mật khẩu không đúng.',
-        ])->withInput();
     }
-    
+
+    // Nếu đăng nhập thất bại, trả về thông báo lỗi
+    return back()->withErrors([
+        'email' => 'Email không chính xác hoặc mật khẩu không đúng.',
+    ])->withInput();
+}
+
     public function dangXuat()
     {
         Auth::logout();
@@ -86,7 +115,7 @@ class AuthenController extends Controller
 
         request()->session()->regenerateToken();
 
-        return redirect()->route('home');
+        return redirect()->route('admin.login');
     }
     //đăng nhập bằng google
     public function redirectToGoogle()

@@ -52,56 +52,65 @@
                                         </h5>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate method="POST"
-                                        action="{{ route('admin.login') }}">
-                                        @csrf 
+                                    <form class="row g-3 needs-validation" novalidate method="POST" action="{{ route('admin.login') }}">
+                                        @csrf
+                                    
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Email</label>
                                             <div class="input-group has-validation">
-                                                <input type="email" name="email" class="form-control"
-                                                    id="yourUsername" required>
-                                                <div class="invalid-feedback">Vui lòng nhập email của bạn.</div>
+                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                                    id="yourUsername" value="{{ old('email') }}" required>
+                                    
+                                                @error('email')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
-
+                                    
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Mật khẩu</label>
-                                            <input type="password" name="password" class="form-control"
-                                                id="yourPassword" required>
-                                            <div class="invalid-feedback">Vui lòng nhập mật khẩu của bạn!</div>
+                                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                                                id="yourPassword" value="{{ old('password') }}" required>
+                                    
+                                            @error('password')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
-
+                                    
                                         <div class="col-12">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="remember"
-                                                    value="true" id="rememberMe">
+                                                <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
                                                 <label class="form-check-label" for="rememberMe">Nhớ mật khẩu</label>
                                             </div>
                                         </div>
+                                    
                                         <div class="col-12">
                                             <button class="btn btn-primary w-100" type="submit">Đăng nhập</button>
                                             <br>
                                             <p class="text-center text-danger">hoặc</p>
                                         </div>
+                                    
                                         <div class="text-center d-flex justify-content-center">
                                             <a href="{{ route('auth.google') }}" class="btn btn-danger mx-2" style="width: 80%;">
                                                 <i class="bi bi-google fs-3"></i>Google
                                             </a>
-
-
                                             <a href="{{ route('auth.facebook') }}" class="btn btn-primary mx-2" style="width: 80%;">
                                                 <i class="bi bi-facebook fs-3"></i>Facebook
                                             </a>
-
                                             <a href="{{ route('auth.twitter') }}" class="btn btn-info mx-2" style="width: 80%;">
                                                 <i class="bi bi-twitter-x fs-3"></i><br>Twitter
                                             </a>
                                         </div>
+                                    
                                         <div class="col-12">
-                                            <p class="small mb-0">Bạn chưa có tài khoản? <a
-                                                    href="{{ route('admin.register') }}">Đăng ký ngay</a></p>
+                                            <p class="small mb-0">Bạn chưa có tài khoản? <a href="{{ route('admin.register') }}">Đăng ký ngay</a></p>
                                         </div>
                                     </form>
+                                    
 
                                 </div>
                             </div>

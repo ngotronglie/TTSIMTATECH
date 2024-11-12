@@ -49,7 +49,7 @@
                             <td>{{ $post->slug }}</td>
                             <td>{{ $post->view }}</td>
                             <td>{{ $post->description }}</td>
-                            <td>{{ $post->content }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit($post->content, 100, '...') }}</td>
                             <td>
                                 @php
                                     $image = $post->image;

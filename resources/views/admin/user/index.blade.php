@@ -28,7 +28,7 @@
                     <th class="align-middle">ID</th>
                     <th class="align-middle">Tên</th>
                     <th class="align-middle">Email</th>
-                    <th class="align-middle">Mật khẩu</th>
+                    <th class="align-middle">Mật khẩu</th>z
                     <th class="align-middle">Avatar</th>
                     <th class="align-middle">Trạng thái</th>
                     <th class="align-middle">Nhà cung cấp</th>
