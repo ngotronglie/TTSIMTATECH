@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\Advertisement;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -157,20 +158,64 @@ class HomeController extends Controller
     }
     public function profile()
     {
-        return view('clients.users-profile');
+        $user = Auth::user();
+
+        return view('clients.users-profile', ['user' => $user]);
     }
-    // public function showRecentlyViewedPosts()
+    // public function edit()
     // {
-    //     // Lấy ID người dùng đã đăng nhập
-    //     $userId = auth()->id();
-
-    //     // Lấy các bài viết đã xem gần đây của người dùng
-    //     $recentPosts = ReadHistory::with('post') // Eager loading để lấy bài viết
-    //         ->where('user_id', $userId) // Lọc theo user_id
-    //         ->latest('read_at') // Sắp xếp theo thời gian xem (mới nhất trước)
-    //         ->limit(5) // Giới hạn số lượng bài viết muốn hiển thị
-    //         ->get();
-
-    //     return view('clients.recently-viewed', compact('recentPosts'));
+    //     $user = Auth::user();  // Lấy người dùng đang đăng nhập
+    //     return view('profile', compact('user'));  // Truyền dữ liệu người dùng vào view
     // }
+
+    // // Xử lý cập nhật thông tin người dùng
+    public function update(Request $request)
+    {
+        // dd($request);
+        $user = Auth::user();   
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'avetar' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        // Xử lý ảnh hồ sơ (nếu có)
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('uploads/avatars', $filename, 'public');
+            $user->avatar = '/storage/' . $filePath; // Lưu đường dẫn avatar vào database
+        }
+
+        $user->save();
+
+        return redirect()->route('home/profile')->with('success', 'Cập nhật thông tin thành công.');
+    }
+    public function updatePassword(Request $request)
+    {
+        
+        $user = Auth::user();  // Lấy thông tin người dùng hiện tại
+    
+        // Validate dữ liệu đầu vào
+        $request->validate([
+            'currentPassword' => 'required|string',  // Mật khẩu hiện tại
+            'newPassword' => 'required|string|min:8|confirmed',  // Mật khẩu mới phải dài ít nhất 8 ký tự và phải có trường xác nhận
+        ]);
+    
+        // Kiểm tra mật khẩu hiện tại có đúng không
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return redirect()->back()->withErrors(['currentPassword' => 'Mật khẩu hiện tại không đúng.']);
+        }
+    
+        // Cập nhật mật khẩu mới
+        $user->password = Hash::make($request->newPassword);  
+        // Mã hóa mật khẩu mới
+  
+        $user->save();  
+    
+        // Trả về thông báo thành công
+        return redirect()->route('home/profile')->with('success', 'Đổi mật khẩu thành công.')->withInput();
+    }
 }

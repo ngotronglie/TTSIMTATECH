@@ -61,7 +61,7 @@
                                     {!! $post->content !!}
                                 </div>
                             </div>
-
+                            
                             @isset($advertisement)
                                 @foreach ($advertisement as $ads)
                                     @if ($ads->position == 'middle' && $ads->pages == 'post_detail')
@@ -83,7 +83,7 @@
 
                             <div class="author-area">
                                 <div class="media">
-                                    <img src="{{ asset('template/assets/img/author/1.png') }}" alt="img">
+                                    <img src="{{ $post->user->avatar }}" alt="Avatar" width="100" height="100">
                                     <div class="media-body align-self-center">
                                         <h4>{{ $post->user->name }}</h4>
                                         <p>Chưa có Thông Tin Tác Gỉả</p>
@@ -145,6 +145,7 @@
                                 </div>
                             </div>
                         @endif
+                        
                         <div class="blog-comment">
                             <div class="section-title">
                                 <h4>Bình luận</h4>
@@ -155,7 +156,7 @@
                                 @foreach($comments as $comment)
                                     <div class="media">
                                         <a href="#">
-                                            <img src="{{ asset('template/assets/img/author/2.png') }}" alt="comment">
+                                            <img src="{{ $comment->user->avatar }}" alt="Avatar" width="100" height="100">
                                         </a>
                                         <div class="media-body">
                                             <h5><a href="#">{{ $comment->user->name ?? 'Người dùng ẩn danh' }}</a></h5>
