@@ -76,7 +76,7 @@ Route::group([], function () {
 });
 
 // Admin
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => 'checkadmin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::get('dashboard', function () {
         return view('admin.dashboard');

@@ -86,7 +86,7 @@
                                     <img src="{{ asset('template/assets/img/author/1.png') }}" alt="img">
                                     <div class="media-body align-self-center">
                                         <h4>{{ $post->user->name }}</h4>
-                                        <p>Chưa có Thông Tin Tác Gỉa</p>
+                                        <p>Chưa có Thông Tin Tác Gỉả</p>
                                     </div>
                                 </div>
                             </div>
@@ -96,13 +96,13 @@
                                 <div class="section-title mb-0">
                                     <h5 class="mb-0">Bài viết liên quan</h5>
                                 </div>
-                                <div class="row justify-content-center">
-                                    @foreach ($relatedPosts as $post)
+                                <div class="row">
+                                    @foreach ($relatedPosts as $relatedPost)
                                         <div class="col-lg-4 col-md-6">
                                             <div class="single-post-wrap">
                                                 <div class="thumb">
                                                     @php
-                                                        $image = $post->image;
+                                                        $image = $relatedPost->image;
                                                         if (!\Str::contains($image, 'http')) {
                                                             $image = Storage::url($image);
                                                         }
@@ -122,21 +122,21 @@
                                                     @endphp
 
                                                     <a class="tag-base {{ $randomColor }}"
-                                                        href="{{ route('category.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
+                                                        href="{{ route('category.posts', $relatedPost->category->slug) }}">{{ $relatedPost->category->name }}</a>
                                                 </div>
                                                 <div class="details">
                                                     <div class="post-meta-single">
                                                         <ul>
                                                             <li><i
-                                                                    class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}
+                                                                    class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($relatedPost->created_at)) }}
                                                             </li>
-                                                            <li><i class="fa fa-user"></i>{{ $post->user->name }}</li>
+                                                            <li><i class="fa fa-user"></i>{{ $relatedPost->user->name }}</li>
                                                         </ul>
                                                     </div>
                                                     <h6 class="title mt-2"
                                                         style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
-                                                        <a href="{{ route('post-detail', $post->slug) }}">
-                                                            {{ $post->title }}</a>
+                                                        <a href="{{ route('post-detail', $relatedPost->slug) }}">
+                                                            {{ $relatedPost->title }}</a>
                                                     </h6>
                                                 </div>
                                             </div>

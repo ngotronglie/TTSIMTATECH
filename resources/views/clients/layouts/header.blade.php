@@ -93,6 +93,11 @@
                                             <button type="submit" class="dropdown-item">Đăng xuất</button>
                                         </form>
                                     </li>
+                                    <li>
+                                        @if (Auth::user()->admin())
+                                            <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Vào trang quản trị</a>
+                                        @endif
+                                    </li>
                                 </ul>
                             </div>
                         @else
