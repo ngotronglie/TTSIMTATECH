@@ -26,7 +26,7 @@
                                                         $image = Storage::url($image);
                                                     }
                                                 @endphp
-                                                <img src="{{ $image }}" width="363px" height="147px" alt="img">
+                                                <img src="{{ $image }}" width="363px" height="180px" alt="img">
                                             </div>
                                             <div class="details">
                                                 <div class="post-meta-single">

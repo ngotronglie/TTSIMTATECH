@@ -29,10 +29,6 @@ use App\Http\Controllers\MemberController;
 // });
 
 Route::get('home/profile', [HomeController::class, 'profile'])->name('home/profile');
-Route::post('home/profile', [HomeController::class, 'update'])->name('profile.update');
-Route::post('home/update', [HomeController::class, 'updatePassword'])->name('password.update');
-
-
 
 // Template Admin
 Route::prefix('admin')->as('admin.')->group(function () {
@@ -77,7 +73,6 @@ Route::group([], function () {
     Route::get('profile', [MemberController::class, 'showProfile'])->name('profile');
     Route::post('change-password', [MemberController::class, 'changePassword'])->name('change-password');
     Route::put('update-profile', [MemberController::class, 'updateProfile'])->name('update-profile');
- 
 });
 
 // Admin
