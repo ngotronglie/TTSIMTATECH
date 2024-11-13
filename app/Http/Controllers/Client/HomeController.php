@@ -55,6 +55,10 @@ class HomeController extends Controller
 
         $categoryPosts = $category->posts()->latest('id')->paginate(20);
 
+        if (Auth::check() && Auth::user()->member() == 'member') {
+            $category->increment('click_count');
+        }
+
         return view('clients.category', compact('category', 'categoryPosts'));
     }
 

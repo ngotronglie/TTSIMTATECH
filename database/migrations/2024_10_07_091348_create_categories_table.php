@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('image');
             $table->boolean('is_active')->default(true);
+            $table->unsignedBigInteger('click_count')->default(0);
             $table->timestamps();
         });
     }

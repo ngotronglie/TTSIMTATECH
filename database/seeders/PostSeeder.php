@@ -23,6 +23,7 @@ class PostSeeder extends Seeder
                 'description' => 'Description of post ' . $i,
                 'content' => 'Content of post ' . $i,
                 'is_active' => 1,
+                'view' => rand(1, 100),
             ]);
         }
     }
