@@ -16,9 +16,8 @@ use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Search2Controller;
 use App\Http\Controllers\Admin\DashboardController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +76,7 @@ Route::group([], function () {
     Route::get('profile', [MemberController::class, 'showProfile'])->name('profile');
     Route::post('change-password', [MemberController::class, 'changePassword'])->name('change-password');
     Route::put('update-profile', [MemberController::class, 'updateProfile'])->name('update-profile');
-    Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/search', [Search2Controller::class, 'search'])->name('search');
     Route::get('articles/{id}', [HomeController::class, 'showNotifications'])->name('articles.show');
     Route::get('notifications', [HomeController::class, 'getNotifications']);
 });
