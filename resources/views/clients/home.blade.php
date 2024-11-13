@@ -14,39 +14,37 @@
                     </div>
                     <div class="post-slider owl-carousel">
                         @foreach ($trendingPosts as $post)
-                            @if ($loop->index % 3 == 0)
-                                <div class="item">
-                                    <div class="trending-post">
-                            @endif
-                                        <div class="single-post-wrap style-overlay">
-                                            <div class="thumb">
-                                                @php
-                                                    $image = $post->image;
-                                                    if (!\Str::contains($image, 'http')) {
-                                                        $image = Storage::url($image);
-                                                    }
-                                                @endphp
-                                                <img src="{{ $image }}" width="363px" height="180px" alt="img">
-                                            </div>
-                                            <div class="details">
-                                                <div class="post-meta-single">
-                                                    <p><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}</p>
-                                                </div>
-                                                <h6 class="title post-line1"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
-                                            </div>
-                                        </div>
-                            @if ($loop->index % 3 == 2 || $loop->index == count($trendingPosts) - 1)
+    @if ($loop->index % 3 == 0)
+        <div class="item">
+            <div class="trending-post">
+    @endif
 
-                                    </div>
-                                    <h6 class="title post-line1"><a
-                                            href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
-                                </div>
-                            </div>
-                            @if ($loop->index % 3 == 2 || $loop->index == count($trendingPosts) - 1)
+                <div class="single-post-wrap style-overlay">
+                    <div class="thumb">
+                        @php
+                            $image = $post->image;
+                            if (!\Str::contains($image, 'http')) {
+                                $image = Storage::url($image);
+                            }
+                        @endphp
+                        <img src="{{ $image }}" width="363px" height="180px" alt="img">
+                    </div>
+                    <div class="details">
+                        <div class="post-meta-single">
+                            <p><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}</p>
+                        </div>
+                        <h6 class="title post-line1">
+                            <a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a>
+                        </h6>
                     </div>
                 </div>
-                @endif
-                @endforeach
+
+    @if ($loop->index % 3 == 2 || $loop->last)
+            </div> <!-- Đóng .trending-post -->
+        </div> <!-- Đóng .item -->
+    @endif
+@endforeach
+{{-- a --}}
             </div>
         </div>
         <div class="{{ isset($postsInWeek) && $postsInWeek->count() > 0 ? 'col-lg-4' : 'col-lg-6' }} col-md-6">

@@ -23,7 +23,7 @@
         </div>
     </section>
     <!--page-title area end-->
-
+{{-- a --}}
     <div class="blog-page-area pd-bottom-80">
         <div class="container">
             <div class="row">
@@ -80,7 +80,20 @@
                                     @endif
                                 @endforeach
                             @endisset
-
+                            <div class="share-buttons mt-4">
+                                <h5>Chia sẻ bài viết:</h5>
+                                <div class="d-flex">
+                                    <!-- Facebook -->
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"
+                                        class="btn btn-facebook mr-2 text-primary ">
+                                        <i class="bi bi-facebook fs-1"></i> Facebook
+                                    </a>
+                                    <!-- Twitter -->
+                                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($post->title) }}" target="_blank" class="btn btn-twitter mr-2">
+                                        <i class="bi bi-twitter fs-1"></i> Twitter
+                                    </a>
+                                </div>
+                            </div>
                             <div class="author-area">
                                 <div class="media">
                                     <img src="{{ $post->user->avatar }}" alt="Avatar" width="100" height="100">

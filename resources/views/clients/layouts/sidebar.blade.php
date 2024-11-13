@@ -1,5 +1,5 @@
 <div class="col-lg-3 pd-top-50">
-    <div class="share-buttons mt-4">
+    {{-- <div class="share-buttons mt-4">
         <h5>Chia sẻ bài viết:</h5>
         <div class="d-flex">
             <!-- Facebook -->
@@ -8,11 +8,12 @@
                 <i class="bi bi-facebook fs-1"></i> Facebook
             </a>
             <!-- Twitter -->
-            {{-- <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($post->title) }}" target="_blank" class="btn btn-twitter mr-2">
+            <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($post->title) }}" target="_blank" class="btn btn-twitter mr-2">
                 <i class="bi bi-twitter fs-1"></i> Twitter
-            </a> --}}
+            </a>
         </div>
-    </div>
+    </div> --}}
+    {{-- a --}}
 
     <div class="category-sitebar">
         <div class="widget widget-category">
@@ -35,20 +36,19 @@
         @isset($advertisement)
             <div class="widget widget-add">
                 @foreach ($advertisement as $ads)
-                    @foreach ($categories as $category)
-                        @if (($ads->position == 'sidebar' && $ads->pages == 'post_detail') || $ads->category_id == $category->id)
-                            @php
-                                $image = $ads->image;
-                                if (!\Str::contains($image, 'http')) {
-                                    $image = Storage::url($image);
-                                }
-                            @endphp
-                            <a href="{{ $ads->link }}" class="add">
-                                <img src="{{ $image }}" alt="img" width="262" class="object-fit-cover">
-                            </a>
-                        @endif
-                    @endforeach
-                @endforeach
+                    @if (($ads->position == 'sidebar' && $ads->pages == 'post_detail'))
+                        @php
+                            $image = $ads->image;
+                            if (!\Str::contains($image, 'http')) {
+                                $image = Storage::url($image);
+                            }
+                        @endphp
+                        <a href="{{ $ads->link }}" class="add">
+                            <img src="{{ $image }}" alt="img" width="262" class="object-fit-cover">
+                        </a>
+                    @endif
+            @endforeach
+            
             </div>
         @endisset
 
