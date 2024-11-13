@@ -18,7 +18,7 @@ use App\Http\Controllers\Admin\AdvertisementController;
 // use App\Http\Controllers\MemberController;
 use App\Http\Controllers\Search2Controller;
 use App\Http\Controllers\Admin\DashboardController;
-
+// a
 /*
 |--------------------------------------------------------------------------
 | Web Routes
