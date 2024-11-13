@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
     // Đăng xuất
     Route::post('logout', [AuthenController::class, 'dangXuat'])->name('logout');
 });
+
 Route::controller(AuthenController::class)->group(function () {
 
     Route::get('auth/twitter', 'redirectToTwitter')->name('auth.twitter');
@@ -77,7 +79,7 @@ Route::group([], function () {
     Route::get('profile', [MemberController::class, 'showProfile'])->name('profile');
     Route::post('change-password', [MemberController::class, 'changePassword'])->name('change-password');
     Route::put('update-profile', [MemberController::class, 'updateProfile'])->name('update-profile');
- 
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
 });
 
 // Admin
@@ -158,4 +160,3 @@ Route::delete('roles/{id}/force-delete', [RoleController::class, 'forceDelete'])
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.chitiet');
 Route::post('post/{slug}/comment', [CommentController::class, 'store'])->name('post.comment');
 // Route::post('post/{post}/comment', [HomeController::class, 'addComment'])->name('post.comment');
-
