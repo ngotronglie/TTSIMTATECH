@@ -13,20 +13,42 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    // public function index()
+    // {
+    //     $comments = DB::table('comments')
+    // ->join('users', 'comments.user_id', '=', 'users.id')
+    // ->join('posts', 'comments.post_id', '=', 'posts.id')
+    // ->select('comments.*', 'users.name as user_name', 'posts.title as post_title')
+    // ->whereNull('comments.deleted_at')
+    // ->get();
+
+
+
+    // return view('admin.comments.index', compact('comments'));
+
+    // }
+    public function index(Request $request)
     {
-        $comments = DB::table('comments')
-    ->join('users', 'comments.user_id', '=', 'users.id')
-    ->join('posts', 'comments.post_id', '=', 'posts.id')
-    ->select('comments.*', 'users.name as user_name', 'posts.title as post_title')
-    ->whereNull('comments.deleted_at')
-    ->get();
+        // Lấy tất cả các comment từ database
+        $commentsQuery = DB::table('comments')
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->join('posts', 'comments.post_id', '=', 'posts.id')
+            ->select('comments.*', 'users.name as user_name', 'posts.title as post_title')
+            ->whereNull('comments.deleted_at'); // Lọc các comment chưa bị xóa
 
+        // Kiểm tra nếu có tham số 'query' trong request để lọc theo id comment
+        if ($request->has('query')) {
+            // Lọc các comment có id tương ứng với giá trị 'query'
+            $commentsQuery->where('comments.id', $request->query('query'));
+        }
 
+        // Lấy kết quả với phân trang
+        $comments = $commentsQuery->paginate(10);
 
-    return view('admin.comments.index', compact('comments'));
-
+        // Trả về view với dữ liệu các comment
+        return view('admin.comments.index', compact('comments'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -86,8 +108,8 @@ class CommentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-          // Validate the incoming request data
-          $request->validate([
+        // Validate the incoming request data
+        $request->validate([
             'is_approve' => 'required|boolean',
             'is_hidden' => 'required|boolean',
         ]);

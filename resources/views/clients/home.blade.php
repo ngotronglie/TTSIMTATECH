@@ -18,20 +18,25 @@
                                 <div class="item">
                                     <div class="trending-post">
                             @endif
-                            <div class="single-post-wrap style-overlay">
-                                <div class="thumb">
-                                    @php
-                                        $image = $post->image;
-                                        if (!\Str::contains($image, 'http')) {
-                                            $image = Storage::url($image);
-                                        }
-                                    @endphp
-                                    <img src="{{ $image }}" width="363px" height="147px" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="post-meta-single">
-                                        <p><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}
-                                        </p>
+                                        <div class="single-post-wrap style-overlay">
+                                            <div class="thumb">
+                                                @php
+                                                    $image = $post->image;
+                                                    if (!\Str::contains($image, 'http')) {
+                                                        $image = Storage::url($image);
+                                                    }
+                                                @endphp
+                                                <img src="{{ $image }}" width="363px" height="180px" alt="img">
+                                            </div>
+                                            <div class="details">
+                                                <div class="post-meta-single">
+                                                    <p><i class="fa fa-clock-o"></i>{{ date('d.m.Y', strtotime($post->created_at)) }}</p>
+                                                </div>
+                                                <h6 class="title post-line1"><a href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>
+                                            </div>
+                                        </div>
+                            @if ($loop->index % 3 == 2 || $loop->index == count($trendingPosts) - 1)
+
                                     </div>
                                     <h6 class="title post-line1"><a
                                             href="{{ route('post-detail', $post->slug) }}">{{ $post->title }}</a></h6>

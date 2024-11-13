@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\ReadHistory;
 use Illuminate\Http\Request;
 use App\Models\Advertisement;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -54,34 +55,25 @@ class HomeController extends Controller
 
         $categoryPosts = $category->posts()->latest('id')->paginate(20);
 
+        if (Auth::check() && Auth::user()->member() == 'member') {
+            $category->increment('click_count');
+        }
+
         return view('clients.category', compact('category', 'categoryPosts'));
     }
 
-    // public function postDetail($slug)
-    // {
-    //     $post = Post::where('slug', $slug)->firstOrFail();
-
-    //     $relatedPosts = Post::where('category_id', $post->category_id)
-    //         ->where('id', '!=', $post->id)
-    //         ->latest('id')
-    //         ->limit(3)
-    //         ->get();
-    //         $post->increment('view');
-
-    //         $comments = Comment::where('post_id', $post->id)->latest()->get();
-    //         // dd($comments);
-    //     return view('clients.post-detail', compact('post', 'relatedPosts','comments'));
-    // }
     public function postDetail($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
+
         $relatedPosts = Post::where('category_id', $post->category_id)
             ->where('id', '!=', $post->id)
             ->latest('id')
             ->limit(3)
             ->get();
+
         $post->increment('view');
-        // $comments = Comment::where('post_id', $post->id)->latest()->get();
+
         $comments = Comment::where('post_id', $post->id)->latest()->take(3)->get();
 
         if (Auth::check()) {
@@ -156,23 +148,25 @@ class HomeController extends Controller
 
         return view('clients.contact')->with('success', 'Gửi liên hệ thành công.');
     }
+
     public function profile()
     {
         $user = Auth::user();
 
         return view('clients.users-profile', ['user' => $user]);
     }
+
     // public function edit()
     // {
     //     $user = Auth::user();  // Lấy người dùng đang đăng nhập
     //     return view('profile', compact('user'));  // Truyền dữ liệu người dùng vào view
     // }
 
-    // // Xử lý cập nhật thông tin người dùng
+    // Xử lý cập nhật thông tin người dùng
     public function update(Request $request)
     {
         // dd($request);
-        $user = Auth::user();   
+        $user = Auth::user();
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
@@ -193,29 +187,60 @@ class HomeController extends Controller
 
         return redirect()->route('home/profile')->with('success', 'Cập nhật thông tin thành công.');
     }
+
     public function updatePassword(Request $request)
     {
-        
+
         $user = Auth::user();  // Lấy thông tin người dùng hiện tại
-    
+
         // Validate dữ liệu đầu vào
         $request->validate([
             'currentPassword' => 'required|string',  // Mật khẩu hiện tại
             'newPassword' => 'required|string|min:8|confirmed',  // Mật khẩu mới phải dài ít nhất 8 ký tự và phải có trường xác nhận
         ]);
-    
+
         // Kiểm tra mật khẩu hiện tại có đúng không
         if (!Hash::check($request->currentPassword, $user->password)) {
             return redirect()->back()->withErrors(['currentPassword' => 'Mật khẩu hiện tại không đúng.']);
         }
-    
+
         // Cập nhật mật khẩu mới
-        $user->password = Hash::make($request->newPassword);  
+        $user->password = Hash::make($request->newPassword);
         // Mã hóa mật khẩu mới
-  
-        $user->save();  
-    
+
+        $user->save();
+
         // Trả về thông báo thành công
         return redirect()->route('home/profile')->with('success', 'Đổi mật khẩu thành công.')->withInput();
+    }
+    public function getNotifications()
+    {
+        try {
+            // Lấy các bài viết được tạo trong 24 giờ qua
+            $newArticles = Post::orderBy('id', 'desc')->limit(5)->get();
+
+
+            if ($newArticles->isEmpty()) {
+                return response()->json(['message' => 'Không có bài viết mới'], 200); // Trả về thông báo nếu không có bài viết mới
+            }
+
+            // Xử lý thông báo
+            $notifications = $newArticles->map(function ($article) {
+                $imageUrl = $article->image ? asset('storage/' . $article->image) : asset('template/admin/assets/img/default-image.jpg');
+            
+                return [
+
+                    'title' => $article->title,
+                    'link' => route('post-detail', $article->slug),
+                    'image' => $imageUrl,
+                ];
+            });
+
+            return response()->json(['notifications' => $notifications]);
+        } catch (\Exception $e) {
+            // Log lỗi nếu có và trả về lỗi 500
+            \Log::error("Lỗi khi lấy thông báo: " . $e->getMessage());
+            return response()->json(['error' => 'Không thể lấy thông báo.'], 500);
+        }
     }
 }

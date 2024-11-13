@@ -14,14 +14,29 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-{
-    // Lấy danh sách tất cả người dùng từ database
-    $users = User::all(); // Hoặc sử dụng paginate() nếu bạn muốn phân trang
-    // dd($users);
-    // Hiển thị dữ liệu người dùng trong view và truyền danh sách user vào view
-    return view('admin.user.index', compact('users'));
-}
+    //     public function index()
+    // {
+    //     // Lấy danh sách tất cả người dùng từ database
+    //     $users = User::all(); // Hoặc sử dụng paginate() nếu bạn muốn phân trang
+    //     // dd($users);
+    //     // Hiển thị dữ liệu người dùng trong view và truyền danh sách user vào view
+    //     return view('admin.user.index', compact('users'));
+    // }
+    public function index(Request $request)
+    {
+        // Kiểm tra nếu có tham số query (id người dùng)
+        if ($request->has('query')) {
+            // Lọc người dùng theo id (query)
+            $userId = $request->query('query');
+            $users = User::where('id', $userId)->paginate(20);
+        } else {
+            // Nếu không có query, lấy tất cả người dùng
+            $users = User::paginate(20); // Hoặc sử dụng all() nếu không cần phân trang
+        }
+
+        // Trả về view với dữ liệu
+        return view('admin.user.index', compact('users'));
+    }
 
 
     /**
@@ -85,59 +100,59 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-{
-    // Tìm user theo ID
-    $user = User::findOrFail($id);
+    {
+        // Tìm user theo ID
+        $user = User::findOrFail($id);
 
-    // Trả về view edit với dữ liệu user
-    return view('admin.user.edit', compact('user'));
-}
+        // Trả về view edit với dữ liệu user
+        return view('admin.user.edit', compact('user'));
+    }
 
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-{
-    // Validate dữ liệu
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,' . $id, // Kiểm tra email trùng
-        'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Avatar có thể null và giới hạn kích thước
-        'is_active' => 'required|boolean',
-    ]);
+    {
+        // Validate dữ liệu
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id, // Kiểm tra email trùng
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Avatar có thể null và giới hạn kích thước
+            'is_active' => 'required|boolean',
+        ]);
 
-    // Tìm user theo ID
-    $user = User::findOrFail($id);
+        // Tìm user theo ID
+        $user = User::findOrFail($id);
 
-    // Cập nhật dữ liệu người dùng
-    $user->name = $request->input('name');
-    $user->email = $request->input('email');
-    $user->is_active = $request->input('is_active');
+        // Cập nhật dữ liệu người dùng
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->is_active = $request->input('is_active');
 
-    // Xử lý ảnh avatar nếu có tải lên
-    if ($request->hasFile('avatar')) {
-        // Xóa ảnh cũ nếu tồn tại
-        if ($user->avatar) {
-            $oldAvatarPath = public_path($user->avatar); // Lấy đường dẫn ảnh cũ
-            if (file_exists($oldAvatarPath)) {
-                unlink($oldAvatarPath); // Xóa ảnh cũ
+        // Xử lý ảnh avatar nếu có tải lên
+        if ($request->hasFile('avatar')) {
+            // Xóa ảnh cũ nếu tồn tại
+            if ($user->avatar) {
+                $oldAvatarPath = public_path($user->avatar); // Lấy đường dẫn ảnh cũ
+                if (file_exists($oldAvatarPath)) {
+                    unlink($oldAvatarPath); // Xóa ảnh cũ
+                }
             }
+
+            // Lưu avatar mới vào thư mục storage
+            $file = $request->file('avatar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('uploads/avatars', $filename, 'public');
+            $user->avatar = '/storage/' . $filePath; // Cập nhật đường dẫn avatar mới vào database
         }
 
-        // Lưu avatar mới vào thư mục storage
-        $file = $request->file('avatar');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $filePath = $file->storeAs('uploads/avatars', $filename, 'public');
-        $user->avatar = '/storage/' . $filePath; // Cập nhật đường dẫn avatar mới vào database
+        // Lưu các thay đổi
+        $user->save();
+
+        // Chuyển hướng về trang danh sách với thông báo thành công
+        return redirect()->route('admin.users.index')->with('success', 'Cập nhật người dùng thành công.');
     }
-
-    // Lưu các thay đổi
-    $user->save();
-
-    // Chuyển hướng về trang danh sách với thông báo thành công
-    return redirect()->route('admin.users.index')->with('success', 'Cập nhật người dùng thành công.');
-}
 
 
 
@@ -163,6 +178,4 @@ class UserController extends Controller
         // Chuyển hướng về trang danh sách với thông báo thành công
         return redirect()->route('admin.users.index')->with('success', 'Người dùng đã được xóa thành công.');
     }
-
 }
-

@@ -28,7 +28,6 @@
                         @endforeach
                     </div>
                 @endisset
-
             </div>
         </div>
     </div>
@@ -74,6 +73,7 @@
                         <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
                     </div>
                 </form>
+
                 <div class="auth-buttons d-flex align-items-center">
                     @if (Auth::check())
                         <div class="dropdown">
@@ -87,13 +87,12 @@
                                 </svg>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="{{ route('home/profile') }}">Quản lý hồ sơ</a>
+
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('home/profile') }}">Quản lý hồ sơ</a>
                                 </li>
                                 <li>
-                                    <form action="{{ route('admin.logout') }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item">Đăng xuất</button>
-                                    </form>
+                                    <a class="dropdown-item" href="{{ route('admin.logout') }}">Đăng xuất</a>
                                 </li>
                             </ul>
                         </div>

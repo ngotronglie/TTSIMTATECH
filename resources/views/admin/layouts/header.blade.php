@@ -9,12 +9,11 @@
     </div><!-- End Logo -->
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <form class="search-form d-flex align-items-center" action="{{ route('admin.search') }}" method="GET" action="#">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword" value="{{old('query')}}">
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
-
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
 
@@ -105,13 +104,13 @@
                     data-bs-toggle="dropdown">
                     <img src="{{ asset('template/admin/assets/img/profile-img.jpg') }}" alt="Profile"
                         class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth()->user()->name }}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Kevin Anderson</h6>
-                        <span>Web Designer</span>
+                        <h6>{{ Auth::user()->name }}</h6>
+                        <span>@if (Auth::user()->admin()) Quản trị viên @endif</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -120,7 +119,7 @@
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                             <i class="bi bi-person"></i>
-                            <span>My Profile</span>
+                            <span>Hồ sơ cá nhân</span>
                         </a>
                     </li>
                     <li>
@@ -128,9 +127,19 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('home') }}">
+                            <i class="bi bi-house"></i>
+                            <span>Trở lại trang chủ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.logout') }}">
                             <i class="bi bi-box-arrow-right"></i>
-                            <span>Sign Out</span>
+                            <span>Đăng xuất</span>
                         </a>
                     </li>
 

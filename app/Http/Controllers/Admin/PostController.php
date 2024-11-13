@@ -16,9 +16,23 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with(['category', 'user'])->orderBy('created_at', 'desc')->paginate(20);
+        if ($request->has('query')) {
+            // Lọc bài viết theo id (query)
+            $postId = $request->query('query');
+            $posts = Post::with(['category', 'user'])
+                        ->where('id', $postId)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(20);
+        } else {
+            // Nếu không có query, lấy tất cả bài viết
+            $posts = Post::with(['category', 'user'])
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(20);
+        }
+    
+        // Trả về view với dữ liệu
         return view('admin.post.index', compact('posts'));
     }
 
