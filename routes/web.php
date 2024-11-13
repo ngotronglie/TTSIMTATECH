@@ -9,6 +9,7 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MemberController;
@@ -32,20 +33,14 @@ Route::get('home/profile', [HomeController::class, 'profile'])->name('home/profi
 Route::post('home/profile', [HomeController::class, 'update'])->name('profile.update');
 Route::post('home/update', [HomeController::class, 'updatePassword'])->name('password.update');
 
-
-
-// Template Admin
 Route::prefix('admin')->as('admin.')->group(function () {
-    // Đăng ký
     Route::get('register', [AuthenController::class, 'formDangKy'])->name('register');
     Route::post('register', [AuthenController::class, 'dangKy']);
 
-    // Đăng nhập
     Route::get('login', [AuthenController::class, 'formDangNhap'])->name('login');
     Route::post('login', [AuthenController::class, 'dangNhap']);
 
-    // Đăng xuất
-    Route::post('logout', [AuthenController::class, 'dangXuat'])->name('logout');
+    Route::get('logout', [AuthenController::class, 'dangXuat'])->name('logout');
 });
 Route::controller(AuthenController::class)->group(function () {
 
@@ -81,11 +76,9 @@ Route::group([], function () {
 });
 
 // Admin
-Route::group(['middleware' => 'checkadmin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['mdddleware' => ['auth', 'checkadmin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('dashboard/{timeframe?}', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('categories')->as('categories.')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');

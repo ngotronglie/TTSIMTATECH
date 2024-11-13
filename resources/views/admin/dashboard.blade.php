@@ -464,7 +464,7 @@
                 </div><!-- End Website Traffic -->
 
                 <!-- News & Updates Traffic -->
-                <div class="card">
+                {{-- <div class="card">
                     <div class="filter">
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -519,7 +519,61 @@
                         </div><!-- End sidebar recent posts-->
 
                     </div>
-                </div><!-- End News & Updates -->
+                </div><!-- End News & Updates --> --}}
+
+                <div class="card">
+                    <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>Filter</h6>
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('admin.dashboard', 'today') }}">Today</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.dashboard', 'week') }}">This Week</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.dashboard', 'month') }}">This Month</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.dashboard', 'year') }}">This Year</a></li>
+                        </ul>
+                    </div>
+                
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">Tin tức &amp; Cập nhật <span>| {{ ucfirst(request('timeframe', 'today')) }}</span></h5>
+                
+                        <div class="news">
+                            @if (request()->is('admin/dashboard'))
+                                @forelse ($postsToday as $post)
+                                    <div class="post-item clearfix d-flex justify-content-between">
+                                        <img src="{{ asset('template/admin/assets/img/news-1.jpg') }}" alt="">
+                                        <div class="flex-fill ms-3">
+                                            <h4 class="ms-0 mb-2"><a href="#">{{ $post->title }}</a></h4>
+                                            <p style="margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $post->description }}</p>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <div class="post-item clearfix text-center">
+                                        <small class="text-danger">Chưa có bài viết nào được tạo trong ngày hôm nay.</small>
+                                    </div>
+                                @endforelse
+                            @else
+                                @isset($posts)
+                                    @forelse ($posts as $post)
+                                        <div class="post-item clearfix d-flex justify-content-between">
+                                            <img src="{{ asset('template/admin/assets/img/news-1.jpg') }}" alt="">
+                                            <div class="flex-fill ms-3">
+                                                <h4 class="ms-0 mb-2"><a href="#">{{ $post->title }}</a></h4>
+                                                <p style="margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $post->description }}</p>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        @if (session('message'))
+                                            <div class="post-item clearfix text-center"><small class="text-danger">{{ session('message') }}</small></div>
+                                        @endif
+                                    @endforelse
+                                @endisset
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                
 
             </div><!-- End Right side columns -->
 
