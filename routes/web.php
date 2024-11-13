@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AuthenController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdvertisementController;
-use App\Http\Controllers\AuthenController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,6 @@ use App\Http\Controllers\MemberController;
 // });
 
 Route::get('home/profile', [HomeController::class, 'profile'])->name('home/profile');
-Route::post('home/profile', [HomeController::class, 'update'])->name('profile.update');
-Route::post('home/update', [HomeController::class, 'updatePassword'])->name('password.update');
-
-
 
 // Template Admin
 Route::prefix('admin')->as('admin.')->group(function () {
@@ -77,10 +74,14 @@ Route::group([], function () {
     Route::get('profile', [MemberController::class, 'showProfile'])->name('profile');
     Route::post('change-password', [MemberController::class, 'changePassword'])->name('change-password');
     Route::put('update-profile', [MemberController::class, 'updateProfile'])->name('update-profile');
- 
+    Route::get('articles/{id}', [HomeController::class, 'showNotifications'])->name('articles.show');
+
+    Route::get('notifications', [HomeController::class, 'getNotifications']);
 });
 
 // Admin
+Route::get('/admin/search', [SearchController::class, 'search'])->name('admin.search');
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::get('dashboard', function () {
