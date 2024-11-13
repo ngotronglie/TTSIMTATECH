@@ -1,0 +1,20 @@
+{
+  "advertisements": [
+    { "title": "Quảng cáo điện thoại", "description": "iPhone 15", "id": "2c80" },
+    { "title": "Quảng cáo máy tính bảng", "description": "iPad Pro", "id": "3b04" }
+  ],
+  "categories": [
+    { "name": "Samsung 1", "id": "0832" },
+    { "name": "Apple", "id": "0833" }
+  ],
+  "comments": [
+    {
+      "id": "3b03",
+      "text": "v"
+    }
+  ],
+  "posts": [],
+  "roles": [],
+  "role_user": [],
+  "users": []
+}
