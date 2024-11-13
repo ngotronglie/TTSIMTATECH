@@ -74,6 +74,9 @@ Route::group([], function () {
     Route::get('profile', [MemberController::class, 'showProfile'])->name('profile');
     Route::post('change-password', [MemberController::class, 'changePassword'])->name('change-password');
     Route::put('update-profile', [MemberController::class, 'updateProfile'])->name('update-profile');
+    Route::get('articles/{id}', [HomeController::class, 'showNotifications'])->name('articles.show');
+
+    Route::get('notifications', [HomeController::class, 'getNotifications']);
 });
 
 // Admin
