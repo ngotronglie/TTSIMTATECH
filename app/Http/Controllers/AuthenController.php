@@ -18,8 +18,6 @@ class AuthenController extends Controller
 
     public function dangKy()
     {
-        // dd(request()->all());
-
         $data = request()->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -77,35 +75,36 @@ class AuthenController extends Controller
     //         'email' => 'Email không chính xác hoặc mật khẩu không đúng.',
     //     ])->withInput();
     // }
+
     public function dangNhap()
-{
-    // Xác thực dữ liệu đầu vào
-    $nguoidung = request()->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
+    {
+        // Xác thực dữ liệu đầu vào
+        $nguoidung = request()->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-    // Thực hiện đăng nhập
-    if (Auth::attempt($nguoidung)) {
-        // Đăng nhập thành công, tạo lại session
-        request()->session()->regenerate();
+        // Thực hiện đăng nhập
+        if (Auth::attempt($nguoidung)) {
+            // Đăng nhập thành công, tạo lại session
+            request()->session()->regenerate();
 
-        // Lấy thông tin người dùng
-        $user = Auth::user();
+            // Lấy thông tin người dùng
+            $user = Auth::user();
 
-        // Kiểm tra quyền admin và chuyển hướng
-        if ($user->admin()) {
-            return redirect()->route('admin.dashboard');
-        } else {
-            return redirect()->route('home');
+            // Kiểm tra quyền admin và chuyển hướng
+            if ($user->admin()) {
+                return redirect()->route('admin.dashboard');
+            } else {
+                return redirect()->route('home');
+            }
         }
-    }
 
-    // Nếu đăng nhập thất bại, trả về thông báo lỗi
-    return back()->withErrors([
-        'email' => 'Email không chính xác hoặc mật khẩu không đúng.',
-    ])->withInput();
-}
+        // Nếu đăng nhập thất bại, trả về thông báo lỗi
+        return back()->withErrors([
+            'email' => 'Email không chính xác hoặc mật khẩu không đúng.',
+        ])->withInput();
+    }
 
     public function dangXuat()
     {
@@ -115,15 +114,16 @@ class AuthenController extends Controller
 
         request()->session()->regenerateToken();
 
-        return redirect()->route('admin.login');
+        return redirect()->route('home');
     }
+
     //đăng nhập bằng google
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
-    public function handleGoogleCallback()
 
+    public function handleGoogleCallback()
     {
 
         try {
@@ -147,11 +147,13 @@ class AuthenController extends Controller
             dd($e->getMessage());
         }
     }
+
     // đăng nhập bằng facebook
     public function redirectToFacebook()
     {
         return Socialite::driver('facebook')->redirect();
     }
+
     public function handleFacebookCallback()
     {
         try {
@@ -175,14 +177,15 @@ class AuthenController extends Controller
             dd($e->getMessage());
         }
     }
+
     // đăng nhập bằng twitter
     public function redirectToTwitter()
-
     {
 
         return Socialite::driver('twitter')->redirect();
 
     }
+    
     public function handleTwitterCallback()
     {
         try {

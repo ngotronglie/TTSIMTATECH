@@ -55,34 +55,25 @@ class HomeController extends Controller
 
         $categoryPosts = $category->posts()->latest('id')->paginate(20);
 
+        if (Auth::check() && Auth::user()->member() == 'member') {
+            $category->increment('click_count');
+        }
+
         return view('clients.category', compact('category', 'categoryPosts'));
     }
 
-    // public function postDetail($slug)
-    // {
-    //     $post = Post::where('slug', $slug)->firstOrFail();
-
-    //     $relatedPosts = Post::where('category_id', $post->category_id)
-    //         ->where('id', '!=', $post->id)
-    //         ->latest('id')
-    //         ->limit(3)
-    //         ->get();
-    //         $post->increment('view');
-
-    //         $comments = Comment::where('post_id', $post->id)->latest()->get();
-    //         // dd($comments);
-    //     return view('clients.post-detail', compact('post', 'relatedPosts','comments'));
-    // }
     public function postDetail($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
+
         $relatedPosts = Post::where('category_id', $post->category_id)
             ->where('id', '!=', $post->id)
             ->latest('id')
             ->limit(3)
             ->get();
+
         $post->increment('view');
-        // $comments = Comment::where('post_id', $post->id)->latest()->get();
+
         $comments = Comment::where('post_id', $post->id)->latest()->take(3)->get();
 
         if (Auth::check()) {
@@ -157,19 +148,21 @@ class HomeController extends Controller
 
         return view('clients.contact')->with('success', 'Gửi liên hệ thành công.');
     }
+
     public function profile()
     {
         $user = Auth::user();
 
         return view('clients.users-profile', ['user' => $user]);
     }
+
     // public function edit()
     // {
     //     $user = Auth::user();  // Lấy người dùng đang đăng nhập
     //     return view('profile', compact('user'));  // Truyền dữ liệu người dùng vào view
     // }
 
-    // // Xử lý cập nhật thông tin người dùng
+    // Xử lý cập nhật thông tin người dùng
     public function update(Request $request)
     {
         // dd($request);
@@ -194,6 +187,7 @@ class HomeController extends Controller
 
         return redirect()->route('home/profile')->with('success', 'Cập nhật thông tin thành công.');
     }
+
     public function updatePassword(Request $request)
     {
 

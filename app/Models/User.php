@@ -68,6 +68,7 @@ class User extends Authenticatable
     {
         return $this->roles()->where('name', self::TYPE_MEMBER)->exists();
     }
+    
     public function readHistories()
     {
         return $this->hasMany(ReadHistory::class);  // Một người dùng có thể có nhiều lịch sử đọc
