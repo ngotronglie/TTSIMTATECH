@@ -25,32 +25,15 @@
                     <!-- Sales Card -->
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card sales-card">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                                        class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
                             <div class="card-body">
-                                <h5 class="card-title">Sales <span>| Today</span></h5>
-
+                                <h5 class="card-title">Tổng số lượt đọc bài viêt <span></span></h5>
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
+                                        <i class="bi bi-eye-fill"></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>145</h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
+                                        <span class="text-success small pt-1 fw-bold">lượt xem tất cả bài viết</span>
 
                                     </div>
                                 </div>
@@ -62,33 +45,15 @@
                     <!-- Revenue Card -->
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card revenue-card">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                                        class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
                             <div class="card-body">
-                                <h5 class="card-title">Revenue <span>| This Month</span></h5>
-
+                                <h5 class="card-title">Lượt truy cập liên kết quảng cáo</h5>
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-currency-dollar"></i>
+                                        <i class="bi bi-share-fill"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>$3,264</h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
-
+                                        <h6>3,264</h6>
+                                        <span class="text-success small pt-1 fw-bold">lượt truy cập</span>
                                     </div>
                                 </div>
                             </div>
@@ -98,25 +63,9 @@
 
                     <!-- Customers Card -->
                     <div class="col-xxl-4 col-xl-12">
-
                         <div class="card info-card customers-card">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                                        class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
                             <div class="card-body">
-                                <h5 class="card-title">Customers <span>| This Year</span></h5>
+                                <h5 class="card-title">Người dùng đăng kí</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -124,32 +73,30 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6>1244</h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span>
+                                        <span class="text-danger small pt-1 fw-bold">Người dùng</span>
 
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-
                     </div><!-- End Customers Card -->
 
-                    <!-- Reports -->
+                    {{-- <!-- Reports -->
                     <div class="col-12">
                         <div class="card">
 
                             <div class="filter">
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i
                                         class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
+                               
+                                   
+                                       
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    
+                              
+                                    
                                 </ul>
                             </div>
 
@@ -164,35 +111,20 @@
                             </div>
 
                         </div>
-                    </div><!-- End Reports -->
+                    </div><!-- End Reports --> --}}
 
                     <!-- Recent Sales -->
                     <div class="col-12">
                         <div class="card recent-sales overflow-auto">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                                        class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
                             <div class="card-body">
-                                <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                                <h5 class="card-title">Người dùng đọc nhiều nhất</h5>
 
                                 <table class="table table-borderless datatable">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Customer</th>
-                                            <th scope="col">Product</th>
+                                            <th scope="col">Tên Người dùng</th>
+                                            <th scope="col">Số lượng bài viết</th>
                                             <th scope="col">Price</th>
                                             <th scope="col">Status</th>
                                         </tr>
@@ -249,35 +181,40 @@
                     <!-- Top Selling -->
                     <div class="col-12">
                         <div class="card top-selling overflow-auto">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                                        class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
                             <div class="card-body pb-0">
-                                <h5 class="card-title">Top Selling <span>| Today</span></h5>
+                                <h5 class="card-title">Bài viết mới nhất</span></h5>
 
                                 <table class="table table-borderless">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Preview</th>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Sold</th>
-                                            <th scope="col">Revenue</th>
+                                            <th scope="col">Ảnh</th>
+                                            <th scope="col">Bài viết</th>
+                                            <th scope="col">Lượt xem</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+
+                                    @isset($latestPosts)
+                                        <tbody>
+                                            @forelse ($latestPosts as $latestPost)
+                                                <tr>
+                                                    <th scope="row">
+                                                        <a href="#"><img src="{{ $latestPost->image }}" alt=""></a>
+                                                    </th>
+                                                    <td>
+                                                        <a href="#" class="text-primary fw-bold">{{ $latestPost->title }}</a>
+                                                    </td>
+                                                    <td>{{ $latestPost->view }}</td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="3" class="text-center">
+                                                        <small class="text-danger">Chưa có bài viết nào được tạo.</small>
+                                                    </td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    @endisset
+                                    {{-- <tbody>
                                         <tr>
                                             <th scope="row"><a href="#"><img
                                                         src="{{ asset('template/admin/assets/img/product-1.jpg') }}"
@@ -288,47 +225,7 @@
                                             <td class="fw-bold">124</td>
                                             <td>$5,828</td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row"><a href="#"><img
-                                                        src="{{ asset('template/admin/assets/img/product-2.jpg') }}"
-                                                        alt=""></a></th>
-                                            <td><a href="#" class="text-primary fw-bold">Exercitationem
-                                                    similique doloremque</a></td>
-                                            <td>$46</td>
-                                            <td class="fw-bold">98</td>
-                                            <td>$4,508</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><a href="#"><img
-                                                        src="{{ asset('template/admin/assets/img/product-3.jpg') }}"
-                                                        alt=""></a></th>
-                                            <td><a href="#" class="text-primary fw-bold">Doloribus nisi
-                                                    exercitationem</a></td>
-                                            <td>$59</td>
-                                            <td class="fw-bold">74</td>
-                                            <td>$4,366</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><a href="#"><img
-                                                        src="{{ asset('template/admin/assets/img/product-4.jpg') }}"
-                                                        alt=""></a></th>
-                                            <td><a href="#" class="text-primary fw-bold">Officiis quaerat
-                                                    sint rerum error</a></td>
-                                            <td>$32</td>
-                                            <td class="fw-bold">63</td>
-                                            <td>$2,016</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><a href="#"><img
-                                                        src="{{ asset('template/admin/assets/img/product-5.jpg') }}"
-                                                        alt=""></a></th>
-                                            <td><a href="#" class="text-primary fw-bold">Sit unde debitis
-                                                    delectus repellendus</a></td>
-                                            <td>$79</td>
-                                            <td class="fw-bold">41</td>
-                                            <td>$3,239</td>
-                                        </tr>
-                                    </tbody>
+                                    </tbody> --}}
                                 </table>
 
                             </div>
@@ -341,129 +238,71 @@
 
             <!-- Right side columns -->
             <div class="col-lg-4">
+                <!-- News & Updates Traffic -->
+                <div class="card">
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">Bài viết nhiều lượt truy cập nhất</span></h5>
 
+                        <div class="news mb-3">
+                            @isset($postsMostViewed)
+                                @forelse ($postsMostViewed as $mostView)
+                                    <div class="post-item clearfix d-flex justify-content-between object-fit-cover">
+                                        <img src="{{ $mostView->image }}" width="80px" height="60px" alt="">
+                                        <div class="flex-fill ms-3">
+                                            <h4 class="ms-0 mb-2"><a href="#">{{ $mostView->title }}</a></h4>
+                                            <p style="margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $mostView->description }}</p>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <div class="post-item clearfix text-center">
+                                        <small class="text-danger">Chưa có bài viết nào được tạo.</small>
+                                    </div>
+                                @endforelse
+                            @endisset
+                        </div><!-- End sidebar recent posts-->
+
+                    </div>
+                </div><!-- End News & Updates -->
                 <!-- Recent Activity -->
                 <div class="card">
-                    <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
-
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                        </ul>
-                    </div>
-
                     <div class="card-body">
-                        <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+                        <h5 class="card-title">Danh mục truy cập nhiều nhất</h5>
 
                         <div class="activity">
 
-                            <div class="activity-item d-flex">
-                                <div class="activite-label">32 min</div>
-                                <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                                <div class="activity-content">
-                                    Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo
-                                        officiis</a> beatae
-                                </div>
-                            </div><!-- End activity item-->
-
-                            <div class="activity-item d-flex">
-                                <div class="activite-label">56 min</div>
-                                <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                                <div class="activity-content">
-                                    Voluptatem blanditiis blanditiis eveniet
-                                </div>
-                            </div><!-- End activity item-->
-
-                            <div class="activity-item d-flex">
-                                <div class="activite-label">2 hrs</div>
-                                <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                                <div class="activity-content">
-                                    Voluptates corrupti molestias voluptatem
-                                </div>
-                            </div><!-- End activity item-->
-
-                            <div class="activity-item d-flex">
-                                <div class="activite-label">1 day</div>
-                                <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                                <div class="activity-content">
-                                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati
-                                        voluptatem</a> tempore
-                                </div>
-                            </div><!-- End activity item-->
-
-                            <div class="activity-item d-flex">
-                                <div class="activite-label">2 days</div>
-                                <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                                <div class="activity-content">
-                                    Est sit eum reiciendis exercitationem
-                                </div>
-                            </div><!-- End activity item-->
-
-                            <div class="activity-item d-flex">
-                                <div class="activite-label">4 weeks</div>
-                                <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                                <div class="activity-content">
-                                    Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                                </div>
-                            </div><!-- End activity item-->
+                            @isset($mostVisitedCategories)
+                                @foreach ($mostVisitedCategories as $mostVisted)
+                                    <div class="activity-item d-flex">
+                                        <div class="activite-label">{{ $mostVisted->click_count }}</div>
+                                        <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                        <div class="activity-content">
+                                            <a href="#" class="fw-bold text-dark">{{ $mostVisted->name }}</a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endisset    
 
                         </div>
-
                     </div>
                 </div><!-- End Recent Activity -->
 
                 <!-- Budget Report -->
                 <div class="card">
-                    <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
-
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                        </ul>
-                    </div>
-
                     <div class="card-body pb-0">
                         <h5 class="card-title">Budget Report <span>| This Month</span></h5>
 
                         <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-
                     </div>
                 </div><!-- End Budget Report -->
 
                 <!-- Website Traffic -->
                 <div class="card">
-                    <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
-
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                        </ul>
-                    </div>
-
                     <div class="card-body pb-0">
-                        <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
+                        <h5 class="card-title">Danh mục bài viết</h5>
                         <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
                     </div>
                 </div><!-- End Website Traffic -->
 
-                <!-- News & Updates Traffic -->
                 <div class="card">
                     <div class="filter">
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -471,56 +310,51 @@
                             <li class="dropdown-header text-start">
                                 <h6>Filter</h6>
                             </li>
-
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.dashboard', 'today') }}">Today</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.dashboard', 'week') }}">This Week</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.dashboard', 'month') }}">This Month</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.dashboard', 'year') }}">This Year</a></li>
                         </ul>
                     </div>
-
+                
                     <div class="card-body pb-0">
-                        <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
+                        <h5 class="card-title">Tin tức &amp; Cập nhật <span>| {{ ucfirst(request('timeframe', 'today')) }}</span></h5>
+                
                         <div class="news">
-                            <div class="post-item clearfix">
-                                <img src="{{ asset('template/admin/assets/img/news-1.jpg') }}" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="{{ asset('template/admin/assets/img/news-2.jpg') }}" alt="">
-                                <h4><a href="#">Quidem autem et impedit</a></h4>
-                                <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...
-                                </p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="{{ asset('template/admin/assets/img/news-3.jpg') }}" alt="">
-                                <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                                <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...
-                                </p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="{{ asset('template/admin/assets/img/news-4.jpg') }}" alt="">
-                                <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                                <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...
-                                </p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="{{ asset('template/admin/assets/img/news-5.jpg') }}" alt="">
-                                <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                                <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos
-                                    eius...</p>
-                            </div>
-
-                        </div><!-- End sidebar recent posts-->
-
+                            @if (request()->is('admin/dashboard'))
+                                @forelse ($postsToday as $post)
+                                    <div class="post-item clearfix d-flex justify-content-between">
+                                        <img src="{{ asset('template/admin/assets/img/news-1.jpg') }}" alt="">
+                                        <div class="flex-fill ms-3">
+                                            <h4 class="ms-0 mb-2"><a href="#">{{ $post->title }}</a></h4>
+                                            <p style="margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $post->description }}</p>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <div class="post-item clearfix text-center">
+                                        <small class="text-danger">Chưa có bài viết nào được tạo trong ngày hôm nay.</small>
+                                    </div>
+                                @endforelse
+                            @else
+                                @isset($posts)
+                                    @forelse ($posts as $post)
+                                        <div class="post-item clearfix d-flex justify-content-between">
+                                            <img src="{{ asset('template/admin/assets/img/news-1.jpg') }}" alt="">
+                                            <div class="flex-fill ms-3">
+                                                <h4 class="ms-0 mb-2"><a href="#">{{ $post->title }}</a></h4>
+                                                <p style="margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $post->description }}</p>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        @if (session('message'))
+                                            <div class="post-item clearfix text-center"><small class="text-danger">{{ session('message') }}</small></div>
+                                        @endif
+                                    @endforelse
+                                @endisset
+                            @endif
+                        </div>
                     </div>
-                </div><!-- End News & Updates -->
-
+                </div>
             </div><!-- End Right side columns -->
 
         </div>
@@ -639,6 +473,10 @@
 
         // Traffic Chart
         document.addEventListener("DOMContentLoaded", () => {
+            var trafficChartData = @json($countPostsInCategory->map(function($item) {
+                return ['value' => $item->posts_count, 'name' => $item->name];
+            }));
+
             echarts.init(document.querySelector("#trafficChart")).setOption({
                 tooltip: {
                     trigger: 'item'
@@ -648,7 +486,7 @@
                     left: 'center'
                 },
                 series: [{
-                    name: 'Access From',
+                    name: 'Số bài viết',
                     type: 'pie',
                     radius: ['40%', '70%'],
                     avoidLabelOverlap: false,
@@ -666,27 +504,7 @@
                     labelLine: {
                         show: false
                     },
-                    data: [{
-                            value: 1048,
-                            name: 'Search Engine'
-                        },
-                        {
-                            value: 735,
-                            name: 'Direct'
-                        },
-                        {
-                            value: 580,
-                            name: 'Email'
-                        },
-                        {
-                            value: 484,
-                            name: 'Union Ads'
-                        },
-                        {
-                            value: 300,
-                            name: 'Video Ads'
-                        }
-                    ]
+                    data: trafficChartData
                 }]
             });
         });

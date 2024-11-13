@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -20,12 +21,24 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Lấy danh sách các category mới nhất với phân trang
         $categories = Category::latest('id')->paginate(10);
 
+        // Kiểm tra nếu có tham số tìm kiếm 'query'
+        if ($request->has('query')) {
+            // Lấy giá trị từ tham số 'query' và dùng nó để lọc category theo id
+            $userId = $request->query('query');  // Lấy giá trị của 'query' từ request
+            // Tìm các category có id tương ứng với giá trị 'query'
+            $categories = Category::where('id', $userId)->paginate(10); // Phân trang 10 kết quả
+        }
+
+        // Trả về view với dữ liệu categories
         return view(self::PATH_VIEW . __FUNCTION__, compact('categories'));
     }
+
+    
     public function show($slug)
     {
         // Lấy danh mục theo slug
