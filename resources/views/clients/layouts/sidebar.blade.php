@@ -1,19 +1,19 @@
-
 <div class="col-lg-3 pd-top-50">
     <div class="share-buttons mt-4">
         <h5>Chia sẻ bài viết:</h5>
         <div class="d-flex">
             <!-- Facebook -->
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" class="btn btn-facebook mr-2 text-primary ">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"
+                class="btn btn-facebook mr-2 text-primary ">
                 <i class="bi bi-facebook fs-1"></i> Facebook
             </a>
             <!-- Twitter -->
-            <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($post->title) }}" target="_blank" class="btn btn-twitter mr-2">
+            {{-- <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($post->title) }}" target="_blank" class="btn btn-twitter mr-2">
                 <i class="bi bi-twitter fs-1"></i> Twitter
-            </a>
+            </a> --}}
         </div>
     </div>
-    
+
     <div class="category-sitebar">
         <div class="widget widget-category">
             <h6 class="widget-title">Danh mục</h6>
@@ -21,8 +21,11 @@
                 @foreach ($categories as $category)
                     <div class="col-md-12 col-sm-6">
                         <div class="single-category-inner text-center">
-                            <img src="{{ Storage::url($category->image) }}" alt="img" height="50" class="mx-auto object-fit-cover">
-                            <a class="tag-base tag-blue text-nowrap" href="{{ route('category.posts', $category->slug) }}" style="min-width: 200px;">{{ $category->name }}</a>
+                            <img src="{{ Storage::url($category->image) }}" alt="img" height="50"
+                                class="mx-auto object-fit-cover">
+                            <a class="tag-base tag-blue text-nowrap"
+                                href="{{ route('category.posts', $category->slug) }}"
+                                style="min-width: 200px;">{{ $category->name }}</a>
                         </div>
                     </div>
                 @endforeach
@@ -33,7 +36,7 @@
             <div class="widget widget-add">
                 @foreach ($advertisement as $ads)
                     @foreach ($categories as $category)
-                        @if ($ads->position == 'sidebar' && $ads->pages == 'post_detail' || $ads->category_id == $category->id)
+                        @if (($ads->position == 'sidebar' && $ads->pages == 'post_detail') || $ads->category_id == $category->id)
                             @php
                                 $image = $ads->image;
                                 if (!\Str::contains($image, 'http')) {
@@ -134,14 +137,14 @@
             <div class="nxp-tab-inner nxp-tab-post-two mb-4">
                 <ul class="nav nav-tabs justify-content-center" id="nx1" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="nx1-tab-1" data-toggle="pill" href="#nx1-tabs-1"
-                            role="tab" aria-selected="true">
+                        <a class="nav-link active" id="nx1-tab-1" data-toggle="pill" href="#nx1-tabs-1" role="tab"
+                            aria-selected="true">
                             Gần đây
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="nx1-tab-2" data-toggle="pill" href="#nx1-tabs-2"
-                            role="tab" aria-selected="false">
+                        <a class="nav-link" id="nx1-tab-2" data-toggle="pill" href="#nx1-tabs-2" role="tab"
+                            aria-selected="false">
                             Phổ biến
                         </a>
                     </li>

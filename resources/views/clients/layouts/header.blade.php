@@ -28,7 +28,6 @@
                         @endforeach
                     </div>
                 @endisset
-                
             </div>
         </div>
     </div>
@@ -68,10 +67,13 @@
             </div>
 
             <div class="nav-right-part nav-right-part-desktop d-flex align-items-center">
-                <div class="menu-search-inner me-2 d-flex">
-                    <input type="text" placeholder="Tìm kiếm">
-                    <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
-                </div>
+                <form action="{{ route('search') }}" method="GET">
+                    <div class="menu-search-inner me-2 d-flex">
+                        <input type="text" name="search" placeholder="Tìm kiếm">
+                        <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+
                 <div class="auth-buttons d-flex align-items-center">
                     @if (Auth::check())
                         <div class="dropdown">
@@ -85,6 +87,7 @@
                                 </svg>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+
                                 <li>
                                     <a class="dropdown-item" href="{{ route('home/profile') }}">Quản lý hồ sơ</a>
                                 </li>
