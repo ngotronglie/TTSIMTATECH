@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\ReadHistory;
 use Illuminate\Http\Request;
 use App\Models\Advertisement;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -161,7 +162,7 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         // dd($request);
-        $user = Auth::user();   
+        $user = Auth::user();
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
@@ -185,27 +186,57 @@ class HomeController extends Controller
 
     public function updatePassword(Request $request)
     {
-        
+
         $user = Auth::user();  // Lấy thông tin người dùng hiện tại
-    
+
         // Validate dữ liệu đầu vào
         $request->validate([
             'currentPassword' => 'required|string',  // Mật khẩu hiện tại
             'newPassword' => 'required|string|min:8|confirmed',  // Mật khẩu mới phải dài ít nhất 8 ký tự và phải có trường xác nhận
         ]);
-    
+
         // Kiểm tra mật khẩu hiện tại có đúng không
         if (!Hash::check($request->currentPassword, $user->password)) {
             return redirect()->back()->withErrors(['currentPassword' => 'Mật khẩu hiện tại không đúng.']);
         }
-    
+
         // Cập nhật mật khẩu mới
-        $user->password = Hash::make($request->newPassword);  
+        $user->password = Hash::make($request->newPassword);
         // Mã hóa mật khẩu mới
-  
-        $user->save();  
-    
+
+        $user->save();
+
         // Trả về thông báo thành công
         return redirect()->route('home/profile')->with('success', 'Đổi mật khẩu thành công.')->withInput();
+    }
+    public function getNotifications()
+    {
+        try {
+            // Lấy các bài viết được tạo trong 24 giờ qua
+            $newArticles = Post::orderBy('id', 'desc')->limit(5)->get();
+
+
+            if ($newArticles->isEmpty()) {
+                return response()->json(['message' => 'Không có bài viết mới'], 200); // Trả về thông báo nếu không có bài viết mới
+            }
+
+            // Xử lý thông báo
+            $notifications = $newArticles->map(function ($article) {
+                $imageUrl = $article->image ? asset('storage/' . $article->image) : asset('template/admin/assets/img/default-image.jpg');
+            
+                return [
+
+                    'title' => $article->title,
+                    'link' => route('post-detail', $article->slug),
+                    'image' => $imageUrl,
+                ];
+            });
+
+            return response()->json(['notifications' => $notifications]);
+        } catch (\Exception $e) {
+            // Log lỗi nếu có và trả về lỗi 500
+            \Log::error("Lỗi khi lấy thông báo: " . $e->getMessage());
+            return response()->json(['error' => 'Không thể lấy thông báo.'], 500);
+        }
     }
 }

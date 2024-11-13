@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\AdvertisementController;
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\ContactController;
-use App\Http\Controllers\Api\FaqController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\FaqController;
+use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\AdvertisementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,4 @@ Route::prefix('faqs')->group(function () {
     Route::put('{id}/update',          [FaqController::class, 'update']);
     Route::delete('{id}/delete',       [FaqController::class, 'delete']);
 });
+Route::get('notifications', [HomeController::class, 'getNotifications']);
