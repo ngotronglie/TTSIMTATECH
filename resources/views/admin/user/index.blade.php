@@ -30,6 +30,7 @@
                     <th class="align-middle">Email</th>
                     <th class="align-middle">Mật khẩu</th>
                     <th class="align-middle">Avatar</th>
+                    <th class="align-middle">Vai trò</th>
                     <th class="align-middle">Trạng thái</th>
                     <th class="align-middle">Nhà cung cấp</th>
                     <th class="align-middle">ID Mạng xã hội</th>
@@ -46,6 +47,13 @@
                             <td>*******</td> <!-- Ẩn mật khẩu không nên hiển thị -->
                             <td>
                                 <img src="{{ $user->avatar }}" alt="Avatar" width="50" height="50">
+                            </td>
+                            <td>
+                                @if($user->roles->isNotEmpty())
+                                    {{ ucfirst($user->roles->pluck('name')->join(', ')) }}
+                                @else
+                                    <span class="text-muted">N/A</span>
+                                @endif
                             </td>
                             <td>{{ $user->is_active ? 'Hoạt động' : 'Không hoạt động' }}</td>
                             <td>{{ $user->social_provider ?? 'N/A' }}</td>

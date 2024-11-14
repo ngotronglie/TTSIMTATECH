@@ -5,6 +5,13 @@
 @endsection
 
 @section('content')
+    @if (session('success'))
+        <div style="width: 66%;" class="mx-auto">
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
     <div class="contact-container">
         <div class="contact-info">
             <h3 style="font-family: none;">Liên hệ với chúng tôi</h3>

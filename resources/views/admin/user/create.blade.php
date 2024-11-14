@@ -52,6 +52,18 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label">Roles: <span class="text-danger">*</span></label>
+            <select name="roles[]" id="roles" class="form-select @error('roles') is-invalid @enderror">
+                @foreach($roles as $role)
+                    <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
+                @endforeach
+            </select>
+            @error('roles')
+                <small class="text-danger fst-italic">* {{ $message }}</small>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <button class="btn btn-primary me-2"> <i class="bi bi-bookmark me-1"></i> Thêm mới </button>
             <button type="reset" class="btn btn-secondary me-2"> <i class="bi bi-clock-wise me-1"></i> Nhập lại </button>
             <a href="{{ route('admin.users.index') }}" class="btn btn-info"> <i class="bi bi-arrow-left me-1"></i> Danh sách </a>

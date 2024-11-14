@@ -52,7 +52,7 @@
                                         </h5>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate method="POST" action="{{ route('admin.login') }}">
+                                    <form class="row g-3 needs-validation" novalidate method="POST" action="{{ route('auth.login') }}">
                                         @csrf
                                     
                                         <div class="col-12">
@@ -107,7 +107,7 @@
                                         </div>
                                     
                                         <div class="col-12">
-                                            <p class="small mb-0">Bạn chưa có tài khoản? <a href="{{ route('admin.register') }}">Đăng ký ngay</a></p>
+                                            <p class="small mb-0">Bạn chưa có tài khoản? <a href="{{ route('auth.register') }}">Đăng ký ngay</a></p>
                                         </div>
                                     </form>
                                     

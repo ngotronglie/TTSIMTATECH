@@ -13,9 +13,6 @@ use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdvertisementController;
-// use App\Http\Controllers\AuthenController;
-// use App\Http\Controllers\CommentController;
-// use App\Http\Controllers\MemberController;
 use App\Http\Controllers\Search2Controller;
 use App\Http\Controllers\Admin\DashboardController;
 // a
@@ -35,8 +32,10 @@ use App\Http\Controllers\Admin\DashboardController;
 // });
 
 Route::get('home/profile', [HomeController::class, 'profile'])->name('home/profile');
+Route::post('home/profile', [HomeController::class, 'update'])->name('profile.update');
+Route::post('home/update', [HomeController::class, 'updatePassword'])->name('password.update');
 
-Route::prefix('admin')->as('admin.')->group(function () {
+Route::prefix('auth')->as('auth.')->group(function () {
     Route::get('register', [AuthenController::class, 'formDangKy'])->name('register');
     Route::post('register', [AuthenController::class, 'dangKy']);
 
@@ -82,7 +81,7 @@ Route::group([], function () {
 });
 
 // Admin
-Route::group(['mdddleware' => ['auth', 'checkadmin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => ['auth', 'checkadmin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::get('/search', [SearchController::class, 'search'])->name('search');
 
@@ -158,4 +157,3 @@ Route::delete('roles/{id}/force-delete', [RoleController::class, 'forceDelete'])
     ->name('roles.forceDelete');
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.chitiet');
 Route::post('post/{slug}/comment', [CommentController::class, 'store'])->name('post.comment');
-// Route::post('post/{post}/comment', [HomeController::class, 'addComment'])->name('post.comment');

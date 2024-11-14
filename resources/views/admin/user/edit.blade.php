@@ -52,6 +52,18 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label"></label>Roles: <span class="text-danger">*</span></label>
+            <select name="roles[]" id="roles" class="form-select @error ('roles') is-invalid @enderror">
+                @foreach($roles as $role)
+                    <option value="{{ $role->id }}" {{ $user->roles->pluck('id')->contains($role->id) ? 'selected' : '' }}>{{ ucfirst($role->name) }}</option>
+                @endforeach
+            </select>
+            @error('is_active')
+                <small class="text-danger fst-italic">* {{ $message }}</small>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <button class="btn btn-primary">Cập nhật</button>
             <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Trở về</a>
         </div>

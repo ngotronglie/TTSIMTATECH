@@ -146,7 +146,7 @@ class HomeController extends Controller
 
         Contact::create($data);
 
-        return view('clients.contact')->with('success', 'Gửi liên hệ thành công.');
+        return back()->with('success', 'Gửi phản hồi thành công.');
     }
 
     public function profile()
@@ -155,12 +155,6 @@ class HomeController extends Controller
 
         return view('clients.users-profile', ['user' => $user]);
     }
-
-    // public function edit()
-    // {
-    //     $user = Auth::user();  // Lấy người dùng đang đăng nhập
-    //     return view('profile', compact('user'));  // Truyền dữ liệu người dùng vào view
-    // }
 
     // Xử lý cập nhật thông tin người dùng
     public function update(Request $request)
@@ -213,6 +207,7 @@ class HomeController extends Controller
         // Trả về thông báo thành công
         return redirect()->route('home/profile')->with('success', 'Đổi mật khẩu thành công.')->withInput();
     }
+
     public function getNotifications()
     {
         try {

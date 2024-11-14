@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User; // Assuming your User model is in this namespace
 
@@ -14,14 +15,6 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    //     public function index()
-    // {
-    //     // Lấy danh sách tất cả người dùng từ database
-    //     $users = User::all(); // Hoặc sử dụng paginate() nếu bạn muốn phân trang
-    //     // dd($users);
-    //     // Hiển thị dữ liệu người dùng trong view và truyền danh sách user vào view
-    //     return view('admin.user.index', compact('users'));
-    // }
     public function index(Request $request)
     {
         // Kiểm tra nếu có tham số query (id người dùng)
@@ -31,7 +24,7 @@ class UserController extends Controller
             $users = User::where('id', $userId)->paginate(20);
         } else {
             // Nếu không có query, lấy tất cả người dùng
-            $users = User::paginate(20); // Hoặc sử dụng all() nếu không cần phân trang
+            $users = User::with('roles')->paginate(20); // Hoặc sử dụng all() nếu không cần phân trang
         }
 
         // Trả về view với dữ liệu
@@ -44,7 +37,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $roles = Role::all(); 
+
+        return view('admin.user.create', compact('roles'));
     }
 
     /**
@@ -59,6 +54,8 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_active' => 'required|in:0,1',
+            'roles' => 'required|array',
+            'roles.*' => 'exists:roles,id',
             'social_provider' => 'nullable|string|in:facebook,google',
             'social_id' => 'nullable|string|max:255',
         ]);
@@ -83,6 +80,8 @@ class UserController extends Controller
         // Save the user
         $user->save();
 
+        $user->roles()->attach($request->input('roles'));
+
         // Redirect back to the user list with success message
         return redirect()->route('admin.users.index')->with('success', 'Người dùng đã được thêm mới thành công!');
     }
@@ -102,10 +101,12 @@ class UserController extends Controller
     public function edit($id)
     {
         // Tìm user theo ID
-        $user = User::findOrFail($id);
+        $user = User::with('roles')->findOrFail($id);
+
+        $roles = Role::all(); 
 
         // Trả về view edit với dữ liệu user
-        return view('admin.user.edit', compact('user'));
+        return view('admin.user.edit', compact('user', 'roles'));
     }
 
 
@@ -120,6 +121,8 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $id, // Kiểm tra email trùng
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Avatar có thể null và giới hạn kích thước
             'is_active' => 'required|boolean',
+            'roles' => 'required|array',
+            'roles.*' => 'exists:roles,id',
         ]);
 
         // Tìm user theo ID
@@ -147,6 +150,7 @@ class UserController extends Controller
             $user->avatar = '/storage/' . $filePath; // Cập nhật đường dẫn avatar mới vào database
         }
 
+        $user->roles()->sync($request->input('roles'));
         // Lưu các thay đổi
         $user->save();
 
