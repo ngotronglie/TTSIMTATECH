@@ -84,18 +84,7 @@
         </div>
 
         <!-- Input for Author (User ID) Dropdown -->
-        <div class="mb-3">
-            <label class="form-label">Tác giả: <span class="text-danger">*</span></label>
-            <select name="user_id" class="form-control @error('user_id') is-invalid @enderror">
-                <option value="">Chọn tác giả</option>
-                @foreach($users as $user)
-                    <option value="{{ $user->id }}" {{ old('user_id', $post->user_id) == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                @endforeach
-            </select>
-            @error('user_id')
-                <small class="text-danger fst-italic">* {{ $message }}</small>
-            @enderror
-        </div>
+        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
         <!-- Submit and Reset Buttons -->
         <div class="mb-3">

@@ -129,6 +129,7 @@ class PostController extends Controller
             'slug' => $request->slug,
             'category_id' => $request->category_id,
             'user_id' => $request->user_id,
+            'description' => $request->description,
             'content' => $request->content,
             'is_active' => $request->is_active,
         ]);

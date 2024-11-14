@@ -29,8 +29,11 @@ class AppServiceProvider extends ServiceProvider
         View::composer('clients.layouts.sidebar', CategoryComposer::class);
 
         View::composer('clients.layouts.sidebar', AdvertisementComposer::class);
-        View::composer('clients.home',            AdvertisementComposer::class);
+        View::composer('clients.post-detail',     AdvertisementComposer::class);
         View::composer('clients.category',        AdvertisementComposer::class);
+        View::composer('clients.contact',         AdvertisementComposer::class);
+        View::composer('clients.home',            AdvertisementComposer::class);
+        View::composer('clients.faq',             AdvertisementComposer::class);
 
         View::composer('clients.layouts.banner',  PostComposer::class);
         View::composer('clients.home',            PostComposer::class);

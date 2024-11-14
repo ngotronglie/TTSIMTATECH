@@ -9,17 +9,12 @@
         <div class="pagetitle container">
             <h1>Hồ Sơ</h1>
         </div>
-        {{-- @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif --}}
 
         <section class="section profile container">
             <div class="row">
                 <div class="col-xl-4">
 
-                    <div class="card">
+                    <div class="card mb-5">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                             
                             <img src="@if ($user->avatar == null) {{ asset('template/assets/img/author/user.png') }} @else {{ $user->avatar }} @endif" alt="Hồ Sơ" width="200" height="200"
@@ -34,9 +29,10 @@
                             </div>
                         </div>
                         @if (session('success'))
-                            <div class="alert alert-success text-center">
+                            <div class="alert alert-success text-center mb-0">
                                 {{ session('success') }}
-                            </div>@endif
+                            </div>
+                        @endif
                     </div>
 
                 </div>

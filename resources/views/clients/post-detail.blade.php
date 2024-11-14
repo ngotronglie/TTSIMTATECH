@@ -23,7 +23,7 @@
         </div>
     </section>
     <!--page-title area end-->
-{{-- a --}}
+
     <div class="blog-page-area pd-bottom-80">
         <div class="container">
             <div class="row">
@@ -80,6 +80,7 @@
                                     @endif
                                 @endforeach
                             @endisset
+
                             <div class="share-buttons mt-4">
                                 <h5>Chia sẻ bài viết:</h5>
                                 <div class="d-flex">
@@ -94,6 +95,7 @@
                                     </a>
                                 </div>
                             </div>
+
                             <div class="author-area">
                                 <div class="media">
                                     <img src="{{ $post->user->avatar }}" alt="Avatar" width="100" height="100">
@@ -104,6 +106,7 @@
                                 </div>
                             </div>
                         </div>
+
                         @if (isset($relatedPosts) && $relatedPosts->count() > 0)
                             <div class="related-post">
                                 <div class="section-title mb-0">
@@ -181,6 +184,7 @@
                                 @endforeach
                             @endif
                         </div>
+
                         <div class="comment-form">
                             <div class="section-title mb-0">
                                 <h4 class="mb-0">Để lại bình luận</h4>
@@ -207,7 +211,7 @@
                                                 <button type="submit" class="btn btn-base">Gửi bình luận</button>
                                             </div>
                                         @else
-                                            <p style="text-align: center">Vui lòng <a href="{{ route('admin.login') }}" style="color: red; font-size: 15px">Đăng nhập</a> để bình luận</p>
+                                            <p style="text-align: center">Vui lòng <a href="{{ route('auth.login') }}" style="color: red; font-size: 15px">Đăng nhập</a> để bình luận</p>
                                         @endif
                                     </div>
                                 </div>

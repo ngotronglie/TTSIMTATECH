@@ -135,7 +135,7 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('admin.login') }}">
+            <a class="nav-link collapsed" href="{{ route('auth.logout') }}">
                  <i class="bi bi-box-arrow-right"></i>
                 <span>Đăng xuất</span>
             </a>

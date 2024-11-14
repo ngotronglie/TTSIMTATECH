@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         static $index = 0;
-        $names = ['Giáo dục', 'Công nghệ', 'Video', 'Podcasts'];
+        $names = ['Giáo dục', 'Công nghệ', 'Khoa học', 'Sức khỏe'];
         
         $name = $names[$index++ % count($names)];
         

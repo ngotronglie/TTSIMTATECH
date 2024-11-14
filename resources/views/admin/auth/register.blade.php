@@ -49,7 +49,7 @@
                                         <h5 class="card-title text-center pb-0 fs-4">Tạo Tài Khoản</h5>
                                     </div>
 
-                                    <form action="{{ route('admin.register') }}" method="POST"
+                                    <form action="{{ route('auth.register') }}" method="POST"
                                         class="row g-3 needs-validation" novalidate>
                                         @csrf
                                         <div class="col-12">
@@ -102,7 +102,7 @@
                                         </div>
                                         <div class="col-12 text-center">
                                             <p class="small mb-0">Bạn đã có tài khoản? <a
-                                                    href="{{ route('admin.login') }}">Đăng nhập</a></p>
+                                                    href="{{ route('auth.login') }}">Đăng nhập</a></p>
                                         </div>
                                     </form>
 
